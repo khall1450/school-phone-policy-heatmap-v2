@@ -213,6 +213,42 @@
     }
     .detail-row { font-size: 0.76rem; margin-bottom: 5px; line-height: 1.45; font-weight: 300; }
     .detail-row strong { color: var(--paragon-blue); font-weight: 700; }
+    .detail-pending {
+      background: #F0F4FF;
+      border-left: 3px solid var(--atlantic-blue);
+      padding: 10px 12px;
+      font-size: 0.73rem;
+      border-radius: 0 0.3rem 0.3rem 0;
+      margin-top: 10px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+    .detail-pending .pending-title {
+      font-weight: 700;
+      color: var(--paragon-blue);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .detail-pending .pending-bill { font-weight: 600; color: var(--paragon-blue); }
+    .detail-pending .pending-status { margin-top: 4px; }
+    .detail-pending .pending-would-be {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(0,46,109,0.1);
+    }
+    .detail-pending .pending-would-be .pending-cat-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 0.3rem;
+      font-size: 0.64rem;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      vertical-align: middle;
+    }
     .detail-flag {
       background: #FFF5E6;
       border-left: 3px solid var(--blaze-orange);
@@ -551,8 +587,15 @@ const STATE_DATA = [
     storageReq:"Storage unspecified",
     legislation:"HB 340 (May 2025, eff. July 2026)",
     notes:"Enacted via statute. K-8 'first to last bell' including lunch and transitions.",
-    additionalNotes:"HB 1009 would extend bell-to-bell ban to grades 9\u201312; passed House 145-20 on 2/24/26; in Senate as of 3/12/26 with active debate.",
-    timeline:"Schools adopt policies by Jan 1 2026; restrictions in place by July 2026"
+    additionalNotes:"",
+    timeline:"Schools adopt policies by Jan 1 2026; restrictions in place by July 2026",
+    pendingLegislation: {
+      bill: "HB 1009",
+      summary: "Would extend bell-to-bell ban to grades 9\u201312 (all grades K\u201312)",
+      status: "Passed House 145-20 on Feb 24, 2026. In Senate as of Mar 12, 2026 with active debate.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified (all grades)"
+    }
   },
   {
     fips:"15", name:"Hawaii", abbr:"HI",
@@ -858,9 +901,16 @@ const STATE_DATA = [
     currentPolicy:"No statewide mandate as of early 2026",
     storageReq:"N/A",
     legislation:"No statewide law",
-    notes:"SB 1014 (bell-to-bell) passed the Senate in Feb 2026 but had not been signed into law.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 1014",
+      summary: "Bell-to-bell ban on personal electronic devices during the school day",
+      status: "Passed Senate in Feb 2026. Awaiting House action.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"44", name:"Rhode Island", abbr:"RI",
@@ -924,9 +974,16 @@ const STATE_DATA = [
     currentPolicy:"Instructional-time ban during classroom hours; law explicitly excludes lunch periods, recess, transit time between classes, and study halls.",
     storageReq:"Storage unspecified",
     legislation:"SB 178 (2024)",
-    notes:"SB 69 (2026) would upgrade to bell-to-bell (including lunch/recess); sent to Gov. Cox Mar 11, 2026 — awaiting signature.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 69 (2026)",
+      summary: "Upgrades to bell-to-bell ban covering the entire school day including lunch, recess, and transition time. Also covers smartwatches and emerging technologies.",
+      status: "Passed legislature Feb 27, 2026. Sent to Gov. Cox Mar 11, 2026 — awaiting signature. Signing widely expected.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"50", name:"Vermont", abbr:"VT",
@@ -985,14 +1042,21 @@ const STATE_DATA = [
   },
   {
     fips:"56", name:"Wyoming", abbr:"WY",
-    category:"tier_3",
-    rawCategory:"Must Adopt a Policy (No Content Req.)",
-    currentPolicy:"All 48 school districts must adopt their own policies governing student possession and use of cellphones and smartwatches. Districts must submit policies to the state superintendent.",
-    storageReq:"No storage requirement specified",
-    legislation:"SF 35 (Mar 2026)",
-    notes:"SF 35 passed legislature Mar 4, 2026 (House 40-20). Does not impose a statewide ban — district discretion on content. A stricter statewide ban bill (SF 21) failed 7-21 in Jan 2025.",
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"No statewide mandate currently in effect. A stricter statewide ban bill (SF 21) failed 7-21 in Jan 2025.",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"",
     additionalNotes:"",
-    timeline:"Awaiting Governor Gordon's signature as of Mar 2026"
+    timeline:"",
+    pendingLegislation: {
+      bill: "SF 35 (2026)",
+      summary: "Requires all 48 school districts to adopt their own policies governing student cellphone and smartwatch use. Districts must submit policies to the state superintendent. Does not dictate policy content.",
+      status: "Passed legislature Mar 4, 2026 (House 40-20). Awaiting Governor Gordon's signature.",
+      wouldBeTier: "tier_3",
+      wouldBeLabel: "Must Adopt a Policy (No Content Req.)"
+    }
   }
 ];
 
@@ -1178,6 +1242,7 @@ function buildTooltipHTML(s, fips, isPinned) {
     <div class="t-cat" style="color:${cat.order <= 4 ? '#FFB866' : '#99C8E8'}">${cat.label}</div>
     <div style="font-size:0.7rem;opacity:0.8;margin-bottom:3px;">${s.storageReq}</div>
     ${linkHtml}
+    ${s.pendingLegislation ? `<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.15);font-size:0.67rem;opacity:0.85;">\u23F3 <strong>${s.pendingLegislation.bill}</strong> pending \u2014 click for details</div>` : ''}
     ${hint}
   `;
 }
@@ -1391,6 +1456,25 @@ function showDetail(fips) {
     ? `<div class="detail-row"><strong>Bill Link:</strong> <a href="${url}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">View legislation \u2197</a></div>`
     : '';
 
+  let pendingHtml = '';
+  if (s.pendingLegislation) {
+    const p = s.pendingLegislation;
+    const wouldBeCat = CATEGORIES[p.wouldBeTier];
+    const badgeColor = wouldBeCat ? wouldBeCat.color : '#666';
+    pendingHtml = `
+      <div class="detail-pending">
+        <div class="pending-title">\u23F3 Legislation in Progress</div>
+        <div><span class="pending-bill">${p.bill}</span></div>
+        <div style="margin-top:4px;">${p.summary}</div>
+        <div class="pending-status"><strong>Status:</strong> ${p.status}</div>
+        <div class="pending-would-be">
+          <strong>If enacted, category would be:</strong><br>
+          <span class="pending-cat-badge" style="background:${badgeColor}">${p.wouldBeLabel || wouldBeCat.label}</span>
+        </div>
+      </div>
+    `;
+  }
+
   panel.innerHTML = `
     <h2>State Detail</h2>
     <div class="detail-state-name">${s.name}</div>
@@ -1402,6 +1486,7 @@ function showDetail(fips) {
     ${s.notes ? `<div class="detail-row"><strong>Notes:</strong> ${s.notes}</div>` : ''}
     ${s.additionalNotes ? `<div class="detail-row"><strong>Additional:</strong> ${s.additionalNotes}</div>` : ''}
     ${linkHtml}
+    ${pendingHtml}
   `;
 }
 
@@ -1416,7 +1501,7 @@ STATE_DATA.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(s => {
     <td>${s.storageReq || '<em style="color:#bbb">N/A</em>'}</td>
     <td>${s.legislation || '\u2014'}</td>
     <td>${s.timeline || '<em style="color:#bbb">N/A</em>'}</td>
-    <td>${[s.notes, s.additionalNotes].filter(Boolean).join(' | ') || '\u2014'}</td>
+    <td>${[s.notes, s.additionalNotes, s.pendingLegislation ? `\u23F3 Pending: ${s.pendingLegislation.bill} \u2014 ${s.pendingLegislation.status}` : ''].filter(Boolean).join(' | ') || '\u2014'}</td>
   `;
   allTbody.appendChild(tr);
 });
