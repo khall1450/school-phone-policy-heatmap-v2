@@ -71,7 +71,7 @@
 
     .main-layout {
       display: grid;
-      grid-template-columns: 1fr 330px;
+      grid-template-columns: 1fr 370px;
       gap: 16px;
       padding: 16px 36px;
       max-width: 1300px;
@@ -113,7 +113,7 @@
       pointer-events: auto;
       opacity: 0;
       transition: opacity .15s;
-      max-width: 290px;
+      max-width: 320px;
       z-index: 999;
       line-height: 1.5;
       box-shadow: 0 5px 15px rgba(0,0,0,.25);
@@ -145,7 +145,7 @@
       display: flex;
       align-items: flex-start;
       gap: 9px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       cursor: pointer;
     }
     .legend-item:last-child { margin-bottom: 0; }
@@ -156,8 +156,9 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .legend-label { font-size: 0.75rem; line-height: 1.35; font-weight: 300; }
+    .legend-label { font-size: 0.72rem; line-height: 1.3; font-weight: 300; }
     .legend-count { font-weight: 700; color: var(--paragon-blue); }
+    .legend-vacant { font-style: italic; color: var(--checklist-grey); }
 
     /* Stats */
     .stats-bar { background: white; border-bottom: 1px solid #dde3ea; padding: 10px 0; }
@@ -222,30 +223,6 @@
       line-height: 1.45;
       font-weight: 300;
     }
-    .detail-accuracy {
-      background: #EEF7EE;
-      border-left: 3px solid #2E9E2C;
-      padding: 7px 10px;
-      font-size: 0.73rem;
-      border-radius: 0 0.3rem 0.3rem 0;
-      margin-top: 8px;
-      line-height: 1.45;
-      font-weight: 300;
-    }
-    .detail-accuracy.warn {
-      background: #FFF5E6;
-      border-left-color: var(--blaze-orange);
-    }
-    .detail-gaps {
-      background: #FDF0F0;
-      border-left: 3px solid #992E2E;
-      padding: 7px 10px;
-      font-size: 0.73rem;
-      border-radius: 0 0.3rem 0.3rem 0;
-      margin-top: 8px;
-      line-height: 1.45;
-      font-weight: 300;
-    }
 
     /* DC callout */
     .dc-note {
@@ -281,42 +258,18 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Accuracy review table */
-    .review-table { width: 100%; border-collapse: collapse; font-size: 0.74rem; }
-    .review-table th { background: var(--paragon-blue); color: white; padding: 8px 9px; text-align: left; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.65rem; }
-    .review-table td { padding: 7px 9px; border-bottom: 1px solid #EEF0F3; vertical-align: top; line-height: 1.45; font-weight: 300; }
-    .review-table tr:hover td { background: #F5F8FC; }
-    .badge-accurate { background: #DCEFD9; color: #1A5C18; padding: 2px 8px; border-radius: 0.3rem; font-size: 0.66rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.03em; }
-    .badge-flag { background: #FFF0DB; color: #8A4800; padding: 2px 8px; border-radius: 0.3rem; font-size: 0.66rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.03em; }
-    .badge-recat { background: #FAE0E0; color: #7A1F1F; padding: 2px 8px; border-radius: 0.3rem; font-size: 0.66rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.03em; }
-
-    .gap-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #992E2E; margin-right: 4px; }
-
     /* Full table */
     .state-table-wrap { overflow-x: auto; }
     .state-table { width: 100%; border-collapse: collapse; font-size: 0.73rem; }
     .state-table th { background: var(--paragon-blue); color: white; padding: 8px 9px; text-align: left; font-weight: 600; position: sticky; top: 0; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.65rem; }
     .state-table td { padding: 6px 9px; border-bottom: 1px solid #EEF0F3; vertical-align: top; line-height: 1.4; font-weight: 300; }
     .state-table tr:hover td { background: #F5F8FC; }
-    .state-table .hl-row td { background: #FFF5E6; }
-    .state-table .hl-row:hover td { background: #FFECD4; }
 
     /* Bottom section */
     .bottom-section {
       max-width: 1300px;
       margin: 0 auto;
       padding: 0 36px 28px;
-    }
-
-    /* Highlighted state indicator */
-    .hl-indicator {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--blaze-orange);
-      margin-right: 4px;
-      flex-shrink: 0;
     }
 
     /* Export button */
@@ -345,12 +298,11 @@
     <div class="brand-logo"></div>
     <div>
       <h1>State Cell Phone Policies in Schools</h1>
-      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Policy Landscape — Updated March 12, 2026</p>
+      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; 11-Tier Policy Classification — Updated March 13, 2026</p>
     </div>
   </div>
   <div class="source">
-    Source: State legislation + <em>Education Week</em> (June 2024)<br>
-    <span style="color:#FF941A">&#9679;</span> Orange border = categorization flagged for review
+    Source: State legislation, executive orders, board policies &amp; DOE guidance
   </div>
 </header>
 
@@ -389,40 +341,18 @@
 <div class="bottom-section">
   <div class="card">
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('accuracy')">Accuracy Review (Flagged States)</button>
-      <button class="tab-btn" onclick="switchTab('all')">All States Table</button>
-    </div>
-
-    <!-- Accuracy Review Tab -->
-    <div class="tab-content active" id="tab-accuracy">
-      <p style="font-size:0.8rem;color:#555;margin-bottom:12px;">
-        The following <strong>24 states</strong> (incl. DC) have been flagged for accuracy review. Original flags (8) were from the source spreadsheet; additional flags (16) were added via independent research cross-check (March 2026).
-        Flags include: possible reclassifications, effective date errors, citation corrections, storage classification questions, and status updates.
-      </p>
-      <table class="review-table">
-        <thead>
-          <tr>
-            <th>State</th>
-            <th>Current Category</th>
-            <th>Legislation</th>
-            <th>Issue / Review Note</th>
-            <th>Assessment</th>
-            <th>Verdict</th>
-          </tr>
-        </thead>
-        <tbody id="accuracy-tbody"></tbody>
-      </table>
+      <button class="tab-btn active" onclick="switchTab('all')">All States Table</button>
     </div>
 
     <!-- All States Tab -->
-    <div class="tab-content" id="tab-all">
+    <div class="tab-content active" id="tab-all">
       <button class="export-btn" onclick="exportCSV()">Export to CSV</button>
       <div class="state-table-wrap">
         <table class="state-table">
           <thead>
             <tr>
               <th>State</th>
-              <th>Category</th>
+              <th>Tier</th>
               <th>Storage Requirement</th>
               <th>Legislation</th>
               <th>Implementation Timeline</th>
@@ -440,42 +370,64 @@
 <div class="tooltip" id="tooltip"></div>
 
 <script>
-// ── CATEGORY DEFINITIONS ──────────────────────────────────────────────────────
+// ── CATEGORY DEFINITIONS (11-Tier System) ────────────────────────────────────
 const CATEGORIES = {
-  bell_bell_inaccessible: {
-    label: 'Bell-to-Bell, Inaccessible Storage',
-    color: '#002E6D',   // darkest — Paragon Blue
+  tier_6c: {
+    label: 'Bell-to-Bell Ban, Inaccessible Storage Mandated',
+    color: '#001A3F',
     order: 1
   },
-  bell_bell_accessible: {
-    label: 'Bell-to-Bell, Accessible Storage',
-    color: '#1A5FA8',   // dark blue
+  tier_6b: {
+    label: 'Bell-to-Bell Ban, Accessible Storage Mandated',
+    color: '#002E6D',
     order: 2
   },
-  bell_bell_partial: {
-    label: 'Bell-to-Bell (Partial — K-8 Only)',
-    color: '#3D8AC8',   // medium blue
+  tier_6a: {
+    label: 'Bell-to-Bell Ban, Storage Unspecified',
+    color: '#0D4A8A',
     order: 3
   },
-  instructional_time: {
-    label: 'Instructional Time Only',
-    color: '#7BB3DC',   // medium-light blue
+  tier_6p: {
+    label: 'Bell-to-Bell Ban, Partial (K\u20138 Only)',
+    color: '#2668A8',
     order: 4
   },
-  policy_required: {
-    label: 'Policy Required, No Mandated Restrictions',
-    color: '#B8D8F0',   // lightest blue
-    order: 5
+  tier_5c: {
+    label: 'Instructional-Time Ban, Inaccessible Storage Mandated',
+    color: '#3D8AC8',
+    order: 5,
+    vacant: true
   },
-  legislation_progress: {
-    label: 'Legislation in Progress',
-    color: '#B4B4B4',   // Wisdom Grey
-    order: 6
+  tier_5b: {
+    label: 'Instructional-Time Ban, Accessible Storage Mandated',
+    color: '#5AA0D8',
+    order: 6,
+    vacant: true
   },
-  no_legislation: {
-    label: 'No Current Legislation',
-    color: '#E8EAED',   // Near white-grey
+  tier_5a: {
+    label: 'Instructional-Time Ban, Storage Unspecified',
+    color: '#7BB3DC',
     order: 7
+  },
+  tier_4: {
+    label: 'Must Limit Use (District Defines)',
+    color: '#99C8E8',
+    order: 8
+  },
+  tier_3: {
+    label: 'Must Adopt a Policy (No Content Req.)',
+    color: '#B8D8F0',
+    order: 9
+  },
+  tier_2: {
+    label: 'Guidance / Encouragement Only',
+    color: '#D4E8F7',
+    order: 10
+  },
+  tier_1: {
+    label: 'No Statewide Policy',
+    color: '#E8EAED',
+    order: 11
   }
 };
 
@@ -483,820 +435,618 @@ const CATEGORIES = {
 const STATE_DATA = [
   {
     fips:"01", name:"Alabama", abbr:"AL",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Device must be turned off and stored off person in locker, car, or similar storage (doesn't explicitly require inaccessible storage)",
-    legislation:"SB 92",
+    category:"tier_6b",
+    rawCategory:"Bell-to-Bell Ban, Accessible Storage Mandated",
+    currentPolicy:"Bell-to-bell ban \u2014 phones must be turned off and stored in a locker, car, or similar location, off their person, for the full school day",
+    storageReq:"Accessible storage mandated (locker, car, or similar location \u2014 off person)",
+    legislation:"HB 166 (May 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts required to set policy by July 2025; effective 2025–2026 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"02", name:"Alaska", abbr:"AK",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements",
-    currentPolicy:"Some policy required — district policy regulating possession and use required",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"Districts must adopt a phone policy covering school hours including lunch and passing periods; content is up to them",
     storageReq:"No storage requirement specified",
-    legislation:"HB 57",
-    notes:"State law requires districts to implement a phone policy, but a ban is not required. If no policy adopted, default is a bell-to-bell ban.",
+    legislation:"HB 57 (May 2025)",
+    notes:"If no policy adopted, default is a bell-to-bell ban.",
     additionalNotes:"",
-    timeline:"Signed 2025; district policy adoption deadline not specified in statute",
-    toReview:"Districts must develop policy regulating phone use bell-to-bell, but a ban is not required; default is ban if no policy",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"UNDERSTATED CATEGORY: HB 57 requires districts to regulate phone use during the full school day (including lunch and passing periods), not just 'adopt a policy.' Default is a bell-to-bell ban if no policy adopted. 'Policy Required, No Mandated Elements' understates the law's prescriptive scope.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"04", name:"Arizona", abbr:"AZ",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements (limits use during school day?)",
-    currentPolicy:"Bell-to-bell limitation — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"HB 2484",
+    category:"tier_4",
+    rawCategory:"Must Limit Use (District Defines)",
+    currentPolicy:"Districts must adopt policies that limit device use during the school day; the specific form is district-defined",
+    storageReq:"District-defined",
+    legislation:"HB 2484 (Apr 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"2025",
-    toReview:"Policy just requires a limit on phone use, not a ban?",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"LIKELY MISCATEGORIZED: HB 2484 requires districts to limit phone use during the school day (bell-to-bell), which IS a mandated element. 'No Mandated Elements' appears inaccurate. Recommend reclassifying as a 'Bell-to-Bell Limitation' or a distinct sub-category distinguishing 'limitation' from 'ban.'",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"05", name:"Arkansas", abbr:"AR",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Possession restricted; no explicit storage location required",
-    legislation:"SB 142",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"'Bell to Bell, No Cell' Act prohibits possession/use during the school day; storage method is district-defined",
+    storageReq:"Storage unspecified \u2014 district-defined",
+    legislation:"SB 142 (Feb 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts required to develop policy by 2025–2026 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"06", name:"California", abbr:"CA",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements (policy includes limitation or prohibition?)",
-    currentPolicy:"Bell-to-bell limitation or prohibition — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"AB 3216",
+    category:"tier_4",
+    rawCategory:"Must Limit Use (District Defines)",
+    currentPolicy:"Districts must adopt a policy to limit or prohibit smartphones by July 1, 2026; both limiting and banning satisfy the law",
+    storageReq:"District-defined",
+    legislation:"AB 3216 (Sept 2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts required to develop policy by July 2026",
-    toReview:"Policy to either limit or prohibit use — not a total ban",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"PARTIALLY INACCURATE: AB 3216 mandates that districts adopt a policy that either limits or prohibits use — some form of restriction IS required. 'No Mandated Elements' is misleading. Consider updating to 'Policy Required (Mandated Limitation or Prohibition)' or creating a distinct sub-category.",
-    accuracyVerdict:"flag"
+    timeline:"Districts required to develop policy by July 2026"
   },
   {
     fips:"08", name:"Colorado", abbr:"CO",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements",
-    currentPolicy:"Some policy required — district policy related to device use required",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"Districts must adopt and post a device policy by July 1, 2026; any policy satisfies the law",
     storageReq:"No storage requirement specified",
-    legislation:"HB 25-1135",
-    notes:"State law requires districts to implement a phone policy, but a ban is not required",
+    legislation:"HB 25-1135 (May 2025)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Signed 2025; district policy adoption deadline not specified in statute",
-    toReview:"Districts must develop policy that regulates phone use, but bans/restrictions not required",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"09", name:"Connecticut", abbr:"CT",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Bell-to-Bell)",
-    currentPolicy:"Ban not required by state — House-passed bill in Senate",
-    storageReq:"N/A — legislation pending",
-    legislation:"HB 5035",
-    notes:"HB 5035 bell-to-bell ban passed the House; now in the Senate. Governor Lamont urging Senate passage. If passed by June 4, districts must adopt policies for the 2026-27 school year. About 65% of districts already implementing bell-to-bell voluntarily.",
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"CT Dept of Education encourages districts to develop personal technology policies \u2014 not a mandate",
+    storageReq:"N/A",
+    legislation:"DOE guidance (Aug 2024)",
+    notes:"Previously had HB 5035 in progress (bell-to-bell ban) but it was not enacted.",
     additionalNotes:"",
-    timeline:"Passed House; pending Senate vote; legislature session ends May 6, 2026",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"10", name:"Delaware", abbr:"DE",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Instructional Time Only)",
-    currentPolicy:"Ban not required by state — awaiting Governor signature",
-    storageReq:"N/A — legislation pending",
-    legislation:"SB 106",
-    notes:"SB 106 passed both chambers; Governor Matt Meyer plans to sign 'later in March 2026.' Would require all districts and charter schools to limit phone use during instructional time and set consequences for violations.",
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"No statewide mandate; state funded a small pouch pilot program in 2024 but no law requires districts to act",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"Previously had SB 106 in progress but it was not enacted.",
     additionalNotes:"",
-    timeline:"Awaiting Governor signature (expected March 2026); district implementation deadline TBD upon enactment",
-    toReview:"SB 106 passed both chambers unanimously and Governor confirmed he will sign — further along than 'Legislation in Progress' implies",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"STATUS UPDATE NEEDED: SB 106 passed both chambers (Senate unanimously, House unanimously with amendment) and Governor Meyer has confirmed he plans to sign 'later in March 2026.' Category should be updated to enacted/signed once confirmed. Note: the bill targets instructional time restrictions, not bell-to-bell.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"11", name:"District of Columbia", abbr:"DC",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — single statewide policy",
-    storageReq:"No storage requirement specified",
-    legislation:"D.C. Law 26-39",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"DC prohibits phone use during the school day in public schools (bell-to-bell); storage not centrally mandated",
+    storageReq:"Storage unspecified",
+    legislation:"District policy",
     notes:"",
     additionalNotes:"",
-    timeline:"Schools must adopt and implement policy no later than 15 days before the 2026–2027 school year",
-    toReview:"Law number 'D.C. Law 26-39' could not be independently verified — the bill is B26-73 (Heads Up! Distraction-Free Learning Amendment Act of 2025)",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"CITATION CHECK: The law number 'D.C. Law 26-39' could not be independently confirmed. The legislation is Bill 26-73 (B26-0073), the 'Heads Up! Distraction-Free Learning Amendment Act of 2025.' Verify the enacted law number against DC Council official records.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"12", name:"Florida", abbr:"FL",
-    category:"bell_bell_partial",
-    rawCategory:"Bell-to-Bell (Partial), Accessible Storage",
-    currentPolicy:"Partial bell-to-bell ban — single statewide policy (K–8 only; instructional time ban for high school)",
-    storageReq:"No storage requirement for elementary/middle; high schools must implement storage policies (inaccessible not specified)",
-    legislation:"HB 1105",
-    notes:"Bell-to-bell ban K–8 only; instructional time ban for high school",
+    category:"tier_6p",
+    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    currentPolicy:"K\u20138: full bell-to-bell ban. Grades 9\u201312: instructional-time ban with teacher exceptions. 6-county HS pilot underway.",
+    storageReq:"Storage unspecified",
+    legislation:"HB 1105 (July 2025)",
+    notes:"",
     additionalNotes:"",
-    timeline:"2025",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"13", name:"Georgia", abbr:"GA",
-    category:"bell_bell_partial",
-    rawCategory:"Bell-to-Bell (Partial), Accessible Storage",
-    currentPolicy:"Partial bell-to-bell ban — district policy required (K–8 only; no policy for high school)",
-    storageReq:"Access prohibited; schools must establish storage in locker, locked pouch, or designated classroom area",
-    legislation:"HB 340",
-    notes:"Bell-to-bell ban K–8 only; no policy for high school",
-    additionalNotes:"HB 1009 would extend bell-to-bell ban to grades 9–12; passed House 145-20 on 2/24/26; in Senate as of 3/12/26 with active debate — bipartisan support reported but no committee/floor vote yet. Would be effective 2027–2028 school year if signed.",
-    timeline:"Schools adopt policies by Jan 1 2026; restrictions in place by July 2026",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    category:"tier_6p",
+    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    currentPolicy:"K\u20138: no personal devices during the school day. High school (9\u201312) has no statewide restriction.",
+    storageReq:"Storage unspecified",
+    legislation:"HB 340 (May 2025, eff. July 2026)",
+    notes:"",
+    additionalNotes:"HB 1009 would extend bell-to-bell ban to grades 9\u201312; passed House 145-20 on 2/24/26; in Senate as of 3/12/26 with active debate.",
+    timeline:"Schools adopt policies by Jan 1 2026; restrictions in place by July 2026"
   },
   {
     fips:"15", name:"Hawaii", abbr:"HI",
-    category:"bell_bell_partial",
-    rawCategory:"Bell-to-Bell (Partial), Accessible Storage",
-    currentPolicy:"Partial bell-to-bell ban — single statewide policy (K–8 only; instructional time ban high school)",
-    storageReq:"Department shall develop storage guidelines; inaccessible not specified",
-    legislation:"Statewide policy",
-    notes:"Bell-to-bell ban K–8 only; instructional time ban high school",
+    category:"tier_6p",
+    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    currentPolicy:"Elementary and middle schools: full-day ban. High schools: instructional-time ban only. Board policy, not a statute.",
+    storageReq:"Storage unspecified",
+    legislation:"BOE policy (Feb 2026)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Effective 2026–2027 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:"Effective 2026\u20132027 school year"
   },
   {
     fips:"16", name:"Idaho", abbr:"ID",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements (bell-to-bell limitation?)",
-    currentPolicy:"Bell-to-bell limitations — district policy required",
-    storageReq:"Not specified in statute — S1032 requires districts to limit device use 'as much as possible' but leaves storage decisions entirely to local district policy",
-    legislation:"ID S1032",
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"Governor encourages all schools to have a comprehensive phone policy by end of the 2024\u201325 school year \u2014 guidance only",
+    storageReq:"N/A",
+    legislation:"Executive Order (Oct 2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Schools must adopt policies by December 2025",
-    toReview:"Policy does not require a ban — just requires district policy to limit device use as much as possible during school hours",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"LIKELY MISCATEGORIZED: ID S1032 requires districts to limit device use 'as much as possible' during school hours. Since a mandated limitation is required, 'No Mandated Elements' appears inaccurate. Similar to Arizona — consider reclassifying as 'Bell-to-Bell Limitation.'",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"17", name:"Illinois", abbr:"IL",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Instructional Time Only)",
-    currentPolicy:"Ban not required by state",
-    storageReq:"N/A — legislation pending",
-    legislation:"SB 2427",
-    notes:"SB 2427 (instructional time ban) passed Senate 55-0 in 2025; stalled in House. Renewed 2026 push — scheduled for House Education Policy Committee hearing. Governor Pritzker announced bell-to-bell ban push 2/24/26. Illinois Federation of Teachers opposes mandate, citing unfunded storage requirements.",
-    additionalNotes:"Governor Pritzker has proposed a separate bell-to-bell ban for 2026; SB 2427 covers instructional time only. No House vote yet as of 3/12/26.",
-    timeline:"Pending House vote; implementation timeline TBD upon enactment",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"No statewide mandate; some major districts have their own policies",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"Previously had SB 2427 in progress but it was not enacted.",
+    additionalNotes:"",
+    timeline:""
   },
   {
     fips:"18", name:"Indiana", abbr:"IN",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Schools must either prohibit phones entirely or require phones to be powered off and inaccessible during school day",
-    legislation:"SB 78 (Public Law 78)",
-    notes:"SB 78 signed by Governor Braun on March 5, 2026 (Public Law 78). Covers phones, smartwatches, and gaming devices. Supersedes prior instructional-time law (SB 0185).",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Instructional-time ban; teachers may allow phones for educational purposes. No storage requirement.",
+    storageReq:"Storage unspecified",
+    legislation:"SB 185 (Mar 2024)",
+    notes:"Note: Website previously listed SB 78 (2026) as a bell-to-bell law \u2014 verify current status.",
     additionalNotes:"",
-    timeline:"Signed March 5, 2026; districts must adopt policies by July 1, 2026",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"19", name:"Iowa", abbr:"IA",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only (restriction, not ban)",
-    currentPolicy:"Instructional time restriction — district policy required",
-    storageReq:"Not specified in statute — HF 782 restricts use during instructional time only; storage outside instructional time is left to district discretion",
-    legislation:"HF 782",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Districts must restrict use during classroom instructional time; teacher exceptions allowed, storage not mandated",
+    storageReq:"Storage unspecified",
+    legislation:"HF 782 (Apr 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Schools required to adopt policies by 2025–2026 school year",
-    toReview:"Instructional time restriction — not ban",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"ACCURATE: 'Class Instructional Time Only' is the correct category. The 'restriction, not ban' qualifier is meaningful — districts must restrict use during instruction but are not required to implement a full ban. This distinction is well-documented and categorization is appropriate.",
-    accuracyVerdict:"accurate"
+    timeline:""
   },
   {
     fips:"20", name:"Kansas", abbr:"KS",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Bell-to-Bell)",
-    currentPolicy:"Ban not required by state — awaiting Governor signature",
-    storageReq:"N/A — legislation pending",
-    legislation:"HB 2299",
-    notes:"HB 2299 'Bell to Bell, No Cell' passed both chambers (Senate 32-4 on 3/5/26; House 84-39 on 3/10/26 with Senate amendments); now on Governor Laura Kelly's desk. Requires districts to adopt policies restricting student cell phone use bell-to-bell. Note: House committee initially amended 'shall' to 'may' but this was reversed — final version is mandatory.",
-    additionalNotes:"Previous bill number SB 302 remains in Senate Education Committee; HB 2299 is the vehicle that passed.",
-    timeline:"Awaiting Governor Kelly's signature (March 2026); district implementation deadline TBD upon enactment",
-    toReview:"Bill number corrected from SB 302 to HB 2299; 'shall'/'may' amendment was reversed in final version — bill is mandatory",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"BILL NUMBER CORRECTED: The bill that actually passed the legislature is HB 2299, not SB 302 (which remains in committee). The House committee initially amended 'shall' to 'may' but this was subsequently reversed — the final version that passed is mandatory. Awaiting Governor Kelly's signature as of 3/12/26.",
-    accuracyVerdict:"flag"
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"Kansas DOE encourages districts to limit phone use \u2014 not a law",
+    storageReq:"N/A",
+    legislation:"KSDE policy (Dec 2024)",
+    notes:"Previously had HB 2299 in progress but it was not enacted.",
+    additionalNotes:"",
+    timeline:""
   },
   {
     fips:"21", name:"Kentucky", abbr:"KY",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only",
-    currentPolicy:"Instructional time ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"HB 208",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Districts must prohibit use during the school day (bell-to-bell); storage method is district-defined",
+    storageReq:"Storage unspecified \u2014 district-defined",
+    legislation:"HB 208 (Mar 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Signed March 2025",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"22", name:"Louisiana", abbr:"LA",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — single statewide policy",
-    storageReq:"Phones prohibited on person; must be securely stored or turned off if brought on campus (doesn't explicitly require inaccessible storage)",
-    legislation:"Act 313",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Phones must be turned off and properly stowed away for the full instructional day; storage is accessible",
+    storageReq:"Storage unspecified",
+    legislation:"SB 207 (May 2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Effective beginning 2024–2025 school year",
-    toReview:"Act 313 requires devices 'turned off and properly stowed away' and prohibited on person — may lean closer to inaccessible than accessible",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"STORAGE CLASSIFICATION QUESTION: Act 313 requires devices to be 'turned off and properly stowed away' and prohibits having them on one's person during the instructional day. This language leans toward inaccessible storage rather than 'Accessible Storage.' Consider whether 'Bell-to-Bell, Inaccessible Storage' is a more accurate category.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"23", name:"Maine", abbr:"ME",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements",
-    currentPolicy:"Ban not required — district policy related to device use required",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"School boards must adopt a device policy by Aug 1, 2026; content is unspecified",
     storageReq:"No storage requirement specified",
-    legislation:"LD 1234 / HP 809",
-    notes:"LD 1234 (HP 809) originally proposed as a blanket ban but heavily amended in committee to require a comprehensive cellphone policy (not necessarily a ban) by August 1, 2026. Passed to be engrossed as amended. Dept. of Education tasked with creating a model policy.",
-    additionalNotes:"Governor Mills called for bell-to-bell ban (1/27/26) and included $700,000 for implementation in supplemental budget. The amended bill preserves local control — districts set their own approach.",
-    timeline:"Districts must adopt policies by August 1, 2026 (LD 1234 as amended)",
-    toReview:"Monitor whether final enacted version maintains 'policy required' approach or gets strengthened to mandate a ban",
-    highlighted:false,
-    dataGaps:[]
+    legislation:"LD 1234 (June 2025)",
+    notes:"",
+    additionalNotes:"",
+    timeline:"Districts must adopt policies by August 1, 2026"
   },
   {
     fips:"24", name:"Maryland", abbr:"MD",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Bell-to-Bell)",
-    currentPolicy:"Ban not required by state — passed House committee, heading to Senate",
-    storageReq:"N/A — legislation pending",
-    legislation:"HB 525",
-    notes:"HB 525 (Maryland Phone-Free Schools Act) passed House Ways and Means Committee; heading to Senate hearing. Would require all 24 school systems to prohibit student device use during entire school day (including lunch, recess, passing periods) by 2027–2028 school year. Includes social media blocking on school networks.",
-    additionalNotes:"Sponsor Del. Adrian Boafo expressed confidence in bipartisan passage; Senate sponsor Sen. Kevin Harris.",
-    timeline:"Would require implementation by 2027–2028 school year if enacted",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
+    storageReq:"N/A",
+    legislation:"State guidance",
+    notes:"Previously had HB 525 in progress but it was not enacted.",
+    additionalNotes:"",
+    timeline:""
   },
   {
     fips:"25", name:"Massachusetts", abbr:"MA",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Bell-to-Bell)",
-    currentPolicy:"Ban not required by state — Senate-passed bill stalled in House",
-    storageReq:"N/A — legislation pending",
-    legislation:"S.2561",
-    notes:"S.2561 passed Senate 38-2 on 7/31/25 but has stalled in the House. The 2025-26 school year began without the ban in effect. Governor Healey supports. Exceptions for medical, IEP, disability.",
-    additionalNotes:"No House action reported as of 3/12/26. New school year started without ban per Axios Boston (Sept 2025).",
-    timeline:"Would require policies in place by fall 2026 if enacted",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"Senate passed a bell-to-bell ban bill in 2025 but it was not signed into law as of early 2026",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"Previously had S.2561 in progress (bell-to-bell) but it stalled in House.",
+    additionalNotes:"",
+    timeline:""
   },
   {
     fips:"26", name:"Michigan", abbr:"MI",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only",
-    currentPolicy:"Instructional time ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"HB 4141",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Smartphones banned during instructional time; students may carry basic/dumb phones; storage is district-defined",
+    storageReq:"Storage unspecified \u2014 district-defined",
+    legislation:"HB 4141 (Feb 2026, eff. 2026\u201327)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts required to implement policies by 2026–2027 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:"Districts required to implement policies by 2026\u20132027 school year"
   },
   {
     fips:"27", name:"Minnesota", abbr:"MN",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements",
-    currentPolicy:"Ban not required — district policy on possession/use of devices required",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"Districts must adopt a phone policy by March 15, 2025; no content specified",
     storageReq:"No storage requirement specified",
-    legislation:"MN Statute 121A.73",
-    notes:"SF 508 (partial bell-to-bell: K-8 phones off school grounds, 9-12 no phones in classroom) passed Senate in 2025 but failed in House. In 2026 session, Senate Education Policy Committee heard it again; held for possible inclusion in a larger education package. Legislature in session through mid-May 2026.",
+    legislation:"SF 3567 (May 2024)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Districts required to adopt policies by March 2025 (existing MN Statute 121A.73)",
-    toReview:"SF 508 2026 status: held in committee for possible omnibus education bill; verify statute number",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"STATUTE NUMBER CORRECTION NEEDED: The cited statute 'MN Statute 121A.72' should be '121A.73.' Section 121A.73 (enacted 2024) requires school districts to adopt cell phone policies. SF 508 would amend 121A.73 with additional K-8 mandatory bans starting 2026-27.",
-    accuracyVerdict:"flag"
+    timeline:"Districts required to adopt policies by March 2025"
   },
   {
     fips:"28", name:"Mississippi", abbr:"MS",
-    category:"no_legislation",
-    rawCategory:"No Bill Enacted",
-    currentPolicy:"Ban not required by state",
-    storageReq:"N/A — no legislation enacted",
-    legislation:"SB 2099 (failed)",
-    notes:"SB 2099 passed Senate 2/4/26 but died in the House — House Education Committee concluded its 2026 session without advancing the bill (March 2026). No statewide phone policy required.",
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"No statewide mandate as of early 2026",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"",
     additionalNotes:"",
-    timeline:"N/A — no legislation enacted",
-    toReview:"SB 2099 is a 2026-session bill; the 2025-session cell phone bill was SB 2151 — verify correct bill is cited",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"MINOR SESSION CLARIFICATION: SB 2099 is specifically a 2026-session bill that died in the House. The 2025-session cell phone bill was SB 2151, not SB 2099. Category 'No Legislation' is correct — just ensure the bill session year is clearly noted to avoid confusion.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"29", name:"Missouri", abbr:"MO",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"SB 68",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Prohibits display or use all day including meals, breaks, passing periods, and study halls; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"SB 68/69 (July 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt policies starting 2025–2026 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"30", name:"Montana", abbr:"MT",
-    category:"no_legislation",
-    rawCategory:"No Bill Introduced",
-    currentPolicy:"Ban not required by state",
-    storageReq:"N/A — no legislation introduced",
-    legislation:"None",
-    notes:"No statewide legislation. Governor Gianforte wrote to all superintendents and school board trustees asking schools to voluntarily adopt phone-free policies. Some individual districts (e.g., Bozeman) implementing full bans starting fall 2026.",
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
+    storageReq:"N/A",
+    legislation:"State guidance",
+    notes:"",
     additionalNotes:"",
-    timeline:"N/A — no legislation introduced",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"31", name:"Nebraska", abbr:"NE",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"LB 140",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Prohibits use on school property during the school day (bell-to-bell); storage left to districts",
+    storageReq:"Storage unspecified",
+    legislation:"LB 140 (May 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt policies before 2025–2026 school year",
-    toReview:"LB 140 requires policies prohibiting use during 'classroom instruction' — may not mandate a full bell-to-bell ban",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"POSSIBLE OVERCATEGORIZATION: LB 140 requires school boards to adopt policies prohibiting use of devices during 'classroom instruction' and on school grounds, but gives districts wide latitude on scope. The law does not explicitly mandate a bell-to-bell ban — districts decide the specifics. 'Policy Required' may be a more accurate category than 'Bell-to-Bell, Accessible Storage.'",
-    accuracyVerdict:"recat"
+    timeline:""
   },
   {
     fips:"32", name:"Nevada", abbr:"NV",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only (limit, not ban?)",
-    currentPolicy:"Instructional time limitation — district policy required to limit use during instruction + policy while on school grounds",
-    storageReq:"No storage requirement specified",
-    legislation:"SB 444",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Districts must prohibit access during class; instructional-time scope, storage not mandated",
+    storageReq:"Storage unspecified",
+    legislation:"SB 444 (May 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt policies before 2026–2027 school year",
-    toReview:"Districts must have a policy concerning use/possession while on school grounds, including limitations on use during instructional time",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"ACCURATE: 'Class Instructional Time Only' is the appropriate category. SB 444 requires a policy that includes limitations during instructional time. The 'limit, not ban' qualifier is noted — districts restrict rather than prohibit use, consistent with other instructional-time-only states.",
-    accuracyVerdict:"accurate"
+    timeline:""
   },
   {
     fips:"33", name:"New Hampshire", abbr:"NH",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"HB 2",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Bell-to-bell ban from first bell to dismissal bell; storage method not specified",
+    storageReq:"Storage unspecified",
+    legislation:"HB 2 (June 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Passed 2025; effective July 1, 2025",
-    toReview:"'Accessible' qualifier may be inaccurate — law's intent and Governor's framing lean toward inaccessible storage, though specifics left to districts",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"STORAGE CLASSIFICATION QUESTION: HB 2 prohibits device use from first bell to dismissal (including lunch), but the law does not specify a storage method. The Governor's framing and some district implementations lean toward inaccessible storage (pouches, lockers). 'Accessible' vs 'Inaccessible' is ambiguous — the law's intent may be closer to inaccessible.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"34", name:"New Jersey", abbr:"NJ",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"S 3695",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Bell-to-bell ban on non-academic device use; storage guidelines issued by state DOE but method is district-defined",
+    storageReq:"Storage unspecified \u2014 district-defined",
+    legislation:"A4882 (Jan 2026, eff. 2026\u201327)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt policies starting 2026–2027 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:"Districts must adopt policies starting 2026\u20132027 school year"
   },
   {
     fips:"35", name:"New Mexico", abbr:"NM",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements (instructional time ban optional?)",
-    currentPolicy:"Policy required — instructional time ban optional",
-    storageReq:"Not specified in statute — SB 11 requires a district policy but storage is not a mandated element; entirely at district discretion",
-    legislation:"SB 11",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"Districts must adopt and implement a wireless device policy; content unspecified",
+    storageReq:"No storage requirement specified",
+    legislation:"SB 11 (Apr 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Schools must adopt policies by August 2025",
-    toReview:"Districts required to adopt a policy which may ban phones during instructional time",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"ACCURATE: SB 11 requires a policy that 'may' include a ban during instructional time — the ban is explicitly optional. 'Policy Required, No Mandated Elements' is the correct classification since no specific restriction is mandated.",
-    accuracyVerdict:"accurate"
+    timeline:""
   },
   {
     fips:"36", name:"New York", abbr:"NY",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Strict, leans toward inaccessible — backpacks not acceptable, lockers acceptable but must prohibit access; districts develop storage policy",
-    legislation:"NY Law (S.3006-C / A.3006-C, L.2025 ch.56)",
-    notes:"State allocated $13.5M for storage solutions including Yondr pouches, cubbies, and lockers.",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Bell-to-bell ban directed by Gov. Hochul as part of the state budget; storage details left to districts",
+    storageReq:"Storage unspecified",
+    legislation:"Budget agreement (May 2025)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Schools must adopt policies by August 1, 2025 (2025–2026 school year)",
-    toReview:"Category says 'Accessible Storage' but law requires devices stored away and inaccessible — multiple storage methods allowed (pouches, cubbies, lockers), not 'lockers only'",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"LIKELY MISCATEGORIZED: The NY law requires devices to be stored away and inaccessible during the school day — this is 'Bell-to-Bell, Inaccessible Storage,' not 'Accessible.' Storage is NOT limited to lockers; Yondr pouches, cubbies, and other methods are explicitly allowed (state allocated $13.5M for storage solutions). Also missing bill number: enacted via state budget bill S.3006-C/A.3006-C (L.2025, ch.56).",
-    accuracyVerdict:"recat"
+    timeline:""
   },
   {
     fips:"37", name:"North Carolina", abbr:"NC",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only",
-    currentPolicy:"Instructional time ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"HB 959 (Session Law 2025-38)",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Districts must prohibit use and display during the school day; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"HB 959 (July 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Local boards must adopt policies by Jan 1 2026",
-    toReview:"Cell phone policy deadline was Sept 1, 2025, not Jan 1, 2026 — the Jan 1 date applies to internet safety policy provisions",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"DATE CLARIFICATION: The cell phone/wireless device policy deadline under HB 959 was September 1, 2025 (start of school year), not January 1, 2026. The January 1, 2026 deadline applies to the separate internet safety policy provisions of the law. Category 'Instructional Time Only' is correct.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"38", name:"North Dakota", abbr:"ND",
-    category:"bell_bell_inaccessible",
-    rawCategory:"Bell-to-Bell, Inaccessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Inaccessible storage required — devices must be silenced and locked away",
-    legislation:"NDCC 15.1-07-41 (HB 1160)",
-    notes:"",
+    category:"tier_6c",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Mandated",
+    currentPolicy:"Bell-to-bell ban (lunch, recess, passing periods explicitly included). Devices must be silenced, locked, and inaccessible in a pouch, phone locker, or envelope.",
+    storageReq:"Inaccessible storage mandated (locked pouch, phone locker, or envelope)",
+    legislation:"HB 1160 (Apr 2025)",
+    notes:"Strictest storage mandate in the country.",
     additionalNotes:"",
-    timeline:"Signed April 25, 2025",
-    toReview:"Citation typo: '15.01-07-41' should be '15.1-07-41' (no zero); bill number is HB 1160",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"CITATION TYPO: The NDCC citation '15.01-07-41' should be '15.1-07-41' (no zero after 15). The originating bill was HB 1160. Category 'Bell-to-Bell, Inaccessible Storage' is correct — law requires devices to be 'silenced and locked away.'",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"39", name:"Ohio", abbr:"OH",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified; districts develop own policy",
-    legislation:"OH law",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Prohibits all cell phone use during the instructional day; teacher exceptions allowed; storage not mandated",
+    storageReq:"Storage unspecified",
+    legislation:"HB 96 (July 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must create policies by Jan 1 2026",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"40", name:"Oklahoma", abbr:"OK",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"SB 139",
-    notes:"Districts required to implement bell-to-bell ban for 2025–26; more flexibility given for 2026–27",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Explicit 'bell to bell' language in the statute; storage method left to districts",
+    storageReq:"Storage unspecified",
+    legislation:"SB 139 (Apr 2025)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Policy required for 2025–2026; flexibility allowed from 2026–2027",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"41", name:"Oregon", abbr:"OR",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Doesn't explicitly say inaccessible; districts must specify how phones will be stored",
-    legislation:"Executive Order No. 25-09",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Requires districts to prohibit use from start to end of regular instructional hours; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"Executive Order 25-09 (July 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Policies adopted by October 2025; effective by January 2026",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"42", name:"Pennsylvania", abbr:"PA",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Bell-to-Bell)",
-    currentPolicy:"Ban not required by state",
-    storageReq:"N/A — legislation pending",
-    legislation:"SB 1014",
-    notes:"SB 1014 bell-to-bell ban passed Senate; referred to House Education Committee 2/4/26. Governor Shapiro has expressed support. Full House vote pending — expected no earlier than June 2026.",
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"No statewide mandate as of early 2026",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"SB 1014 (bell-to-bell) passed the Senate in Feb 2026 but had not been signed into law.",
     additionalNotes:"",
-    timeline:"Pending House vote (expected no earlier than June 2026); district implementation deadline TBD upon enactment",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"44", name:"Rhode Island", abbr:"RI",
-    category:"bell_bell_inaccessible",
-    rawCategory:"Bell-to-Bell, Inaccessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Prohibition on physical access to device",
-    legislation:"S 0771",
+    category:"tier_6c",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Mandated",
+    currentPolicy:"Bell-to-bell ban including non-instructional periods. Devices must be stored in inaccessible locations all day.",
+    storageReq:"Inaccessible storage mandated",
+    legislation:"2025-S 0771A (signed June 2025, eff. Aug 2026)",
     notes:"",
     additionalNotes:"",
-    timeline:"Act effective August 2026",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:"Act effective August 2026"
   },
   {
     fips:"45", name:"South Carolina", abbr:"SC",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — single statewide policy",
-    storageReq:"Prohibits access; storage determined by district policy",
-    legislation:"Proviso 1.103 / H. 5100 (2024)",
-    notes:"Specifies this is an 'off-and-away' policy, not a campus ban. Enforced via budget proviso, not standalone statute. Bill 65 (2025-2026 session) introduced to codify a permanent statutory ban.",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Prohibits student access to personal devices during the school day; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"Budget proviso (July 2024)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Districts must implement policy by January 2025",
-    toReview:"Legal mechanism is Proviso 1.103 in General Appropriations Bill H. 5100, not just a 'policy memorandum' — important legal distinction",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"LEGAL BASIS CLARIFICATION: The enforcement mechanism is Proviso 1.103 in the General Appropriations Bill H. 5100 (2024), not merely a 'policy memorandum.' This is an important legal distinction — provisos carry force of law for the fiscal year but must be renewed. Bill 65 was introduced in 2025-2026 to codify a permanent statutory ban. Category is correct.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"46", name:"South Dakota", abbr:"SD",
-    category:"no_legislation",
-    rawCategory:"No Bill Enacted",
-    currentPolicy:"Ban not required by state",
-    storageReq:"N/A — no legislation enacted",
-    legislation:"SB 198 (failed)",
-    notes:"SB 198 passed Senate 19-15 on 2/17/26 but killed in the House — House voted 28-39 on 3/6/26. Local control opposition defeated the bill.",
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
+    storageReq:"N/A",
+    legislation:"State guidance",
+    notes:"",
     additionalNotes:"",
-    timeline:"N/A — no legislation enacted",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"47", name:"Tennessee", abbr:"TN",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only",
-    currentPolicy:"Instructional time ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"SB 0897 / HB 0932",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Districts must prohibit use during instructional time; teacher exceptions remain; storage not mandated",
+    storageReq:"Storage unspecified",
+    legislation:"SB 0897 (Mar 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt and implement policies starting 2025–2026 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"48", name:"Texas", abbr:"TX",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"Phones can be banned or storage required; inaccessible not specified",
-    legislation:"HB 1481",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Districts must prohibit use during the school day (bell-to-bell); storage left to districts",
+    storageReq:"Storage unspecified",
+    legislation:"HB 1481 (June 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:"Effective April 2025; districts must adopt policies within 90 days",
-    toReview:"Effective date listed as April 2025 but HB 1481 was effective June 20, 2025 — district policy deadline was September 18, 2025",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"EFFECTIVE DATE ERROR: HB 1481 was effective June 20, 2025 (immediately upon signing), not April 2025. Districts had until September 18, 2025 (90 days) to adopt written policies. The 'April 2025' date does not correspond to any milestone for this bill. Category is correct.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"49", name:"Utah", abbr:"UT",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Bell-to-Bell)",
-    currentPolicy:"Bell-to-bell ban — awaiting Governor Cox's signature",
-    storageReq:"",
-    legislation:"SB 69",
-    notes:"SB 69 passed both chambers (House 46-21, Senate unanimous 2/27/26); awaiting Governor Cox's signature. Effective July 1, 2026 if signed. Bans all smart devices (phones, smartwatches, etc.) from first bell to last bell. Supersedes prior instructional-time default (SB 178, 2025).",
-    additionalNotes:"Governor Cox championed SB 69 as a top priority for the 2026 session.",
-    timeline:"Effective July 1, 2026 if signed",
-    toReview:"SB 69 passed both chambers and Cox championed it — likely signed by now. Verify signing status and update category to Bell-to-Bell if enacted.",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"STATUS LIKELY OUTDATED: SB 69 passed both chambers (House 46-21, Senate unanimous) by 2/27/26, and Governor Cox championed it as a top priority. As of 3/12/26, Cox has been signing batches of bills — this has very likely been signed into law. If so, category should be updated from 'Legislation in Progress' to 'Bell-to-Bell' (accessible vs. inaccessible TBD based on storage provisions).",
-    accuracyVerdict:"recat"
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Bell-to-bell ban; districts must prohibit phone use during the school day; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"SB 178 (2024)",
+    notes:"",
+    additionalNotes:"",
+    timeline:""
   },
   {
     fips:"50", name:"Vermont", abbr:"VT",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage",
-    currentPolicy:"Bell-to-bell ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"H 480",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Bell-to-bell ban; districts must prohibit use during the school day; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"Act 76 (2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt and implement policies starting 2026–2027 school year",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"51", name:"Virginia", abbr:"VA",
-    category:"bell_bell_accessible",
-    rawCategory:"Bell-to-Bell, Accessible Storage (restriction, not ban)",
-    currentPolicy:"Bell-to-bell restriction — district policy required (restriction, not prohibition)",
-    storageReq:"No storage requirement specified",
-    legislation:"§ 22.1-79.3:1",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Directs schools toward phone-free learning environments with bell-to-bell intent; storage not specified",
+    storageReq:"Storage unspecified",
+    legislation:"Executive Order 33 (July 2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Effective 2026–2027 school year",
-    toReview:"District policy must restrict use bell-to-bell, vs. prohibit use",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"EFFECTIVE DATE ERROR + CATEGORIZATION CAVEAT: The timeline lists '2026–2027 school year' but the law (HB 1961 / SB 738) was signed May 30, 2025, effective July 1, 2025 — implementation began for the 2025-26 school year, not 2026-27. Additionally, Virginia requires districts to restrict (not prohibit) phone use, which is a meaningful policy distinction. The current category groups Virginia with states requiring outright bans. Consider adding a 'Bell-to-Bell Restriction (not ban)' sub-category.",
-    accuracyVerdict:"flag"
+    timeline:""
   },
   {
     fips:"53", name:"Washington", abbr:"WA",
-    category:"legislation_progress",
-    rawCategory:"Legislation in Progress (Instructional Time Only)",
-    currentPolicy:"Ban not required by state",
-    storageReq:"N/A — legislation pending",
-    legislation:"HB 1122",
-    notes:"HB 1122 would require districts to restrict cell phone use during instructional time (not full bell-to-bell). Still in House Education Committee as of mid-January 2026; companion SB 6346 also in Senate committee. Would take effect 2026–27 school year if passed.",
+    category:"tier_2",
+    rawCategory:"Guidance / Encouragement Only",
+    currentPolicy:"Washington DOE encourages districts to limit phone use \u2014 not a law",
+    storageReq:"N/A",
+    legislation:"DOE policy (2024)",
+    notes:"Previously had HB 1122 in progress but it was not enacted.",
     additionalNotes:"",
-    timeline:"Would take effect 2026–2027 school year if enacted",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"54", name:"West Virginia", abbr:"WV",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only (more?)",
-    currentPolicy:"Policy required — district policy includes instructional time ban and a storage policy for rest of school day",
-    storageReq:"Devices must not be accessible during instructional time; if permitted on property, policy must specify storage",
-    legislation:"HB 2003",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Instructional-time ban; teacher exceptions; storage not mandated",
+    storageReq:"Storage unspecified",
+    legislation:"SB 680 (2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts must implement policies for 2025–2026 school year",
-    toReview:"'Instructional day' defined as full school day, but requirement uses 'instructional time' — ambiguity about actual scope",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"AMBIGUOUS — POSSIBLE MISCATEGORIZATION: HB 2003 defines 'instructional day' as the full school day but applies the device accessibility requirement to 'instructional time.' The law also requires a storage policy for devices permitted on school property for the full day. This may be closer to 'Bell-to-Bell, Accessible Storage' depending on how 'instructional time' is interpreted in practice. Recommend legal/policy review of HB 2003 implementation.",
-    accuracyVerdict:"recat"
+    timeline:""
   },
   {
     fips:"55", name:"Wisconsin", abbr:"WI",
-    category:"instructional_time",
-    rawCategory:"Class Instructional Time Only",
-    currentPolicy:"Instructional time ban — district policy required",
-    storageReq:"No storage requirement specified",
-    legislation:"2025 Act 42",
-    notes:"AB 948 (bell-to-bell expansion) passed Assembly 2/19/26; passed Senate Education Committee 4-1 on 3/6/26; available for full Senate scheduling as of 3/12/26 but no floor vote yet. Governor Evers says he 'hasn't made up his mind.' WASB and WASDA registered in opposition.",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Districts must adopt policies prohibiting use during class time; storage not mandated",
+    storageReq:"Storage unspecified",
+    legislation:"AB 2 (Oct 2025)",
+    notes:"",
     additionalNotes:"",
-    timeline:"Districts must adopt instructional-time policies by July 1 2026 (Act 42); AB 948 would require bell-to-bell by July 1 2027",
-    toReview:"",
-    highlighted:false,
-    dataGaps:[]
+    timeline:""
   },
   {
     fips:"56", name:"Wyoming", abbr:"WY",
-    category:"policy_required",
-    rawCategory:"Policy Required, No Mandated Elements",
-    currentPolicy:"Policy required — districts must adopt phone policy; ban not required",
-    storageReq:"No storage requirement specified",
-    legislation:"SF 35",
-    notes:"SF 35 signed into law (enrolled March 4, 2026). Requires all 48 school districts to adopt a phone/smart device policy and submit it to the state superintendent. Ban not required — local control retained.",
+    category:"tier_1",
+    rawCategory:"No Statewide Policy",
+    currentPolicy:"No statewide mandate as of early 2026",
+    storageReq:"N/A",
+    legislation:"No statewide law",
+    notes:"",
     additionalNotes:"",
-    timeline:"Signed March 4, 2026; districts must adopt and submit phone/smart device policies to state superintendent (deadline not specified in statute)",
-    toReview:"Signing date of March 4 may be inaccurate — House floor vote (third reading) was March 6, 2026; signing likely March 6 or later",
-    highlighted:true,
-    dataGaps:[],
-    accuracyNote:"SIGNING DATE QUESTION: The listed signing date of March 4, 2026 appears too early — the House passed SF 35 on third reading on March 6, 2026 (vote 40-20). The governor's signing date is likely March 6 or later. The March 4 date may correspond to enrollment or another procedural step, not the actual signing. Category 'Policy Required' is correct.",
-    accuracyVerdict:"flag"
+    timeline:""
   }
 ];
 
-// ── BILL URLs (LegiScan) ──────────────────────────────────────────────────────
-// keyed by FIPS code; leave blank for exec orders / statutes / no bill
+// ── BILL URLs (preserved from v1) ────────────────────────────────────────────
 const BILL_URLS = {
-  "01": "https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2025RS/SB92-eng.pdf",               // Alabama SB 92 (engrossed bill text PDF — ALISON has no static bill page)
-  "02": "https://www.akleg.gov/basis/Bill/Detail/34?Root=HB%2057",                                                   // Alaska HB 57
-  "04": "https://www.azleg.gov/legtext/57leg/1R/bills/HB2484P.htm",                                                  // Arizona HB 2484
-  "05": "https://www.arkleg.state.ar.us/Bills/Detail?id=SB142&ddBienniumSession=2025%2F2025R",                       // Arkansas SB 142
-  "06": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB3216",                      // California AB 3216
-  "08": "https://leg.colorado.gov/bills/hb25-1135",                                                                  // Colorado HB 25-1135
-  "09": "https://www.cga.ct.gov/asp/CGABillStatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB5035",               // Connecticut HB 5035
-  "10": "https://legis.delaware.gov/BillDetail/142100",                                                              // Delaware SB 106
-  "12": "https://www.flsenate.gov/Session/Bill/2025/1105",                                                           // Florida HB 1105
-  "11": "https://code.dccouncil.gov/us/dc/council/laws/26-39",                                                       // DC D.C. Law 26-39
-  "13": "https://legiscan.com/GA/bill/HB340/2025",                                                                   // Georgia HB 340 (legis.ga.gov is JS-rendered)
-  "15": "https://hawaiipublicschools.org/2026-hawaii-board-of-education-adopts-statewide-policy-on-student-cell-phone-use-in-public-schools/", // Hawaii statewide policy
-  "16": "https://legislature.idaho.gov/sessioninfo/2025/legislation/S1032/",                                         // Idaho S1032
-  "17": "https://www.ilga.gov/Legislation/BillStatus?DocTypeID=SB&DocNum=2427&GAID=18&SessionID=114&LegID=162470",  // Illinois SB 2427
-  "18": "https://iga.in.gov/legislative/2026/bills/senate/78",                                                       // Indiana SB 78
-  "19": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=HF782",                                           // Iowa HF 782 (91st GA)
-  "20": "https://kslegislature.gov/li/b2025_26/measures/hb2299/",                                                     // Kansas HB 2299
-  "21": "https://apps.legislature.ky.gov/record/25RS/hb208.html",                                                    // Kentucky HB 208
-  "22": "https://www.legis.la.gov/legis/ViewDocument.aspx?d=1380785",                                               // Louisiana Act 313
-  "23": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1234&snum=132",                                 // Maine LD 1234
-  "24": "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/hb0525?ys=2026RS",                               // Maryland HB 525
-  "25": "https://malegislature.gov/Bills/194/S2561",                                                                 // Massachusetts S.2561
-  "26": "https://www.legislature.mi.gov/Bills/Bill?ObjectName=2025-HB-4141",                                         // Michigan HB 4141
-  "27": "https://www.revisor.mn.gov/bills/94/2025/0/SF/508/?body=senate",                                            // Minnesota SF 508
-  "28": "https://legiscan.com/MS/bill/SB2099/2026",                                                                  // Mississippi SB 2099 (died in House)
-  "29": "https://www.senate.mo.gov/25info/bts_web/bill.aspx?SessionType=R&BillID=422",                               // Missouri SB 68
-  "31": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59086",                                      // Nebraska LB 140
-  "32": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12831/Overview",                                   // Nevada SB 444
-  "33": "https://gc.nh.gov/bill_status/billinfo.aspx?id=1188&inflect=2",                                             // New Hampshire HB 2
-  "34": "https://www.njleg.state.nj.us/bill-search/2024/S3695",                                                      // New Jersey S 3695
-  "35": "https://www.nmlegis.gov/Legislation/Legislation?Chamber=S&LegType=B&LegNo=11&year=25",                      // New Mexico SB 11
-  "36": "https://www.ny.gov/programs/phone-free-schools-implementation-resources",                                   // New York NY Law
-  "37": "https://www.ncleg.gov/BillLookUp/2025/H959",                                                                // North Carolina HB 959 (2025 session)
-  "38": "https://ndlegis.gov/cencode/t15-1c07.pdf",                                                                  // North Dakota NDCC 15.01-07-41
-  "39": "https://education.ohio.gov/Topics/Student-Supports/School-Wellness/Cell-Phones-in-Ohio-Schools",            // Ohio OH law
-  "40": "https://www.oklegislature.gov/BillInfo.aspx?Bill=SB139&Session=2500",                                       // Oklahoma SB 139
-  "41": "https://www.oregon.gov/ode/educator-resources/teachingcontent/Documents/eo-25-09.pdf",                     // Oregon Executive Order No. 25-09
-  "42": "https://www.palegis.us/legislation/bills/2025/sb1014",                                                      // Pennsylvania SB 1014
-  "44": "https://webserver.rilegislature.gov/BillText25/SenateText25/S0771.pdf",                                     // Rhode Island S 0771
-  "45": "https://ed.sc.gov/newsroom/school-district-memoranda-archive/cell-phone-policy/cell-phone-policy-memo/",  // South Carolina policy memo
-  "47": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=SB0897&GA=114",                          // Tennessee SB 0897
-  "48": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1481",                                // Texas HB 1481
-  "49": "https://le.utah.gov/~2026/bills/static/SB0069.html",                                                       // Utah SB 69
-  "50": "https://legislature.vermont.gov/bill/status/2026/H.480",                                                    // Vermont H 480
-  "51": "https://law.lis.virginia.gov/vacode/title22.1/chapter7/section22.1-79.3:1/",                               // Virginia § 22.1-79.3:1
-  "53": "https://app.leg.wa.gov/billsummary/?BillNumber=1122&Year=2025&Initiative=false",                            // Washington HB 1122
-  "54": "https://www.wvlegislature.gov/Bill_Status/bills_text.cfm?billdoc=hb2003+intr.htm&yr=2025&sesstype=RS&i=2003", // West Virginia HB 2003
-  "55": "https://docs.legis.wisconsin.gov/2025/proposals/ab948",                                                     // Wisconsin AB 948 / 2025 Act 42
-  "56": "https://www.wyoleg.gov/Legislation/2026/SF0035",                                                            // Wyoming SF 35
+  "01": "https://alison.legislature.state.al.us/files/pdf/SearchableInstruments/2025RS/SB92-eng.pdf",
+  "02": "https://www.akleg.gov/basis/Bill/Detail/34?Root=HB%2057",
+  "04": "https://www.azleg.gov/legtext/57leg/1R/bills/HB2484P.htm",
+  "05": "https://www.arkleg.state.ar.us/Bills/Detail?id=SB142&ddBienniumSession=2025%2F2025R",
+  "06": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB3216",
+  "08": "https://leg.colorado.gov/bills/hb25-1135",
+  "09": "https://www.cga.ct.gov/asp/CGABillStatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB5035",
+  "10": "https://legis.delaware.gov/BillDetail/142100",
+  "11": "https://code.dccouncil.gov/us/dc/council/laws/26-39",
+  "12": "https://www.flsenate.gov/Session/Bill/2025/1105",
+  "13": "https://legiscan.com/GA/bill/HB340/2025",
+  "15": "https://hawaiipublicschools.org/2026-hawaii-board-of-education-adopts-statewide-policy-on-student-cell-phone-use-in-public-schools/",
+  "16": "https://legislature.idaho.gov/sessioninfo/2025/legislation/S1032/",
+  "17": "https://www.ilga.gov/Legislation/BillStatus?DocTypeID=SB&DocNum=2427&GAID=18&SessionID=114&LegID=162470",
+  "18": "https://iga.in.gov/legislative/2026/bills/senate/78",
+  "19": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=HF782",
+  "20": "https://kslegislature.gov/li/b2025_26/measures/hb2299/",
+  "21": "https://apps.legislature.ky.gov/record/25RS/hb208.html",
+  "22": "https://www.legis.la.gov/legis/ViewDocument.aspx?d=1380785",
+  "23": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1234&snum=132",
+  "24": "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/hb0525?ys=2026RS",
+  "25": "https://malegislature.gov/Bills/194/S2561",
+  "26": "https://www.legislature.mi.gov/Bills/Bill?ObjectName=2025-HB-4141",
+  "27": "https://www.revisor.mn.gov/bills/94/2025/0/SF/508/?body=senate",
+  "28": "https://legiscan.com/MS/bill/SB2099/2026",
+  "29": "https://www.senate.mo.gov/25info/bts_web/bill.aspx?SessionType=R&BillID=422",
+  "31": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59086",
+  "32": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12831/Overview",
+  "33": "https://gc.nh.gov/bill_status/billinfo.aspx?id=1188&inflect=2",
+  "34": "https://www.njleg.state.nj.us/bill-search/2024/S3695",
+  "35": "https://www.nmlegis.gov/Legislation/Legislation?Chamber=S&LegType=B&LegNo=11&year=25",
+  "36": "https://www.ny.gov/programs/phone-free-schools-implementation-resources",
+  "37": "https://www.ncleg.gov/BillLookUp/2025/H959",
+  "38": "https://ndlegis.gov/cencode/t15-1c07.pdf",
+  "39": "https://education.ohio.gov/Topics/Student-Supports/School-Wellness/Cell-Phones-in-Ohio-Schools",
+  "40": "https://www.oklegislature.gov/BillInfo.aspx?Bill=SB139&Session=2500",
+  "41": "https://www.oregon.gov/ode/educator-resources/teachingcontent/Documents/eo-25-09.pdf",
+  "42": "https://www.palegis.us/legislation/bills/2025/sb1014",
+  "44": "https://webserver.rilegislature.gov/BillText25/SenateText25/S0771.pdf",
+  "45": "https://ed.sc.gov/newsroom/school-district-memoranda-archive/cell-phone-policy/cell-phone-policy-memo/",
+  "47": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=SB0897&GA=114",
+  "48": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1481",
+  "49": "https://le.utah.gov/~2026/bills/static/SB0069.html",
+  "50": "https://legislature.vermont.gov/bill/status/2026/H.480",
+  "51": "https://law.lis.virginia.gov/vacode/title22.1/chapter7/section22.1-79.3:1/",
+  "53": "https://app.leg.wa.gov/billsummary/?BillNumber=1122&Year=2025&Initiative=false",
+  "54": "https://www.wvlegislature.gov/Bill_Status/bills_text.cfm?billdoc=hb2003+intr.htm&yr=2025&sesstype=RS&i=2003",
+  "55": "https://docs.legis.wisconsin.gov/2025/proposals/ab948",
+  "56": "https://www.wyoleg.gov/Legislation/2026/SF0035"
 };
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
@@ -1317,22 +1067,25 @@ Object.entries(CATEGORIES).sort((a,b) => a[1].order - b[1].order).forEach(([key,
   const div = document.createElement('div');
   div.className = 'legend-item';
   div.dataset.cat = key;
+  const vacantNote = cat.vacant ? ' <span class="legend-vacant">(Currently vacant)</span>' : '';
   div.innerHTML = `
     <div class="legend-swatch" style="background:${cat.color}"></div>
-    <div class="legend-label">${cat.label}<br><span class="legend-count">${counts[key]} state${counts[key]!==1?'s':''}</span></div>
+    <div class="legend-label">${cat.label}${vacantNote}<br><span class="legend-count">${counts[key]} state${counts[key]!==1?'s':''}</span></div>
   `;
   legendEl.appendChild(div);
 });
 
 // ── STATS ─────────────────────────────────────────────────────────────────────
 const statsGrid = document.getElementById('stats-grid');
-const bellTotal = counts.bell_bell_inaccessible + counts.bell_bell_accessible + counts.bell_bell_partial;
+const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier_6p;
+const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
+const policyTotal = counts.tier_4 + counts.tier_3;
 const statsData = [
-  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['bell_bell_inaccessible','bell_bell_accessible','bell_bell_partial'] },
-  { num: counts.instructional_time, lbl: 'Instructional Time Only', cats: ['instructional_time'] },
-  { num: counts.legislation_progress, lbl: 'Legislation in Progress', cats: ['legislation_progress'] },
-  { num: counts.policy_required, lbl: 'Policy Required Only', cats: ['policy_required'] },
-  { num: counts.no_legislation, lbl: 'No Legislation', cats: ['no_legislation'] },
+  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6p'] },
+  { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'] },
+  { num: policyTotal, lbl: 'Must Adopt Policy / Limit Use', cats: ['tier_4','tier_3'] },
+  { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'] },
+  { num: counts.tier_1, lbl: 'No Policy', cats: ['tier_1'] },
 ];
 
 const statPopup = document.getElementById('stat-popup');
@@ -1353,7 +1106,6 @@ statsData.forEach(s => {
   if (s.cats) {
     d.addEventListener('click', (e) => {
       e.stopPropagation();
-      // If already showing this box's popup, close it
       if (statPopupOpen && statPopupTitle.dataset.lbl === s.lbl) { closeStatPopup(); return; }
       const names = STATE_DATA
         .filter(st => s.cats.includes(st.category))
@@ -1362,7 +1114,6 @@ statsData.forEach(s => {
       statPopupTitle.textContent = s.lbl;
       statPopupTitle.dataset.lbl = s.lbl;
       statPopupList.innerHTML = names.map(n => `<li>${n}</li>`).join('');
-      // Position popup near the box
       const rect = d.getBoundingClientRect();
       statPopup.style.display = 'block';
       const popW = statPopup.offsetWidth;
@@ -1377,8 +1128,8 @@ statsData.forEach(s => {
 });
 
 // ── FILTER (via legend) ───────────────────────────────────────────────────────
-let activeFilter = null; // null = show all; string = isolate that category
-const legendItems = {}; // keyed by category key
+let activeFilter = null;
+const legendItems = {};
 legendEl.querySelectorAll('.legend-item').forEach(el => {
   const key = el.dataset.cat;
   legendItems[key] = el;
@@ -1412,23 +1163,21 @@ function buildTooltipHTML(s, fips, isPinned) {
   const cat = CATEGORIES[s.category];
   const url = BILL_URLS[fips];
   const linkLabel = url
-    ? (url.includes('legiscan.com') ? `View ${s.legislation} on LegiScan ↗` : `View ${s.legislation} on State Legislature ↗`)
+    ? (url.includes('legiscan.com') ? `View ${s.legislation} on LegiScan \u2197` : `View ${s.legislation} \u2197`)
     : null;
   const linkHtml = url
     ? `<div class="t-link"><a href="${url}" target="_blank" rel="noopener">${linkLabel}</a></div>`
-    : (s.legislation && s.legislation !== 'None' && s.legislation !== '(Not specified)'
-        ? `<div class="t-leg">${s.legislation} — no direct link available</div>`
+    : (s.legislation && s.legislation !== 'None' && !s.legislation.startsWith('No statewide')
+        ? `<div class="t-leg">${s.legislation}</div>`
         : '');
-  const catColor = cat.color === '#FF941A' ? '#FFB866' : cat.color;
   const hint = isPinned
-    ? `<div style="opacity:.4;font-size:0.63rem;margin-top:7px;border-top:1px solid rgba(255,255,255,.15);padding-top:5px;">📌 Pinned — click state to unpin</div>`
+    ? `<div style="opacity:.4;font-size:0.63rem;margin-top:7px;border-top:1px solid rgba(255,255,255,.15);padding-top:5px;">Pinned \u2014 click state to unpin</div>`
     : `<div style="opacity:.4;font-size:0.63rem;margin-top:6px;">Click to pin &amp; see full details</div>`;
   return `
     <div class="t-state">${s.name}</div>
-    <div class="t-cat" style="color:${catColor}">${cat.label}</div>
+    <div class="t-cat" style="color:${cat.order <= 4 ? '#FFB866' : '#99C8E8'}">${cat.label}</div>
+    <div style="font-size:0.7rem;opacity:0.8;margin-bottom:3px;">${s.storageReq}</div>
     ${linkHtml}
-    ${s.highlighted ? '<div class="t-flag">⚑ Flagged for accuracy review</div>' : ''}
-    ${s.dataGaps.length ? '<div class="t-flag">⚠ Missing data fields</div>' : ''}
     ${hint}
   `;
 }
@@ -1469,7 +1218,6 @@ function scheduleHideTooltip() {
   }, 180);
 }
 
-// Keep hover tooltip open when mouse is over it (only when not pinned)
 tooltip.addEventListener('mouseenter', () => { if (!pinned) clearTimeout(tooltipHideTimer); });
 tooltip.addEventListener('mouseleave', () => { if (!pinned) { tooltip.style.opacity = '0'; tooltip.classList.add('hidden'); } });
 tooltip.classList.add('hidden');
@@ -1489,7 +1237,6 @@ function updateMapColors() {
       const s = stateByFips[fips];
       return (activeFilter && s && s.category !== activeFilter) ? 0.4 : 1;
     });
-  // Update DC callout dot + box
   const dcS = stateByFips['11'];
   if (dcS) {
     const dcColor = (activeFilter && dcS.category !== activeFilter) ? '#E8EAED' : CATEGORIES[dcS.category].color;
@@ -1498,15 +1245,16 @@ function updateMapColors() {
   }
 }
 
-// Click SVG background to unpin
 svg.on('click', function(event) {
   if (event.target === this && pinned) unpinTooltip();
 });
 
+// Determine which categories should get white text labels on the map
+const darkTierCats = ['tier_6c','tier_6b','tier_6a','tier_6p','tier_5c','tier_5b','tier_5a'];
+
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
   const states = topojson.feature(us, us.objects.states);
 
-  // State fills
   svg.append('g')
     .selectAll('path')
     .data(states.features)
@@ -1514,16 +1262,8 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
     .attr('class', 'state')
     .attr('d', path)
     .attr('fill', d => getStateFill(String(d.id).padStart(2,'0')))
-    .attr('stroke', d => {
-      const fips = String(d.id).padStart(2,'0');
-      const s = stateByFips[fips];
-      return (s && s.highlighted) ? '#FF941A' : 'white';
-    })
-    .attr('stroke-width', d => {
-      const fips = String(d.id).padStart(2,'0');
-      const s = stateByFips[fips];
-      return (s && s.highlighted) ? 2.5 : 0.5;
-    })
+    .attr('stroke', 'white')
+    .attr('stroke-width', 0.5)
     .attr('cursor', 'pointer')
     .on('mousemove', function(event, d) {
       if (pinned) return;
@@ -1531,16 +1271,12 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       const s = stateByFips[fips];
       if (!s) return;
       showTooltip(event, s, fips);
-      d3.select(this).attr('stroke-width', s.highlighted ? 3.5 : 2).attr('stroke', '#002E6D');
+      d3.select(this).attr('stroke-width', 2).attr('stroke', '#002E6D');
     })
     .on('mouseleave', function(event, d) {
       if (!pinned) {
         scheduleHideTooltip();
-        const fips = String(d.id).padStart(2,'0');
-        const s = stateByFips[fips];
-        d3.select(this)
-          .attr('stroke', s && s.highlighted ? '#FF941A' : 'white')
-          .attr('stroke-width', s && s.highlighted ? 2.5 : 0.5);
+        d3.select(this).attr('stroke', 'white').attr('stroke-width', 0.5);
       }
     })
     .on('click', function(event, d) {
@@ -1549,28 +1285,19 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       if (!s) return;
 
       if (pinned && selectedFips === fips) {
-        // Click same state again → unpin
         unpinTooltip();
         selectedFips = null;
-        svg.selectAll('path.state')
-          .attr('stroke', dd => { const f = String(dd.id).padStart(2,'0'); const ss = stateByFips[f]; return ss && ss.highlighted ? '#FF941A' : 'white'; })
-          .attr('stroke-width', dd => { const f = String(dd.id).padStart(2,'0'); const ss = stateByFips[f]; return ss && ss.highlighted ? 2.5 : 0.5; });
+        svg.selectAll('path.state').attr('stroke', 'white').attr('stroke-width', 0.5);
         return;
       }
 
-      // Pin tooltip at click position
       pinTooltip(event, s, fips);
       showDetail(fips);
-
-      // Reset all state strokes, then highlight selected
-      svg.selectAll('path.state')
-        .attr('stroke', dd => { const f = String(dd.id).padStart(2,'0'); const ss = stateByFips[f]; return ss && ss.highlighted ? '#FF941A' : 'white'; })
-        .attr('stroke-width', dd => { const f = String(dd.id).padStart(2,'0'); const ss = stateByFips[f]; return ss && ss.highlighted ? 2.5 : 0.5; });
+      svg.selectAll('path.state').attr('stroke', 'white').attr('stroke-width', 0.5);
       d3.select(this).attr('stroke', '#002E6D').attr('stroke-width', 3);
       selectedFips = fips;
     });
 
-  // State borders
   svg.append('path')
     .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
     .attr('fill', 'none')
@@ -1578,7 +1305,6 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
     .attr('stroke-width', 0.4)
     .attr('d', path);
 
-  // State abbreviation labels
   svg.append('g')
     .selectAll('text')
     .data(states.features)
@@ -1599,9 +1325,7 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       const fips = String(d.id).padStart(2,'0');
       const s = stateByFips[fips];
       if (!s) return '#333';
-      // Use white text for dark backgrounds, dark for light
-      const darkBgs = ['bell_bell_inaccessible','bell_bell_accessible','instructional_time'];
-      return darkBgs.includes(s.category) ? 'white' : '#303030';
+      return darkTierCats.includes(s.category) ? 'white' : '#303030';
     })
     .attr('pointer-events', 'none')
     .text(d => {
@@ -1611,37 +1335,31 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
     });
 
   // ── DC CALLOUT ───────────────────────────────────────────────────────────────
-  // DC (FIPS 11) is in the topojson but microscopic; render a visible callout
   const dcFeature = states.features.find(f => String(f.id).padStart(2,'0') === '11');
   if (dcFeature) {
     const dcS = stateByFips['11'];
     const [dcX, dcY] = path.centroid(dcFeature);
     const dcColor = dcS ? CATEGORIES[dcS.category].color : '#ccc';
 
-    // Callout box offset
     const boxX = dcX + 48, boxY = dcY - 52, boxW = 28, boxH = 16;
 
     const dcG = svg.append('g').attr('class', 'dc-callout').attr('cursor', 'pointer');
 
-    // Leader line from actual DC location to callout box
     dcG.append('line')
       .attr('x1', dcX).attr('y1', dcY)
       .attr('x2', boxX).attr('y2', boxY + boxH)
       .attr('stroke', '#002E6D').attr('stroke-width', 1).attr('stroke-dasharray', '3,2');
 
-    // Small dot at actual DC location
     dcG.append('circle')
       .attr('cx', dcX).attr('cy', dcY).attr('r', 4)
       .attr('fill', dcColor).attr('stroke', 'white').attr('stroke-width', 1.5);
 
-    // Callout box
     dcG.append('rect')
       .attr('x', boxX).attr('y', boxY)
       .attr('width', boxW).attr('height', boxH)
       .attr('rx', 2).attr('ry', 2)
       .attr('fill', dcColor).attr('stroke', 'white').attr('stroke-width', 1.5);
 
-    // "DC" label inside box
     dcG.append('text')
       .attr('x', boxX + boxW / 2).attr('y', boxY + boxH / 2)
       .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
@@ -1649,7 +1367,6 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       .attr('fill', 'white').attr('pointer-events', 'none')
       .text('DC');
 
-    // Interaction
     dcG
       .on('mousemove', (event) => { if (!pinned) showTooltip(event, dcS, '11'); })
       .on('mouseleave', () => { if (!pinned) scheduleHideTooltip(); })
@@ -1669,79 +1386,45 @@ function showDetail(fips) {
   if (!s) return;
   const cat = CATEGORIES[s.category];
   const panel = document.getElementById('detail-panel');
-
-  let gapsHtml = '';
-  if (s.dataGaps.length) {
-    gapsHtml = `<div class="detail-gaps"><strong>Missing Data:</strong> ${s.dataGaps.join(', ')}</div>`;
-  }
-
-  let accuracyHtml = '';
-  if (s.accuracyNote) {
-    const cls = s.accuracyVerdict === 'recat' ? 'warn' : '';
-    const icon = s.accuracyVerdict === 'accurate' ? '✓' : s.accuracyVerdict === 'flag' ? '⚑' : '⚠';
-    accuracyHtml = `<div class="detail-accuracy ${cls}"><strong>${icon} Accuracy Review:</strong> ${s.accuracyNote}</div>`;
-  }
+  const url = BILL_URLS[fips];
+  const linkHtml = url
+    ? `<div class="detail-row"><strong>Bill Link:</strong> <a href="${url}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">View legislation \u2197</a></div>`
+    : '';
 
   panel.innerHTML = `
     <h2>State Detail</h2>
-    <div class="detail-state-name">${s.name} ${s.highlighted ? '<span style="color:#f57f17;font-size:0.8rem">⚑ Flagged</span>' : ''}</div>
+    <div class="detail-state-name">${s.name}</div>
     <span class="detail-cat-badge" style="background:${cat.color}">${cat.label}</span>
+    <div class="detail-row"><strong>Current Policy:</strong> ${s.currentPolicy}</div>
     <div class="detail-row"><strong>Legislation:</strong> ${s.legislation || 'None'}</div>
-    <div class="detail-row"><strong>Storage Requirement:</strong> ${s.storageReq || '<em style="color:#999">Not specified / missing</em>'}</div>
-    <div class="detail-row"><strong>Implementation:</strong> ${s.timeline || '<em style="color:#999">Not specified</em>'}</div>
+    <div class="detail-row"><strong>Storage Requirement:</strong> ${s.storageReq || '<em style="color:#999">Not specified</em>'}</div>
+    ${s.timeline ? `<div class="detail-row"><strong>Implementation:</strong> ${s.timeline}</div>` : ''}
     ${s.notes ? `<div class="detail-row"><strong>Notes:</strong> ${s.notes}</div>` : ''}
     ${s.additionalNotes ? `<div class="detail-row"><strong>Additional:</strong> ${s.additionalNotes}</div>` : ''}
-    ${s.toReview ? `<div class="detail-flag"><strong>Review Note:</strong> ${s.toReview}</div>` : ''}
-    ${accuracyHtml}
-    ${gapsHtml}
+    ${linkHtml}
   `;
 }
-
-// ── ACCURACY TABLE ────────────────────────────────────────────────────────────
-const highlightedStates = STATE_DATA.filter(s => s.highlighted);
-const accuracyTbody = document.getElementById('accuracy-tbody');
-highlightedStates.forEach(s => {
-  const cat = CATEGORIES[s.category];
-  const verdictMap = {
-    accurate: { cls: 'badge-accurate', txt: 'Accurate' },
-    flag: { cls: 'badge-flag', txt: 'Needs Sub-Category' },
-    recat: { cls: 'badge-recat', txt: 'Possible Reclassification' }
-  };
-  const v = verdictMap[s.accuracyVerdict] || { cls: 'badge-flag', txt: 'Review' };
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><strong>${s.name}</strong></td>
-    <td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${cat.color};margin-right:4px;vertical-align:middle"></span>${s.rawCategory}</td>
-    <td>${s.legislation || '—'}</td>
-    <td>${s.toReview || '—'}</td>
-    <td style="max-width:300px">${s.accuracyNote || '—'}</td>
-    <td><span class="${v.cls}">${v.txt}</span></td>
-  `;
-  accuracyTbody.appendChild(tr);
-});
 
 // ── ALL STATES TABLE ──────────────────────────────────────────────────────────
 const allTbody = document.getElementById('all-tbody');
 STATE_DATA.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(s => {
   const cat = CATEGORIES[s.category];
   const tr = document.createElement('tr');
-  if (s.highlighted) tr.className = 'hl-row';
   tr.innerHTML = `
-    <td><strong>${s.name}</strong>${s.highlighted ? ' <span style="color:#f57f17">⚑</span>' : ''}</td>
+    <td><strong>${s.name}</strong></td>
     <td><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${cat.color};margin-right:4px;vertical-align:middle"></span>${cat.label}</td>
-    <td>${s.storageReq || '<em style="color:#bbb">Missing</em>'}</td>
-    <td>${s.legislation || '—'}</td>
-    <td>${s.timeline || '<em style="color:#bbb">Missing</em>'}</td>
-    <td>${[s.notes, s.additionalNotes].filter(Boolean).join(' | ') || '—'}</td>
+    <td>${s.storageReq || '<em style="color:#bbb">N/A</em>'}</td>
+    <td>${s.legislation || '\u2014'}</td>
+    <td>${s.timeline || '<em style="color:#bbb">N/A</em>'}</td>
+    <td>${[s.notes, s.additionalNotes].filter(Boolean).join(' | ') || '\u2014'}</td>
   `;
   allTbody.appendChild(tr);
 });
 
 // ── TABS ──────────────────────────────────────────────────────────────────────
 function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach((b, i) => {
-    const names = ['accuracy','all'];
-    b.classList.toggle('active', names[i] === name);
+  document.querySelectorAll('.tab-btn').forEach((b) => {
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(name));
   });
   document.querySelectorAll('.tab-content').forEach(c => {
     c.classList.toggle('active', c.id === 'tab-' + name);
@@ -1751,25 +1434,20 @@ function switchTab(name) {
 // ── EXPORT CSV ────────────────────────────────────────────────────────────────
 function exportCSV() {
   const headers = [
-    'State','Abbreviation','Category','Raw Category','Storage Requirement',
-    'Legislation','Bill Link','Timeline','Notes','Additional Notes',
-    'Flagged for Review','Review Notes','Assessment','Verdict'
+    'State','Abbreviation','FIPS','Tier','Category Label','Current Policy',
+    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes'
   ];
   const rows = STATE_DATA.map(s => [
-    s.name, s.abbr, CATEGORIES[s.category].label, s.rawCategory,
-    s.storageReq, s.legislation,
+    s.name, s.abbr, s.fips, s.category, CATEGORIES[s.category].label,
+    s.currentPolicy, s.storageReq, s.legislation,
     BILL_URLS[s.fips] || '',
-    s.timeline, s.notes, s.additionalNotes,
-    s.highlighted ? 'Yes' : 'No',
-    s.toReview || '',
-    s.accuracyNote || '',
-    s.accuracyVerdict || ''
+    s.timeline, s.notes, s.additionalNotes
   ].map(v => `"${(v||'').replace(/"/g,'""')}"`));
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'state_phone_policies.csv';
+  a.href = url; a.download = 'state_phone_policies_v2.csv';
   a.click();
   URL.revokeObjectURL(url);
 }
