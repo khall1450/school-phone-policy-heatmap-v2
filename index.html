@@ -561,20 +561,20 @@ const STATE_DATA = [
     currentPolicy:"Elementary and middle schools: full-day ban. High schools: instructional-time ban only. Board policy, not a statute.",
     storageReq:"Storage unspecified",
     legislation:"BOE policy (Feb 2026)",
-    notes:"",
+    notes:"Based on Board of Education policy, not statute — can be changed by board vote without legislative action.",
     additionalNotes:"",
     timeline:"Effective 2026\u20132027 school year"
   },
   {
     fips:"16", name:"Idaho", abbr:"ID",
-    category:"tier_2",
-    rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"Governor encourages all schools to have a comprehensive phone policy by end of the 2024\u201325 school year \u2014 guidance only",
-    storageReq:"N/A",
-    legislation:"Executive Order (Oct 2024)",
-    notes:"",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"S1032 requires local school boards and public charter schools to develop a policy governing students' use of electronic communications devices during school hours. Policies must emphasize minimizing device use and reducing classroom distractions.",
+    storageReq:"No storage requirement specified",
+    legislation:"S1032 (2025)",
+    notes:"Also has Executive Order 2024-11 ('Phone Free Learning Act') offering $5,000 incentive to districts adopting policies. The enacted statute (S1032) is the binding requirement.",
     additionalNotes:"",
-    timeline:""
+    timeline:"Districts required to adopt policies by December 31, 2025"
   },
   {
     fips:"17", name:"Illinois", abbr:"IL",
@@ -589,14 +589,14 @@ const STATE_DATA = [
   },
   {
     fips:"18", name:"Indiana", abbr:"IN",
-    category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
-    currentPolicy:"Instructional-time ban; teachers may allow phones for educational purposes. No storage requirement.",
-    storageReq:"Storage unspecified",
-    legislation:"SB 185 (Mar 2024)",
-    notes:"Note: Website previously listed SB 78 (2026) as a bell-to-bell law \u2014 verify current status.",
+    category:"tier_6b",
+    rawCategory:"Bell-to-Bell Ban, Accessible Storage Mandated",
+    currentPolicy:"Bell-to-bell ban for the entire school day. Schools must choose either a no-device policy or require devices powered off and stored inaccessibly all day.",
+    storageReq:"Accessible storage mandated (devices must be powered off and inaccessible for the entire school day)",
+    legislation:"SB 78 (Mar 2026, eff. July 2026)",
+    notes:"Supersedes prior SB 185 (2024) which was instructional-time only. Exceptions for IEPs, Section 504, medical conditions, emergencies, and language translation.",
     additionalNotes:"",
-    timeline:""
+    timeline:"Effective July 1, 2026"
   },
   {
     fips:"19", name:"Iowa", abbr:"IA",
@@ -622,23 +622,23 @@ const STATE_DATA = [
   },
   {
     fips:"21", name:"Kentucky", abbr:"KY",
-    category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Districts must prohibit use during the school day (bell-to-bell); storage method is district-defined",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Districts must, at minimum, ban student use of cell phones during instructional time. Districts may optionally extend to the full school day, but the law's floor is instructional time only.",
     storageReq:"Storage unspecified \u2014 district-defined",
     legislation:"HB 208 (Mar 2025)",
-    notes:"",
+    notes:"Some districts have implemented full bell-to-bell bans, but the state law only requires an instructional-time minimum.",
     additionalNotes:"",
     timeline:""
   },
   {
     fips:"22", name:"Louisiana", abbr:"LA",
-    category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Phones must be turned off and properly stowed away for the full instructional day; storage is accessible",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Phones must be turned off and properly stowed away during the instructional day. Bill author stated intent is about instruction time, not full school day.",
     storageReq:"Storage unspecified",
     legislation:"SB 207 (May 2024)",
-    notes:"",
+    notes:"Uses 'instructional day' language (not 'school day' or 'bell-to-bell'). Many schools enforce through lunch in practice, but statutory scope is ambiguous.",
     additionalNotes:"",
     timeline:""
   },
@@ -732,12 +732,12 @@ const STATE_DATA = [
   },
   {
     fips:"31", name:"Nebraska", abbr:"NE",
-    category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Prohibits use on school property during the school day (bell-to-bell); storage left to districts",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Prohibits use during instructional time/school instructional function. Districts have wide latitude on when and where to authorize use outside of instruction.",
     storageReq:"Storage unspecified",
     legislation:"LB 140 (May 2025)",
-    notes:"",
+    notes:"Legislators noted they did not intend to prevent districts from allowing phones at lunch or passing periods.",
     additionalNotes:"",
     timeline:""
   },
@@ -798,12 +798,12 @@ const STATE_DATA = [
   },
   {
     fips:"37", name:"North Carolina", abbr:"NC",
-    category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Districts must prohibit use and display during the school day; storage not specified",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Districts must prohibit use and display during instructional time. Schools may adopt stronger limits but are not required to cover lunch or passing periods.",
     storageReq:"Storage unspecified",
     legislation:"HB 959 (July 2025)",
-    notes:"",
+    notes:"High school students can use phones during non-instructional time under state law.",
     additionalNotes:"",
     timeline:""
   },
@@ -814,7 +814,7 @@ const STATE_DATA = [
     currentPolicy:"Bell-to-bell ban (lunch, recess, passing periods explicitly included). Devices must be silenced, locked, and inaccessible in a pouch, phone locker, or envelope.",
     storageReq:"Inaccessible storage mandated (locked pouch, phone locker, or envelope)",
     legislation:"HB 1160 (Apr 2025)",
-    notes:"Strictest storage mandate in the country.",
+    notes:"Strictest storage mandate in the country. Note: some sources describe the core prohibition as 'instructional time' with district discretion on lunch — NDSBA guidance gives districts flexibility. Categorized as bell-to-bell based on explicit inclusion of lunch/recess/passing periods in the statute.",
     additionalNotes:"",
     timeline:""
   },
@@ -822,12 +822,12 @@ const STATE_DATA = [
     fips:"39", name:"Ohio", abbr:"OH",
     category:"tier_5a",
     rawCategory:"Instructional-Time Ban, Storage Unspecified",
-    currentPolicy:"Prohibits all cell phone use during the instructional day; teacher exceptions allowed; storage not mandated",
+    currentPolicy:"Prohibits all cell phone use during the 'instructional day'; teacher exceptions allowed; storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"HB 96 (July 2025)",
-    notes:"",
+    notes:"Law uses 'instructional day' but does not define the term. District interpretations vary — some enforce bell-to-bell (including lunch), others interpret as classroom time only.",
     additionalNotes:"",
-    timeline:""
+    timeline:"In effect since Sept 30, 2025; policies required by Jan 1, 2026"
   },
   {
     fips:"40", name:"Oklahoma", abbr:"OK",
@@ -844,10 +844,10 @@ const STATE_DATA = [
     fips:"41", name:"Oregon", abbr:"OR",
     category:"tier_6a",
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Requires districts to prohibit use from start to end of regular instructional hours; storage not specified",
+    currentPolicy:"Bell-to-bell ban including passing times and lunch for K-12. Districts must prohibit use from start to end of the school day.",
     storageReq:"Storage unspecified",
     legislation:"Executive Order 25-09 (July 2025)",
-    notes:"",
+    notes:"Based on executive order, not statute — could be reversed by a future governor without legislative action.",
     additionalNotes:"",
     timeline:""
   },
@@ -877,10 +877,10 @@ const STATE_DATA = [
     fips:"45", name:"South Carolina", abbr:"SC",
     category:"tier_6a",
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Prohibits student access to personal devices during the school day; storage not specified",
+    currentPolicy:"Prohibits student access to personal devices during the school day (arrival to dismissal); storage not specified",
     storageReq:"Storage unspecified",
     legislation:"Budget proviso (July 2024)",
-    notes:"",
+    notes:"Enforcement mechanism is a budget proviso + State Board policy, not a standalone statute — depends on annual budget renewal and could lapse. 2025 budget language may have shifted to 'instructional day.'",
     additionalNotes:"",
     timeline:""
   },
@@ -919,12 +919,12 @@ const STATE_DATA = [
   },
   {
     fips:"49", name:"Utah", abbr:"UT",
-    category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Bell-to-bell ban; districts must prohibit phone use during the school day; storage not specified",
+    category:"tier_5a",
+    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    currentPolicy:"Instructional-time ban during classroom hours; law explicitly excludes lunch periods, recess, transit time between classes, and study halls.",
     storageReq:"Storage unspecified",
     legislation:"SB 178 (2024)",
-    notes:"",
+    notes:"SB 69 (2026) would upgrade to bell-to-bell (including lunch/recess); sent to Gov. Cox Mar 11, 2026 — awaiting signature.",
     additionalNotes:"",
     timeline:""
   },
@@ -943,9 +943,9 @@ const STATE_DATA = [
     fips:"51", name:"Virginia", abbr:"VA",
     category:"tier_6a",
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Directs schools toward phone-free learning environments with bell-to-bell intent; storage not specified",
+    currentPolicy:"Bell-to-bell ban including lunch and between classes. Originally established by Executive Order 33 (July 2024), now codified into statute (May 2025).",
     storageReq:"Storage unspecified",
-    legislation:"Executive Order 33 (July 2024)",
+    legislation:"EO 33 (July 2024) + statute (May 2025)",
     notes:"",
     additionalNotes:"",
     timeline:""
@@ -985,14 +985,14 @@ const STATE_DATA = [
   },
   {
     fips:"56", name:"Wyoming", abbr:"WY",
-    category:"tier_1",
-    rawCategory:"No Statewide Policy",
-    currentPolicy:"No statewide mandate as of early 2026",
-    storageReq:"N/A",
-    legislation:"No statewide law",
-    notes:"",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"All 48 school districts must adopt their own policies governing student possession and use of cellphones and smartwatches. Districts must submit policies to the state superintendent.",
+    storageReq:"No storage requirement specified",
+    legislation:"SF 35 (Mar 2026)",
+    notes:"SF 35 passed legislature Mar 4, 2026 (House 40-20). Does not impose a statewide ban — district discretion on content. A stricter statewide ban bill (SF 21) failed 7-21 in Jan 2025.",
     additionalNotes:"",
-    timeline:""
+    timeline:"Awaiting Governor Gordon's signature as of Mar 2026"
   }
 ];
 
@@ -1067,10 +1067,10 @@ Object.entries(CATEGORIES).sort((a,b) => a[1].order - b[1].order).forEach(([key,
   const div = document.createElement('div');
   div.className = 'legend-item';
   div.dataset.cat = key;
-  const vacantNote = cat.vacant ? ' <span class="legend-vacant">(Currently vacant)</span>' : '';
+  if (cat.vacant && counts[key] === 0) return; // Hide vacant tiers with no states
   div.innerHTML = `
     <div class="legend-swatch" style="background:${cat.color}"></div>
-    <div class="legend-label">${cat.label}${vacantNote}<br><span class="legend-count">${counts[key]} state${counts[key]!==1?'s':''}</span></div>
+    <div class="legend-label">${cat.label}<br><span class="legend-count">${counts[key]} state${counts[key]!==1?'s':''}</span></div>
   `;
   legendEl.appendChild(div);
 });
