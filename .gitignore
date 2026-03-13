@@ -1,0 +1,4 @@
+*.ps1.bak
+Thumbs.db
+.DS_Store
+map-print.html
