@@ -542,20 +542,27 @@ const STATE_DATA = [
     currentPolicy:"CT Dept of Education encourages districts to develop personal technology policies \u2014 not a mandate",
     storageReq:"N/A",
     legislation:"DOE guidance (Aug 2024)",
-    notes:"Previously had HB 5035 in progress (bell-to-bell ban) but it was not enacted.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "HB 5035 / HB 5149",
+      summary: "Would require districts to implement bell-to-bell cellphone bans. Students would store phones in lockers or secure pouches. Accommodations for IEPs and medical needs.",
+      status: "Both bills referred to Education Committee. Hearing held Feb 20. Committee deadline Mar 23. Gov. Lamont supports. Some bipartisan division on committee.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"10", name:"Delaware", abbr:"DE",
-    category:"tier_1",
-    rawCategory:"No Statewide Policy",
-    currentPolicy:"No statewide mandate; state funded a small pouch pilot program in 2024 but no law requires districts to act",
-    storageReq:"N/A",
-    legislation:"No statewide law",
-    notes:"Previously had SB 106 in progress but it was not enacted.",
+    category:"tier_4",
+    rawCategory:"Must Limit Use (District Defines)",
+    currentPolicy:"Districts must limit cell phone use during instructional time; specific restrictions are district-defined. State also funded a pouch pilot program in 2024.",
+    storageReq:"District-defined",
+    legislation:"SB 106 (signed Mar 12, 2026)",
+    notes:"Enacted via statute. Requires limiting use during instructional time but lets districts define specifics.",
     additionalNotes:"",
-    timeline:""
+    timeline:"Signed into law Mar 12, 2026"
   },
   {
     fips:"11", name:"District of Columbia", abbr:"DC",
@@ -626,9 +633,16 @@ const STATE_DATA = [
     currentPolicy:"No statewide mandate; some major districts have their own policies",
     storageReq:"N/A",
     legislation:"No statewide law",
-    notes:"Previously had SB 2427 in progress but it was not enacted.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 2427",
+      summary: "Requires every school board to adopt a policy prohibiting wireless devices during instructional time by 2026-27. Includes guidance for secure storage. Exceptions for medical, IEP, and ELL needs.",
+      status: "Passed Senate 55-0. Cleared House Education Policy Committee. Needs House floor vote in 2026 spring session. Gov. Pritzker making it a priority.",
+      wouldBeTier: "tier_5a",
+      wouldBeLabel: "Instructional-Time Ban, Storage Unspecified"
+    }
   },
   {
     fips:"18", name:"Indiana", abbr:"IN",
@@ -659,9 +673,16 @@ const STATE_DATA = [
     currentPolicy:"Kansas DOE encourages districts to limit phone use \u2014 not a law",
     storageReq:"N/A",
     legislation:"KSDE policy (Dec 2024)",
-    notes:"Previously had HB 2299 in progress but it was not enacted.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "Sub. HB 2299 ('Bell to Bell, No Cell')",
+      summary: "Requires districts to adopt policies restricting student cell phone use throughout the entire school day. Covers phones, smartwatches, earbuds, and all personal communication devices.",
+      status: "Passed Senate 32-4 on Mar 5; House concurred 84-39 on Mar 10. On Gov. Kelly's desk \u2014 she has indicated she will sign.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"21", name:"Kentucky", abbr:"KY",
@@ -703,20 +724,34 @@ const STATE_DATA = [
     currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
     storageReq:"N/A",
     legislation:"State guidance",
-    notes:"Previously had HB 525 in progress but it was not enacted.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "HB 525 (Phone-Free Schools Act)",
+      summary: "Bell-to-bell ban making phones inaccessible during school day. Also requires blocking social media on school networks. Implementation by 2027-28.",
+      status: "In House Ways and Means Committee. Hearing held but reported 'Unfavorable' \u2014 faces significant headwinds.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"25", name:"Massachusetts", abbr:"MA",
     category:"tier_1",
     rawCategory:"No Statewide Policy",
-    currentPolicy:"Senate passed a bell-to-bell ban bill in 2025 but it was not signed into law as of early 2026",
+    currentPolicy:"No statewide mandate as of early 2026. S.2561 passed Senate 38-2 in 2025 but stalled in House.",
     storageReq:"N/A",
     legislation:"No statewide law",
-    notes:"Previously had S.2561 in progress (bell-to-bell) but it stalled in House.",
+    notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "S.323 (2026 session)",
+      summary: "Bell-to-bell ban on phones, tablets, smartwatches, and Bluetooth devices at all K-12 public schools. Exceptions for medical, IEP, disability, and off-campus travel. Refiled from prior S.2561.",
+      status: "Refiled for 2026 session. Gov. Healey pushing for passage. House has not yet acted.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"26", name:"Michigan", abbr:"MI",
@@ -738,7 +773,14 @@ const STATE_DATA = [
     legislation:"SF 3567 (May 2024)",
     notes:"",
     additionalNotes:"",
-    timeline:"Districts required to adopt policies by March 2025"
+    timeline:"Districts required to adopt policies by March 2025",
+    pendingLegislation: {
+      bill: "SF 508 / HF 2516",
+      summary: "K-8: full bell-to-bell ban (no phones on school grounds). Grades 9-12: banned during classroom time but allowed at other times. Implementation for 2026-27.",
+      status: "Senate Education Policy Committee held hearing but no vote taken. Being held for possible inclusion in larger omnibus education bill.",
+      wouldBeTier: "tier_6p",
+      wouldBeLabel: "Bell-to-Bell Ban, Partial (K\u20138 Only)"
+    }
   },
   {
     fips:"28", name:"Mississippi", abbr:"MS",
@@ -876,12 +918,19 @@ const STATE_DATA = [
     fips:"40", name:"Oklahoma", abbr:"OK",
     category:"tier_6a",
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
-    currentPolicy:"Explicit 'bell to bell' language in the statute; storage method left to districts",
+    currentPolicy:"Explicit 'bell to bell' language in the statute; storage method left to districts. Note: current law is a one-year mandate for 2025-26; without SB 1719, the ban becomes optional for districts starting 2026-27.",
     storageReq:"Storage unspecified",
     legislation:"SB 139 (Apr 2025)",
-    notes:"Enacted via statute. Explicitly prohibits phones during lunch and recess.",
+    notes:"Enacted via statute. Explicitly prohibits phones during lunch and recess. Current ban has a sunset clause \u2014 mandatory only for 2025-26 school year.",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 1719",
+      summary: "Makes the current one-year mandatory bell-to-bell ban permanent for all future school years. Without this, the ban becomes optional for districts starting 2026-27.",
+      status: "In Senate Education Committee as of early March. Committee of Origin deadline was Mar 5 \u2014 status uncertain.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified (permanent)"
+    }
   },
   {
     fips:"41", name:"Oregon", abbr:"OR",
@@ -1014,9 +1063,16 @@ const STATE_DATA = [
     currentPolicy:"Washington DOE encourages districts to limit phone use \u2014 not a law",
     storageReq:"N/A",
     legislation:"DOE policy (2024)",
-    notes:"Previously had HB 1122 in progress but it was not enacted.",
+    notes:"Stronger HB 1122 (instructional-time mandate) did not advance.",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 5346",
+      summary: "Directs the state superintendent to study and deliver recommendations on cellphone use in schools by December 2028. Does not mandate restrictions.",
+      status: "Passed both chambers. Delivered to Gov. Ferguson \u2014 awaiting signature.",
+      wouldBeTier: "tier_2",
+      wouldBeLabel: "Guidance / Encouragement Only (formalizes study process)"
+    }
   },
   {
     fips:"54", name:"West Virginia", abbr:"WV",
@@ -1038,7 +1094,14 @@ const STATE_DATA = [
     legislation:"AB 2 (Oct 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "AB 948",
+      summary: "Expands existing instructional-time ban to cover the entire school day including recess, passing periods, and lunch. Implementation by July 1, 2027.",
+      status: "Passed Assembly on voice vote. Passed Senate Education Committee 4-1 (~Mar 7). Awaiting full Senate vote. Gov. Evers undecided.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+    }
   },
   {
     fips:"56", name:"Wyoming", abbr:"WY",
