@@ -567,6 +567,7 @@ const STATE_DATA = [
     currentPolicy:"CT Dept of Education encourages districts to develop personal technology policies \u2014 not a mandate",
     storageReq:"N/A",
     legislation:"DOE guidance (Aug 2024)",
+    guidanceLink:"https://portal.ct.gov/-/media/sde/board/position_statement_cell_phone_use.pdf",
     notes:"",
     additionalNotes:"",
     timeline:"",
@@ -695,9 +696,10 @@ const STATE_DATA = [
     fips:"20", name:"Kansas", abbr:"KS",
     category:"tier_2",
     rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"Kansas DOE encourages districts to limit phone use \u2014 not a law",
+    currentPolicy:"Kansas DOE encourages districts to limit phone use \u2014 not a law. Blue Ribbon Task Force recommended bell-to-bell bans with secure storage for all K-12.",
     storageReq:"N/A",
     legislation:"KSDE policy (Dec 2024)",
+    guidanceLink:"https://www.ksde.gov/Home/Quick-Links/News-Room/Weekly-News/Feature-Story/ArtMID/6201/ArticleID/2988",
     notes:"",
     additionalNotes:"",
     timeline:"",
@@ -746,9 +748,10 @@ const STATE_DATA = [
     fips:"24", name:"Maryland", abbr:"MD",
     category:"tier_2",
     rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
+    currentPolicy:"Task force guidance recommends restrictions, stricter for lower grades. State Board of Education requested districts implement policies 'as soon as practicable' for 2025-26.",
     storageReq:"N/A",
-    legislation:"State guidance",
+    legislation:"State guidance (Apr 2025)",
+    guidanceLink:"https://marylandpublicschools.org/Pages/taskforce/cell-phone-task-force.aspx",
     notes:"",
     additionalNotes:"",
     timeline:"",
@@ -837,9 +840,10 @@ const STATE_DATA = [
     fips:"30", name:"Montana", abbr:"MT",
     category:"tier_2",
     rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
+    currentPolicy:"Governor Gianforte urged all districts to adopt 'cell phone-free' school policies. Budget includes $1M in one-time incentives for districts that adopt policies.",
     storageReq:"N/A",
-    legislation:"State guidance",
+    legislation:"Governor's letter (Aug 2024)",
+    guidanceLink:"https://news.mt.gov/Governors-Office/Governor_Gianforte_Calls_for_Cell_Phone-Free_Schools",
     notes:"",
     additionalNotes:"",
     timeline:""
@@ -1016,9 +1020,10 @@ const STATE_DATA = [
     fips:"46", name:"South Dakota", abbr:"SD",
     category:"tier_2",
     rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"State guidance encourages districts to limit phone use \u2014 not a law",
+    currentPolicy:"Legislature passed a resolution encouraging school boards to develop and implement cell phone policies during instructional time. 95% of districts already have policies in place.",
     storageReq:"N/A",
-    legislation:"State guidance",
+    legislation:"Legislative resolution (2025)",
+    guidanceLink:"https://southdakotasearchlight.com/2025/08/29/one-third-sd-school-districts-remove-or-lock-away-student-cell-phones-policy/",
     notes:"",
     additionalNotes:"",
     timeline:"",
@@ -1092,9 +1097,10 @@ const STATE_DATA = [
     fips:"53", name:"Washington", abbr:"WA",
     category:"tier_2",
     rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"Washington DOE encourages districts to limit phone use \u2014 not a law",
+    currentPolicy:"OSPI published guidance supporting schools to restrict cell phone use during the school day. 75% of districts have a policy in place.",
     storageReq:"N/A",
-    legislation:"DOE policy (2024)",
+    legislation:"OSPI guidance (Aug 2024)",
+    guidanceLink:"https://ospi.k12.wa.us/about-ospi/news-center/news-releases/superintendent-reykdal-publishes-guidance-schools-limit-cell-phones-during-instructional-time",
     notes:"Stronger HB 1122 (instructional-time mandate) did not advance.",
     additionalNotes:"",
     timeline:"",
@@ -1324,11 +1330,15 @@ function buildTooltipHTML(s, fips, isPinned) {
   const linkLabel = url
     ? (url.includes('legiscan.com') ? `View ${s.legislation} on LegiScan \u2197` : `View ${s.legislation} \u2197`)
     : null;
+  const guidanceHtml = s.guidanceLink
+    ? `<div class="t-link"><a href="${s.guidanceLink}" target="_blank" rel="noopener">View state guidance \u2197</a></div>`
+    : '';
   const linkHtml = url
     ? `<div class="t-link"><a href="${url}" target="_blank" rel="noopener">${linkLabel}</a></div>`
-    : (s.legislation && s.legislation !== 'None' && !s.legislation.startsWith('No statewide')
-        ? `<div class="t-leg">${s.legislation}</div>`
-        : '');
+    : (s.guidanceLink ? guidanceHtml
+        : (s.legislation && s.legislation !== 'None' && !s.legislation.startsWith('No statewide')
+            ? `<div class="t-leg">${s.legislation}</div>`
+            : ''));
   const hint = isPinned
     ? `<div style="opacity:.4;font-size:0.63rem;margin-top:7px;border-top:1px solid rgba(255,255,255,.15);padding-top:5px;">Pinned \u2014 click state to unpin</div>`
     : `<div style="opacity:.4;font-size:0.63rem;margin-top:6px;">Click to pin &amp; see full details</div>`;
@@ -1550,6 +1560,9 @@ function showDetail(fips) {
   const linkHtml = url
     ? `<div class="detail-row"><strong>Bill Link:</strong> <a href="${url}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">View legislation \u2197</a></div>`
     : '';
+  const guidanceLinkHtml = s.guidanceLink
+    ? `<div class="detail-row"><strong>State Guidance:</strong> <a href="${s.guidanceLink}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">View guidance document \u2197</a></div>`
+    : '';
 
   let pendingHtml = '';
   if (s.pendingLegislation) {
@@ -1581,6 +1594,7 @@ function showDetail(fips) {
     ${s.notes ? `<div class="detail-row"><strong>Notes:</strong> ${s.notes}</div>` : ''}
     ${s.additionalNotes ? `<div class="detail-row"><strong>Additional:</strong> ${s.additionalNotes}</div>` : ''}
     ${linkHtml}
+    ${guidanceLinkHtml}
     ${pendingHtml}
     ${s.priorFailedBills && s.priorFailedBills.length ? `
       <div class="detail-prior-bills">
