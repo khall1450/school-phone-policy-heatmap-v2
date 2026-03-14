@@ -284,6 +284,24 @@
       line-height: 1.45;
       font-weight: 300;
     }
+    .detail-review-flag {
+      background: #FFF8E1;
+      border-left: 3px solid #D4A017;
+      padding: 10px 12px;
+      font-size: 0.73rem;
+      border-radius: 0 0.3rem 0.3rem 0;
+      margin-top: 10px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+    .detail-review-flag .review-flag-title {
+      font-weight: 700;
+      color: #8B6914;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
 
     /* DC callout */
     .dc-note {
@@ -325,6 +343,7 @@
     .state-table th { background: var(--paragon-blue); color: white; padding: 8px 9px; text-align: left; font-weight: 600; position: sticky; top: 0; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.65rem; }
     .state-table td { padding: 6px 9px; border-bottom: 1px solid #EEF0F3; vertical-align: top; line-height: 1.4; font-weight: 300; }
     .state-table tr:hover td { background: #F5F8FC; }
+    .review-flag { color: #8B6914; background: #FFF8E1; padding: 3px 6px; border-radius: 4px; display: inline-block; font-size: 0.68rem; line-height: 1.35; border: 1px solid #F0E0A0; }
 
     /* Bottom section */
     .bottom-section {
@@ -418,6 +437,7 @@
               <th>Legislation</th>
               <th>Implementation Timeline</th>
               <th>Notes</th>
+              <th>Review Flag</th>
             </tr>
           </thead>
           <tbody id="all-tbody"></tbody>
@@ -545,6 +565,7 @@ const STATE_DATA = [
     currentPolicy:"Districts must adopt a policy to limit or prohibit smartphones by July 1, 2026; both limiting and banning satisfy the law",
     storageReq:"District-defined",
     legislation:"AB 3216 (Sept 2024)",
+    reviewFlag:"Law says 'limit or prohibit' with full district discretion on the form of restriction. Some policy trackers classify this as tier 3 (must adopt policy) since the state does not mandate a minimum restriction level.",
     notes:"",
     additionalNotes:"",
     timeline:"Districts required to develop policy by July 2026"
@@ -618,7 +639,7 @@ const STATE_DATA = [
     rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
     currentPolicy:"K\u20138: no personal devices during the school day. High school (9\u201312) has no statewide restriction.",
     storageReq:"Storage unspecified",
-    legislation:"HB 340 (May 2025, eff. July 2026)",
+    legislation:"HB 340 (Apr 2025, eff. July 2026)",
     notes:"Enacted via statute. K-8 'first to last bell' including lunch and transitions.",
     additionalNotes:"",
     timeline:"Schools adopt policies by Jan 1 2026; restrictions in place by July 2026",
@@ -729,6 +750,7 @@ const STATE_DATA = [
     currentPolicy:"Phones must be turned off and properly stowed away during the instructional day. Bill author stated intent is about instruction time, not full school day.",
     storageReq:"Storage unspecified",
     legislation:"SB 207 (May 2024)",
+    reviewFlag:"Law requires phones to be off-person and stowed during the 'instructional day' \u2014 could be interpreted as closer to bell-to-bell (tier 6a) since students cannot carry phones at all. Classified as tier 5a based on bill author\u2019s stated intent.",
     notes:"Uses 'instructional day' language (not 'school day' or 'bell-to-bell'). Many schools enforce through lunch in practice, but statutory scope is ambiguous.",
     additionalNotes:"",
     timeline:""
@@ -866,6 +888,7 @@ const STATE_DATA = [
     currentPolicy:"Districts must prohibit access during class; instructional-time scope, storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"SB 444 (May 2025)",
+    reviewFlag:"SB 444 requires districts to adopt a policy 'limiting' device use during instructional time but does not itself mandate a ban. Could arguably be tier 3 (must adopt policy) or tier 4 (must limit use) rather than tier 5a.",
     notes:"",
     additionalNotes:"",
     timeline:""
@@ -943,6 +966,7 @@ const STATE_DATA = [
     currentPolicy:"Prohibits all cell phone use during the 'instructional day'; teacher exceptions allowed; storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"HB 96 (July 2025)",
+    reviewFlag:"Law uses 'instructional day' without defining the term. Some districts interpret as bell-to-bell (including lunch), others as classroom time only. Could be tier 6a if 'instructional day' is read broadly.",
     notes:"Law uses 'instructional day' but does not define the term. District interpretations vary — some enforce bell-to-bell (including lunch), others interpret as classroom time only.",
     additionalNotes:"",
     timeline:"In effect since Sept 30, 2025; policies required by Jan 1, 2026"
@@ -1012,6 +1036,7 @@ const STATE_DATA = [
     currentPolicy:"Prohibits student access to personal devices during the school day (arrival to dismissal); storage not specified",
     storageReq:"Storage unspecified",
     legislation:"Budget proviso (July 2024)",
+    reviewFlag:"Enforcement is via annual budget proviso, not permanent statute \u2014 could lapse. Some reports suggest 2025 budget language shifted to 'instructional day,' which would make this tier 5a rather than tier 6a. Classified as 6a based on original proviso language.",
     notes:"Enforcement mechanism is a budget proviso + State Board policy, not a standalone statute — depends on annual budget renewal and could lapse. 2025 budget language may have shifted to 'instructional day.'",
     additionalNotes:"",
     timeline:""
@@ -1600,6 +1625,12 @@ function showDetail(fips) {
         `).join('')}
       </div>
     ` : ''}
+    ${s.reviewFlag ? `
+      <div class="detail-review-flag">
+        <div class="review-flag-title">\u26A0\uFE0F Classification Note</div>
+        <div>${s.reviewFlag}</div>
+      </div>
+    ` : ''}
   `;
 }
 
@@ -1615,6 +1646,7 @@ STATE_DATA.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(s => {
     <td>${s.legislation || '\u2014'}</td>
     <td>${s.timeline || '<em style="color:#bbb">N/A</em>'}</td>
     <td>${[s.notes, s.additionalNotes, s.pendingLegislation ? `\u23F3 Pending: ${s.pendingLegislation.bill} \u2014 ${s.pendingLegislation.status}` : ''].filter(Boolean).join(' | ') || '\u2014'}</td>
+    <td>${s.reviewFlag ? `<span class="review-flag">\u26A0\uFE0F ${s.reviewFlag}</span>` : '<em style="color:#bbb">\u2014</em>'}</td>
   `;
   allTbody.appendChild(tr);
 });
@@ -1633,13 +1665,13 @@ function switchTab(name) {
 function exportCSV() {
   const headers = [
     'State','Abbreviation','FIPS','Tier','Category Label','Current Policy',
-    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes'
+    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes','Review Flag'
   ];
   const rows = STATE_DATA.map(s => [
     s.name, s.abbr, s.fips, s.category, CATEGORIES[s.category].label,
     s.currentPolicy, s.storageReq, s.legislation,
     BILL_URLS[s.fips] || '',
-    s.timeline, s.notes, s.additionalNotes
+    s.timeline, s.notes, s.additionalNotes, s.reviewFlag || ''
   ].map(v => `"${(v||'').replace(/"/g,'""')}"`));
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
