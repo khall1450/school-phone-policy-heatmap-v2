@@ -596,8 +596,8 @@ const STATE_DATA = [
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
     currentPolicy:"DC prohibits phone use during the school day in public schools (bell-to-bell); storage not centrally mandated",
     storageReq:"Storage unspecified",
-    legislation:"Distraction-Free Learning Amendment Act",
-    notes:"Enacted via DC Council legislation (not a federal statute). Binding law within DC.",
+    legislation:"Disconnect Act of 2025 (Law L26-0039, eff. Sept 2025)",
+    notes:"Enacted via DC Council legislation (not a federal statute). Binding law within DC. Introduced as B26-73 'Heads Up! Distraction-Free Learning Amendment Act.'",
     additionalNotes:"",
     timeline:""
   },
@@ -831,7 +831,7 @@ const STATE_DATA = [
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
     currentPolicy:"Prohibits display or use all day including meals, breaks, passing periods, and study halls; storage not specified",
     storageReq:"Storage unspecified",
-    legislation:"SB 68/69 (July 2025)",
+    legislation:"SB 68 (July 2025)",
     notes:"Enacted via statute. Explicitly lists meal times, breaks, time between classes, and study halls.",
     additionalNotes:"",
     timeline:""
@@ -953,7 +953,7 @@ const STATE_DATA = [
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
     currentPolicy:"Explicit 'bell to bell' language in the statute; storage method left to districts. Note: current law is a one-year mandate for 2025-26; without SB 1719, the ban becomes optional for districts starting 2026-27.",
     storageReq:"Storage unspecified",
-    legislation:"SB 139 (Apr 2025)",
+    legislation:"SB 139 (May 2025)",
     notes:"Enacted via statute. Explicitly prohibits phones during lunch and recess. Current ban has a sunset clause \u2014 mandatory only for 2025-26 school year.",
     additionalNotes:"",
     timeline:"",
@@ -1059,7 +1059,7 @@ const STATE_DATA = [
     rawCategory:"Instructional-Time Ban, Storage Unspecified",
     currentPolicy:"Instructional-time ban during classroom hours; law explicitly excludes lunch periods, recess, transit time between classes, and study halls.",
     storageReq:"Storage unspecified",
-    legislation:"SB 178 (2024)",
+    legislation:"SB 178 (2025)",
     notes:"",
     additionalNotes:"",
     timeline:"",
@@ -1077,7 +1077,7 @@ const STATE_DATA = [
     rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
     currentPolicy:"Bell-to-bell ban from arrival to dismissal; districts must prohibit use during the school day; storage not specified",
     storageReq:"Storage unspecified",
-    legislation:"H.480 / Act 76 (June 2025)",
+    legislation:"H.480 / Act 72 (June 2025)",
     notes:"Enacted via statute. Covers arrival time to dismissal.",
     additionalNotes:"",
     timeline:""
@@ -1143,21 +1143,14 @@ const STATE_DATA = [
   },
   {
     fips:"56", name:"Wyoming", abbr:"WY",
-    category:"tier_1",
-    rawCategory:"No Statewide Policy",
-    currentPolicy:"No statewide mandate currently in effect.",
-    storageReq:"N/A",
-    legislation:"No statewide law",
-    notes:"",
+    category:"tier_3",
+    rawCategory:"Must Adopt a Policy (No Content Req.)",
+    currentPolicy:"All 48 school districts must adopt and submit their own policies governing student cellphone and smartwatch use to the state superintendent. Policy content is district-defined.",
+    storageReq:"No storage requirement specified",
+    legislation:"SF 35 (signed Mar 2026)",
+    notes:"Does not dictate policy content \u2014 districts decide the scope and strength of their own restrictions.",
     additionalNotes:"",
-    timeline:"",
-    pendingLegislation: {
-      bill: "SF 35 (2026)",
-      summary: "Requires all 48 school districts to adopt their own policies governing student cellphone and smartwatch use. Districts must submit policies to the state superintendent. Does not dictate policy content.",
-      status: "Passed legislature Mar 4, 2026 (House 40-20). Awaiting Governor Gordon's signature.",
-      wouldBeTier: "tier_3",
-      wouldBeLabel: "Must Adopt a Policy (No Content Req.)"
-    }
+    timeline:"Signed into law March 2026"
   }
 ];
 
@@ -1205,7 +1198,7 @@ const BILL_URLS = {
   "45": "https://ed.sc.gov/newsroom/school-district-memoranda-archive/cell-phone-policy/cell-phone-policy-memo/",
   "47": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=SB0897&GA=114",
   "48": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1481",
-  "49": "https://le.utah.gov/~2024/bills/static/SB0178.html",
+  "49": "https://le.utah.gov/~2025/bills/static/SB0178.html",
   "50": "https://legislature.vermont.gov/bill/status/2026/H.480",
   "51": "https://law.lis.virginia.gov/vacode/title22.1/chapter7/section22.1-79.3:1/",
   // "53" removed — HB 1122 did not advance; guidance link serves as primary reference
