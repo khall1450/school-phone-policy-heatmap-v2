@@ -249,6 +249,31 @@
       letter-spacing: 0.03em;
       vertical-align: middle;
     }
+    .detail-prior-bills {
+      background: #F5F5F5;
+      border-left: 3px solid var(--wisdom-grey);
+      padding: 10px 12px;
+      font-size: 0.73rem;
+      border-radius: 0 0.3rem 0.3rem 0;
+      margin-top: 10px;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+    .detail-prior-bills .prior-title {
+      font-weight: 700;
+      color: var(--concrete-grey);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .detail-prior-bills .prior-bill-entry {
+      padding: 4px 0;
+      border-bottom: 1px solid #E8EAED;
+    }
+    .detail-prior-bills .prior-bill-entry:last-child { border-bottom: none; }
+    .detail-prior-bills .prior-bill-name { font-weight: 600; color: var(--concrete-grey); }
+    .detail-prior-bills .prior-outcome { color: #992E2E; font-weight: 600; font-size: 0.68rem; text-transform: uppercase; }
     .detail-flag {
       background: #FFF5E6;
       border-left: 3px solid var(--blaze-orange);
@@ -791,7 +816,11 @@ const STATE_DATA = [
     legislation:"No statewide law",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    priorFailedBills: [
+      { bill: "SB 2099", session: "2026", outcome: "Failed", detail: "Multiple bills requiring school phone policies advanced in committee but died before reaching full votes.", wouldHaveBeen: "Bell-to-Bell Ban" },
+      { bill: "SB 2151", session: "2026", outcome: "Failed", detail: "House version appeared dead as of late Feb 2026.", wouldHaveBeen: "Bell-to-Bell Ban" }
+    ]
   },
   {
     fips:"29", name:"Missouri", abbr:"MO",
@@ -992,7 +1021,10 @@ const STATE_DATA = [
     legislation:"State guidance",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    priorFailedBills: [
+      { bill: "SB 198", session: "2026", outcome: "Killed in committee", detail: "Would have banned phone use during the school day. Passed Senate 19-15 but House Education Committee killed it 8-7 on Mar 2, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" }
+    ]
   },
   {
     fips:"47", name:"Tennessee", abbr:"TN",
@@ -1107,7 +1139,7 @@ const STATE_DATA = [
     fips:"56", name:"Wyoming", abbr:"WY",
     category:"tier_1",
     rawCategory:"No Statewide Policy",
-    currentPolicy:"No statewide mandate currently in effect. A stricter statewide ban bill (SF 21) failed 7-21 in Jan 2025.",
+    currentPolicy:"No statewide mandate currently in effect.",
     storageReq:"N/A",
     legislation:"No statewide law",
     notes:"",
@@ -1149,7 +1181,7 @@ const BILL_URLS = {
   "25": "https://malegislature.gov/Bills/194/S2561",
   "26": "https://www.legislature.mi.gov/Bills/Bill?ObjectName=2025-HB-4141",
   "27": "https://www.revisor.mn.gov/bills/94/2025/0/SF/508/?body=senate",
-  "28": "https://legiscan.com/MS/bill/SB2099/2026",
+  // "28" removed — SB 2099 failed; link was to a dead bill
   "29": "https://www.senate.mo.gov/25info/bts_web/bill.aspx?SessionType=R&BillID=422",
   "31": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59086",
   "32": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12831/Overview",
@@ -1550,6 +1582,17 @@ function showDetail(fips) {
     ${s.additionalNotes ? `<div class="detail-row"><strong>Additional:</strong> ${s.additionalNotes}</div>` : ''}
     ${linkHtml}
     ${pendingHtml}
+    ${s.priorFailedBills && s.priorFailedBills.length ? `
+      <div class="detail-prior-bills">
+        <div class="prior-title">Prior Failed Bills</div>
+        ${s.priorFailedBills.map(b => `
+          <div class="prior-bill-entry">
+            <span class="prior-bill-name">${b.bill}</span> <span class="prior-outcome">${b.outcome}</span> (${b.session} session)<br>
+            ${b.detail}${b.wouldHaveBeen ? `<br><em>Would have been: ${b.wouldHaveBeen}</em>` : ''}
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
   `;
 }
 
