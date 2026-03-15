@@ -1295,12 +1295,12 @@ Object.entries(CATEGORIES).sort((a,b) => a[1].order - b[1].order).forEach(([key,
 const statsGrid = document.getElementById('stats-grid');
 const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier_6pi + counts.tier_6p;
 const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
-const policyTotal = counts.tier_4 + counts.tier_3;
 const pendingStates = STATE_DATA.filter(s => s.pendingLegislation);
 const statsData = [
   { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'] },
   { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'] },
-  { num: policyTotal, lbl: 'Must Adopt Policy / Limit Use', cats: ['tier_4','tier_3'] },
+  { num: counts.tier_4, lbl: 'Must Limit Use', cats: ['tier_4'] },
+  { num: counts.tier_3, lbl: 'Must Adopt Policy', cats: ['tier_3'] },
   { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'] },
   { num: counts.tier_1, lbl: 'No Policy', cats: ['tier_1'] },
   { num: pendingStates.length, lbl: 'Pending Legislation', cats: [], pending: true },
