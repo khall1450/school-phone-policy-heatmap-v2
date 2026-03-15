@@ -110,7 +110,7 @@
 
 <div class="layout">
   <div class="map-wrap">
-    <svg id="map-svg" viewBox="0 0 960 600"></svg>
+    <svg id="map-svg" viewBox="0 0 960 600" width="960" height="600" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
   <div class="legend-wrap">
     <div class="legend-items">
@@ -214,6 +214,7 @@ const svg = d3.select('#map-svg');
 const path = d3.geoPath();
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
+  if (!us || !us.objects) { document.querySelector('.map-wrap').innerHTML = '<p style="color:red;">Error: TopoJSON failed to load. Try refreshing.</p>'; return; }
   const states = topojson.feature(us, us.objects.states);
 
   // State fills
@@ -300,6 +301,8 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       .attr('font-size', '7px').attr('font-weight', '700').attr('font-family', 'Public Sans, sans-serif')
       .attr('fill', 'white').text(abbr);
   });
+}).catch(err => {
+  document.querySelector('.map-wrap').innerHTML = '<p style="color:red;font-size:0.85rem;">Map failed to load: ' + err.message + '. Try refreshing or opening via the live site.</p>';
 });
 </script>
 </body>
