@@ -459,12 +459,13 @@ const CATEGORIES = {
     order: 1
   },
   tier_6b: {
-    label: 'Bell-to-Bell Ban, Accessible Storage Mandated',
+    label: '(Vacant)',
     color: '#002E6D',
-    order: 2
+    order: 2,
+    vacant: true
   },
   tier_6a: {
-    label: 'Bell-to-Bell Ban, Storage Unspecified',
+    label: 'Bell-to-Bell Ban, Inaccessible Storage Not Mandated',
     color: '#0D4A8A',
     order: 3
   },
@@ -491,7 +492,7 @@ const CATEGORIES = {
     vacant: true
   },
   tier_5a: {
-    label: 'Instructional-Time Ban, Storage Unspecified',
+    label: 'Instructional-Time Ban, Inaccessible Storage Not Mandated',
     color: '#7BB3DC',
     order: 8
   },
@@ -521,8 +522,8 @@ const CATEGORIES = {
 const STATE_DATA = [
   {
     fips:"01", name:"Alabama", abbr:"AL",
-    category:"tier_6b",
-    rawCategory:"Bell-to-Bell Ban, Accessible Storage Mandated",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban \u2014 phones must be turned off and stored in a locker, car, or similar location, off their person, for the full school day",
     storageReq:"Accessible storage mandated (locker, car, or similar location \u2014 off person)",
     legislation:"HB 166 (May 2025)",
@@ -555,7 +556,7 @@ const STATE_DATA = [
   {
     fips:"05", name:"Arkansas", abbr:"AR",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"'Bell to Bell, No Cell' Act prohibits possession/use during the school day; storage method is district-defined",
     storageReq:"Storage unspecified \u2014 district-defined",
     legislation:"Act 122 / SB 142 (Feb 2025)",
@@ -602,7 +603,7 @@ const STATE_DATA = [
       summary: "Would require districts to implement bell-to-bell cellphone bans. Students would store phones in lockers or secure pouches. Accommodations for IEPs and medical needs.",
       status: "Both bills referred to Education Committee. Public hearing held Feb 20 with strong support from CT Education Association. Committee deadline Mar 23. Gov. Lamont supports. Covers phones, tablets, gaming devices, smartwatches; excludes school-provided tech. Accommodations for IEPs and medical needs.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
@@ -619,7 +620,7 @@ const STATE_DATA = [
   {
     fips:"11", name:"District of Columbia", abbr:"DC",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"DC prohibits phone use during the school day in public schools (bell-to-bell); storage not centrally mandated",
     storageReq:"Storage unspecified",
     legislation:"Disconnect Act of 2025 (Law L26-0039, eff. Sept 2025)",
@@ -653,7 +654,7 @@ const STATE_DATA = [
       summary: "Would extend bell-to-bell ban to grades 9\u201312 (all grades K\u201312)",
       status: "Passed House 145-20 on Feb 24, 2026. In Senate as of Mar 12, 2026 with active debate.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified (all grades)"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated (all grades)"
     }
   },
   {
@@ -693,7 +694,7 @@ const STATE_DATA = [
       summary: "Requires every school board to adopt a policy prohibiting wireless devices during instructional time by 2026-27. Includes guidance for secure storage. Exceptions for medical, IEP, and ELL needs.",
       status: "Passed Senate 55-0. Cleared House Education Policy Committee. Stalled in House in 2025 session — not called to floor vote. Gov. Pritzker renewed push in Feb 2026. House discussing amendments to reignite movement. Needs House floor vote in 2026 spring session.",
       wouldBeTier: "tier_5a",
-      wouldBeLabel: "Instructional-Time Ban, Storage Unspecified"
+      wouldBeLabel: "Instructional-Time Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
@@ -710,7 +711,7 @@ const STATE_DATA = [
   {
     fips:"19", name:"Iowa", abbr:"IA",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must restrict use during classroom instructional time; teacher exceptions allowed, storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"HF 782 (Apr 2025)",
@@ -734,13 +735,13 @@ const STATE_DATA = [
       summary: "Requires districts to adopt policies restricting student cell phone use throughout the entire school day. Covers phones, smartwatches, earbuds, and all personal communication devices.",
       status: "Passed Senate 32-4 on Mar 5; House concurred 84-39 on Mar 10. On Gov. Kelly's desk \u2014 she has indicated she will sign.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
     fips:"21", name:"Kentucky", abbr:"KY",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must, at minimum, ban student use of cell phones during instructional time. Districts may optionally extend to the full school day, but the law's floor is instructional time only.",
     storageReq:"Storage unspecified \u2014 district-defined",
     legislation:"HB 208 (Mar 2025)",
@@ -751,7 +752,7 @@ const STATE_DATA = [
   {
     fips:"22", name:"Louisiana", abbr:"LA",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"No student may possess a phone on their person throughout the instructional day. Devices must be turned off and stowed away for the duration of the instructional day.",
     storageReq:"Storage unspecified \u2014 must be 'properly stowed away'",
     legislation:"SB 207 (May 2024)",
@@ -786,7 +787,7 @@ const STATE_DATA = [
       summary: "Bell-to-bell ban making phones inaccessible during school day. Requires districts to implement policies by 2027-28. Cross-filed as SB 928 in Senate.",
       status: "HB 525 in House Ways and Means Committee; reported 'Unfavorable' in committee. Cross-filed SB 928 has bipartisan support in Senate (sponsor Sen. Kevin Harris). Faces headwinds in House but Senate path may be viable.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
@@ -804,13 +805,13 @@ const STATE_DATA = [
       summary: "Bell-to-bell ban on phones, tablets, smartwatches, and Bluetooth devices at all K-12 public schools. Exceptions for medical, IEP, disability, and off-campus travel. Refiled from prior S.2561.",
       status: "Refiled for 2026 session. Gov. Healey pushing for passage. House has not yet acted.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
     fips:"26", name:"Michigan", abbr:"MI",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must prohibit use of wireless communication devices on school grounds during instructional time. No grade-level distinctions. Districts may adopt stricter full-day bans at their discretion.",
     storageReq:"Storage unspecified \u2014 district-defined",
     legislation:"HB 4141 (Feb 2026, eff. 2026\u201327)",
@@ -854,7 +855,7 @@ const STATE_DATA = [
   {
     fips:"29", name:"Missouri", abbr:"MO",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Prohibits display or use all day including meals, breaks, passing periods, and study halls; storage not specified",
     storageReq:"Storage unspecified",
     legislation:"SB 68 (July 2025)",
@@ -877,7 +878,7 @@ const STATE_DATA = [
   {
     fips:"31", name:"Nebraska", abbr:"NE",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Prohibits use of electronic communication devices while on school property or attending a school instructional function. Covers the entire school day, not just classroom instruction.",
     storageReq:"Storage unspecified",
     legislation:"LB 140 (May 2025)",
@@ -888,7 +889,7 @@ const STATE_DATA = [
   {
     fips:"32", name:"Nevada", abbr:"NV",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must prohibit access during class; instructional-time scope, storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"SB 444 (May 2025)",
@@ -900,7 +901,7 @@ const STATE_DATA = [
   {
     fips:"33", name:"New Hampshire", abbr:"NH",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban from first bell to dismissal bell; storage method not specified",
     storageReq:"Storage unspecified",
     legislation:"HB 2 (June 2025)",
@@ -911,7 +912,7 @@ const STATE_DATA = [
   {
     fips:"34", name:"New Jersey", abbr:"NJ",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban on non-academic device use; storage guidelines issued by state DOE but method is district-defined",
     storageReq:"Storage unspecified \u2014 district-defined",
     legislation:"S3695 (signed Jan 8, 2026, eff. 2026\u201327)",
@@ -933,7 +934,7 @@ const STATE_DATA = [
   {
     fips:"36", name:"New York", abbr:"NY",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban directed by Gov. Hochul as part of the state budget; storage details left to districts",
     storageReq:"Storage unspecified",
     legislation:"Budget agreement (May 2025)",
@@ -944,7 +945,7 @@ const STATE_DATA = [
   {
     fips:"37", name:"North Carolina", abbr:"NC",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must prohibit use and display during instructional time. Schools may adopt stronger limits but are not required to cover lunch or passing periods.",
     storageReq:"Storage unspecified",
     legislation:"HB 959 (July 2025)",
@@ -966,7 +967,7 @@ const STATE_DATA = [
   {
     fips:"39", name:"Ohio", abbr:"OH",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Prohibits all cell phone use during the 'instructional day'; teacher exceptions allowed; storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"HB 96 (July 2025)",
@@ -978,7 +979,7 @@ const STATE_DATA = [
   {
     fips:"40", name:"Oklahoma", abbr:"OK",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Explicit 'bell to bell' language in the statute; storage method left to districts. Note: current law is a one-year mandate for 2025-26; without SB 1719, the ban becomes optional for districts starting 2026-27.",
     storageReq:"Storage unspecified",
     legislation:"SB 139 (May 2025)",
@@ -990,13 +991,13 @@ const STATE_DATA = [
       summary: "Makes the current one-year mandatory bell-to-bell ban permanent for all future school years. Without this, the ban becomes optional for districts starting 2026-27.",
       status: "In Senate Education Committee as of early March. Committee of Origin deadline was Mar 5 \u2014 status uncertain.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified (permanent)"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated (permanent)"
     }
   },
   {
     fips:"41", name:"Oregon", abbr:"OR",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban including passing times and lunch for K-12. Districts must prohibit use from start to end of the school day.",
     storageReq:"Storage unspecified",
     legislation:"Executive Order 25-09 (July 2025)",
@@ -1019,7 +1020,7 @@ const STATE_DATA = [
       summary: "Bell-to-bell ban on personal electronic devices during the school day. Exceptions for medical, IEP, ELL, and teacher-approved instructional use. Districts define storage and enforcement. Would take effect 2027-28.",
       status: "Passed Senate 46-1 on Feb 3, 2026. Referred to House Education Committee Feb 4. Gov. Shapiro supports. Pending committee action as of mid-March.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
@@ -1036,7 +1037,7 @@ const STATE_DATA = [
   {
     fips:"45", name:"South Carolina", abbr:"SC",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Prohibits student access to personal devices during the school day (arrival to dismissal); storage not specified",
     storageReq:"Storage unspecified",
     legislation:"Budget proviso (July 2024)",
@@ -1063,7 +1064,7 @@ const STATE_DATA = [
   {
     fips:"47", name:"Tennessee", abbr:"TN",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must prohibit use during instructional time; teacher exceptions remain; storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"SB 0897 (Mar 2025)",
@@ -1074,7 +1075,7 @@ const STATE_DATA = [
   {
     fips:"48", name:"Texas", abbr:"TX",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must prohibit use during the school day (bell-to-bell); storage left to districts",
     storageReq:"Storage unspecified",
     legislation:"HB 1481 (June 2025)",
@@ -1085,7 +1086,7 @@ const STATE_DATA = [
   {
     fips:"49", name:"Utah", abbr:"UT",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Instructional-time ban during classroom hours; law explicitly excludes lunch periods, recess, transit time between classes, and study halls.",
     storageReq:"Storage unspecified",
     legislation:"SB 178 (2025)",
@@ -1097,13 +1098,13 @@ const STATE_DATA = [
       summary: "Upgrades to bell-to-bell ban covering the entire school day including lunch, recess, and transition time. Also covers smartwatches and emerging technologies.",
       status: "Passed legislature Feb 27, 2026. Sent to Gov. Cox Mar 11, 2026 — awaiting signature. Signing widely expected.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
     fips:"50", name:"Vermont", abbr:"VT",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban from arrival to dismissal; districts must prohibit use during the school day; storage not specified",
     storageReq:"Storage unspecified",
     legislation:"H.480 / Act 72 (June 2025)",
@@ -1114,7 +1115,7 @@ const STATE_DATA = [
   {
     fips:"51", name:"Virginia", abbr:"VA",
     category:"tier_6a",
-    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Bell-to-bell ban including lunch and between classes. Originally established by Executive Order 33 (July 2024), now codified into statute (May 2025).",
     storageReq:"Storage unspecified",
     legislation:"EO 33 (July 2024) + statute (May 2025)",
@@ -1144,7 +1145,7 @@ const STATE_DATA = [
   {
     fips:"54", name:"West Virginia", abbr:"WV",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Instructional-time ban; teacher exceptions; storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"HB 2003 (Apr 2025)",
@@ -1155,7 +1156,7 @@ const STATE_DATA = [
   {
     fips:"55", name:"Wisconsin", abbr:"WI",
     category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
+    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
     currentPolicy:"Districts must adopt policies prohibiting use during class time; storage not mandated",
     storageReq:"Storage unspecified",
     legislation:"AB 2 (Oct 2025)",
@@ -1167,7 +1168,7 @@ const STATE_DATA = [
       summary: "Expands existing instructional-time ban to cover the entire school day including recess, passing periods, and lunch. Implementation by July 1, 2027.",
       status: "Passed Assembly on voice vote. Passed Senate Education Committee 4-1 (~Mar 7). Awaiting full Senate vote. Gov. Evers undecided.",
       wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Storage Unspecified"
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
   },
   {
