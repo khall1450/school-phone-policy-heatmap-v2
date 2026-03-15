@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <style>
     :root {
@@ -371,6 +372,20 @@
       transition: background .15s;
     }
     .export-btn:hover { background: #00408C; }
+    .map-export-btn {
+      background: white;
+      color: var(--paragon-blue);
+      border: 1.5px solid var(--blaze-orange);
+      border-radius: 0.3rem;
+      padding: 5px 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      font-family: 'Public Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: .03em;
+      transition: background .15s, color .15s;
+    }
+    .map-export-btn:hover { background: #FFF5EB; }
   </style>
 </head>
 <body>
@@ -399,7 +414,10 @@
   <div class="card map-container">
     <div style="display:flex;justify-content:space-between;align-items:center;">
       <h2 style="margin-bottom:0;">Policy Heatmap — United States</h2>
-      <button class="export-btn" onclick="exportMapPNG()" style="margin:0;font-size:0.65rem;padding:5px 12px;">Export Map as PNG</button>
+      <span style="display:flex;gap:6px;">
+        <button class="map-export-btn" onclick="exportMapPNG()">Export PNG</button>
+        <button class="map-export-btn" onclick="exportMapPDF()">Export PDF</button>
+      </span>
     </div>
     <svg id="map-svg" viewBox="0 0 960 600"></svg>
   </div>
@@ -2066,6 +2084,109 @@ function exportMapPNG() {
     a.download = 'school_phone_ban_policies_map.png';
     a.href = canvas.toDataURL('image/png');
     a.click();
+  };
+  img.src = url;
+}
+
+// ── EXPORT MAP PDF ────────────────────────────────────────────────────────────
+function exportMapPDF() {
+  // Reuse the PNG canvas logic, then put on a PDF page
+  const W = 1400, mapW = 960, mapH = 600, pad = 40, legendX = mapW + pad + 30;
+  const H = mapH + 140;
+  const canvas = document.createElement('canvas');
+  canvas.width = W * 2; canvas.height = H * 2; // 2x for crisp PDF
+  const ctx = canvas.getContext('2d');
+  ctx.scale(2, 2);
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#002E6D';
+  ctx.font = 'bold 28px Public Sans, sans-serif';
+  ctx.fillText('School Phone Ban Policies by State', pad, 45);
+  ctx.fillStyle = '#6B6B6B';
+  ctx.font = '300 14px Public Sans, sans-serif';
+  ctx.fillText('Updated March 15, 2026', pad, 68);
+
+  const svgEl = document.getElementById('map-svg');
+  const svgData = new XMLSerializer().serializeToString(svgEl);
+  const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.onload = function() {
+    ctx.drawImage(img, pad, 85, mapW, mapH);
+    URL.revokeObjectURL(url);
+
+    const cats = Object.entries(CATEGORIES)
+      .sort((a,b) => a[1].order - b[1].order)
+      .filter(([key, cat]) => !(cat.vacant && catCounts()[key] === 0));
+    const cts = catCounts();
+    let ly = 105;
+    ctx.fillStyle = '#002E6D';
+    ctx.font = 'bold 11px Public Sans, sans-serif';
+    ctx.fillText('PHONE BAN POLICY', legendX, ly);
+    ly += 4;
+    ctx.strokeStyle = '#FF941A';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(legendX, ly); ctx.lineTo(legendX + 200, ly); ctx.stroke();
+    ly += 16;
+    const swatchSize = 13;
+    cats.forEach(([key, cat]) => {
+      ctx.fillStyle = cat.color;
+      ctx.fillRect(legendX, ly, swatchSize, swatchSize);
+      ctx.fillStyle = '#303030';
+      ctx.font = '300 10.5px Public Sans, sans-serif';
+      const maxLabelW = 175;
+      const words = cat.label.split(' ');
+      let line = '', lineY = ly + 10;
+      words.forEach(word => {
+        const test = line + (line ? ' ' : '') + word;
+        if (ctx.measureText(test).width > maxLabelW && line) {
+          ctx.fillText(line, legendX + swatchSize + 8, lineY);
+          line = word; lineY += 13;
+        } else { line = test; }
+      });
+      ctx.fillText(line, legendX + swatchSize + 8, lineY);
+      lineY += 2;
+      ctx.fillStyle = '#002E6D';
+      ctx.font = 'bold 10px Public Sans, sans-serif';
+      ctx.fillText(cts[key] + ' state' + (cts[key] !== 1 ? 's' : ''), legendX + swatchSize + 8, lineY + 11);
+      ly = lineY + 22;
+    });
+
+    // Gradient arrow
+    const arrowX = legendX + 220, arrowTop = 120, arrowBot = ly - 10;
+    ctx.fillStyle = cats[0][1].color;
+    ctx.beginPath();
+    ctx.moveTo(arrowX, arrowTop); ctx.lineTo(arrowX + 6, arrowTop + 10); ctx.lineTo(arrowX - 6, arrowTop + 10);
+    ctx.closePath(); ctx.fill();
+    const grad = ctx.createLinearGradient(0, arrowTop + 10, 0, arrowBot - 10);
+    cats.forEach(([, cat], i) => { grad.addColorStop(i / (cats.length - 1), cat.color); });
+    ctx.fillStyle = grad;
+    ctx.fillRect(arrowX - 2, arrowTop + 10, 4, arrowBot - arrowTop - 20);
+    ctx.fillStyle = cats[cats.length - 1][1].color;
+    ctx.beginPath();
+    ctx.moveTo(arrowX, arrowBot); ctx.lineTo(arrowX + 6, arrowBot - 10); ctx.lineTo(arrowX - 6, arrowBot - 10);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#002E6D';
+    ctx.font = 'bold 8px Public Sans, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('MOST', arrowX, arrowTop - 8);
+    ctx.fillText('STRICT', arrowX, arrowTop);
+    ctx.fillStyle = '#6B6B6B';
+    ctx.fillText('LEAST', arrowX, arrowBot + 10);
+    ctx.fillText('STRICT', arrowX, arrowBot + 18);
+    ctx.textAlign = 'left';
+
+    ctx.fillStyle = '#949494';
+    ctx.font = '300 10px Public Sans, sans-serif';
+    ctx.fillText('Source: State legislation, executive orders, DOE guidance & board policies. Analysis as of March 2026.', pad, H - 20);
+
+    // Generate PDF (landscape)
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [W, H] });
+    const imgData = canvas.toDataURL('image/png');
+    pdf.addImage(imgData, 'PNG', 0, 0, W, H);
+    pdf.save('school_phone_ban_policies_map.pdf');
   };
   img.src = url;
 }
