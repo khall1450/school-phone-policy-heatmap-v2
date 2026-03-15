@@ -405,7 +405,10 @@
     <!-- Legend -->
     <div class="card">
       <h2>Legend</h2>
-      <div id="legend"></div>
+      <div style="display:flex;gap:12px;align-items:stretch;">
+        <div id="legend" style="flex:1;"></div>
+        <div id="legend-arrow" style="display:flex;flex-direction:column;align-items:center;width:28px;padding:2px 0;"></div>
+      </div>
     </div>
 
     <!-- State Detail -->
@@ -1257,6 +1260,36 @@ Object.entries(CATEGORIES).sort((a,b) => a[1].order - b[1].order).forEach(([key,
   `;
   legendEl.appendChild(div);
 });
+
+// ── LEGEND ARROW ─────────────────────────────────────────────────────────────
+(function() {
+  const arrowEl = document.getElementById('legend-arrow');
+  // Collect visible category colors in order (most strict → least strict)
+  const visibleColors = Object.entries(CATEGORIES)
+    .sort((a,b) => a[1].order - b[1].order)
+    .filter(([key, cat]) => !(cat.vacant && counts[key] === 0))
+    .map(([, cat]) => cat.color);
+  const topColor = visibleColors[0];
+  const bottomColor = visibleColors[visibleColors.length - 1];
+  // Build gradient stops evenly spaced
+  const stops = visibleColors.map((c, i) =>
+    `<stop offset="${(i / (visibleColors.length - 1) * 100).toFixed(1)}%" stop-color="${c}"/>`
+  ).join('');
+  arrowEl.innerHTML = `
+    <div style="font-size:0.52rem;font-weight:700;color:var(--paragon-blue);text-transform:uppercase;letter-spacing:.06em;line-height:1.1;text-align:center;margin-bottom:3px;">Most<br>strict</div>
+    <svg width="10" height="10" viewBox="0 0 10 10" style="flex-shrink:0;">
+      <polygon points="5,0 10,10 0,10" fill="${topColor}"/>
+    </svg>
+    <svg width="6" style="flex:1;min-height:20px;" preserveAspectRatio="none" viewBox="0 0 6 100">
+      <defs><linearGradient id="legendGrad" x1="0" y1="0" x2="0" y2="1">${stops}</linearGradient></defs>
+      <rect x="1" y="0" width="4" height="100" fill="url(#legendGrad)"/>
+    </svg>
+    <svg width="10" height="10" viewBox="0 0 10 10" style="flex-shrink:0;">
+      <polygon points="5,10 10,0 0,0" fill="${bottomColor}"/>
+    </svg>
+    <div style="font-size:0.52rem;font-weight:700;color:var(--concrete-grey);text-transform:uppercase;letter-spacing:.06em;line-height:1.1;text-align:center;margin-top:3px;">Least<br>strict</div>
+  `;
+})();
 
 // ── STATS ─────────────────────────────────────────────────────────────────────
 const statsGrid = document.getElementById('stats-grid');
