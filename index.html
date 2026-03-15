@@ -1296,12 +1296,14 @@ const statsGrid = document.getElementById('stats-grid');
 const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier_6pi + counts.tier_6p;
 const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
 const policyTotal = counts.tier_4 + counts.tier_3;
+const pendingStates = STATE_DATA.filter(s => s.pendingLegislation);
 const statsData = [
   { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'] },
   { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'] },
   { num: policyTotal, lbl: 'Must Adopt Policy / Limit Use', cats: ['tier_4','tier_3'] },
   { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'] },
   { num: counts.tier_1, lbl: 'No Policy', cats: ['tier_1'] },
+  { num: pendingStates.length, lbl: 'Pending Legislation', cats: [], pending: true },
 ];
 
 const statPopup = document.getElementById('stat-popup');
@@ -1317,29 +1319,35 @@ document.addEventListener('click', closeStatPopup);
 
 statsData.forEach(s => {
   const d = document.createElement('div');
-  d.className = s.cats ? 'stat-box clickable' : 'stat-box';
+  d.className = 'stat-box clickable';
   d.innerHTML = `<div class="num">${s.num}</div><div class="lbl">${s.lbl}</div>`;
-  if (s.cats) {
-    d.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (statPopupOpen && statPopupTitle.dataset.lbl === s.lbl) { closeStatPopup(); return; }
-      const names = STATE_DATA
+  d.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (statPopupOpen && statPopupTitle.dataset.lbl === s.lbl) { closeStatPopup(); return; }
+    let names;
+    if (s.pending) {
+      names = STATE_DATA
+        .filter(st => st.pendingLegislation)
+        .map(st => `${st.name} (${st.pendingLegislation.bill})`)
+        .sort();
+    } else {
+      names = STATE_DATA
         .filter(st => s.cats.includes(st.category))
         .map(st => st.name)
         .sort();
-      statPopupTitle.textContent = s.lbl;
-      statPopupTitle.dataset.lbl = s.lbl;
-      statPopupList.innerHTML = names.map(n => `<li>${n}</li>`).join('');
-      const rect = d.getBoundingClientRect();
-      statPopup.style.display = 'block';
-      const popW = statPopup.offsetWidth;
-      let left = rect.left + rect.width / 2 - popW / 2;
-      left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
-      statPopup.style.left = left + 'px';
-      statPopup.style.top = (rect.bottom + 6) + 'px';
-      statPopupOpen = true;
-    });
-  }
+    }
+    statPopupTitle.textContent = s.lbl;
+    statPopupTitle.dataset.lbl = s.lbl;
+    statPopupList.innerHTML = names.map(n => `<li>${n}</li>`).join('');
+    const rect = d.getBoundingClientRect();
+    statPopup.style.display = 'block';
+    const popW = statPopup.offsetWidth;
+    let left = rect.left + rect.width / 2 - popW / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - popW - 8));
+    statPopup.style.left = left + 'px';
+    statPopup.style.top = (rect.bottom + 6) + 'px';
+    statPopupOpen = true;
+  });
   statsGrid.appendChild(d);
 });
 
