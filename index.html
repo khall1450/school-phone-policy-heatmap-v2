@@ -1498,17 +1498,43 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
     .attr('stroke-width', 0.4)
     .attr('d', path);
 
+  // Manual label offsets for states where centroid lands awkwardly
+  const labelOffsets = {
+    '12': [14, 8],    // FL — shift right and down (away from panhandle)
+    '22': [-4, 6],    // LA — shift left and down (away from boot heel)
+    '26': [10, 12],   // MI — shift right and down (into lower peninsula)
+    '06': [-6, 0],    // CA — nudge left
+    '21': [2, -2],    // KY — slight nudge
+    '24': [8, 4],     // MD — shift right (narrow state)
+    '25': [6, 2],     // MA — shift right (narrow state)
+    '09': [4, 2],     // CT — shift right
+    '34': [4, 0],     // NJ — slight nudge right
+    '10': [4, 0],     // DE — slight nudge right
+    '33': [2, -2],    // NH — slight nudge
+    '44': [6, 2],     // RI — shift right
+    '50': [0, -2],    // VT — slight nudge up
+    '15': [12, -2],   // HI — shift right
+    '02': [0, 0],     // AK — keep centroid
+    '36': [4, 0],     // NY — nudge right
+  };
+
   svg.append('g')
     .selectAll('text')
     .data(states.features)
     .join('text')
     .attr('x', d => {
       const c = path.centroid(d);
-      return isNaN(c[0]) ? -999 : c[0];
+      if (isNaN(c[0])) return -999;
+      const fips = String(d.id).padStart(2,'0');
+      const off = labelOffsets[fips];
+      return c[0] + (off ? off[0] : 0);
     })
     .attr('y', d => {
       const c = path.centroid(d);
-      return isNaN(c[1]) ? -999 : c[1];
+      if (isNaN(c[1])) return -999;
+      const fips = String(d.id).padStart(2,'0');
+      const off = labelOffsets[fips];
+      return c[1] + (off ? off[1] : 0);
     })
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'central')
