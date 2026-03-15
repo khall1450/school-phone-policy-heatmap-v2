@@ -397,7 +397,10 @@
 
   <!-- Map -->
   <div class="card map-container">
-    <h2>Policy Heatmap — United States</h2>
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h2 style="margin-bottom:0;">Policy Heatmap — United States</h2>
+      <button class="export-btn" onclick="exportMapPNG()" style="margin:0;font-size:0.65rem;padding:5px 12px;">Export Map as PNG</button>
+    </div>
     <svg id="map-svg" viewBox="0 0 960 600"></svg>
   </div>
 
@@ -1940,6 +1943,131 @@ function switchTab(name) {
   document.querySelectorAll('.tab-content').forEach(c => {
     c.classList.toggle('active', c.id === 'tab-' + name);
   });
+}
+
+// ── EXPORT MAP PNG ────────────────────────────────────────────────────────────
+function exportMapPNG() {
+  const W = 1400, mapW = 960, mapH = 600, pad = 40, legendX = mapW + pad + 30;
+  const H = mapH + 140; // extra space for title + source
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // White background
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, W, H);
+
+  // Title
+  ctx.fillStyle = '#002E6D';
+  ctx.font = 'bold 28px Public Sans, sans-serif';
+  ctx.fillText('School Phone Ban Policies by State', pad, 45);
+  ctx.fillStyle = '#6B6B6B';
+  ctx.font = '300 14px Public Sans, sans-serif';
+  ctx.fillText('Updated March 15, 2026', pad, 68);
+
+  // Render SVG map to canvas
+  const svgEl = document.getElementById('map-svg');
+  const svgData = new XMLSerializer().serializeToString(svgEl);
+  const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.onload = function() {
+    ctx.drawImage(img, pad, 85, mapW, mapH);
+    URL.revokeObjectURL(url);
+
+    // Legend
+    const cats = Object.entries(CATEGORIES)
+      .sort((a,b) => a[1].order - b[1].order)
+      .filter(([key, cat]) => !(cat.vacant && catCounts()[key] === 0));
+    const cts = catCounts();
+    let ly = 105;
+    ctx.fillStyle = '#002E6D';
+    ctx.font = 'bold 11px Public Sans, sans-serif';
+    ctx.fillText('PHONE BAN POLICY', legendX, ly);
+    ly += 4;
+    ctx.strokeStyle = '#FF941A';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(legendX, ly); ctx.lineTo(legendX + 200, ly); ctx.stroke();
+    ly += 16;
+
+    const swatchSize = 13;
+    cats.forEach(([key, cat]) => {
+      ctx.fillStyle = cat.color;
+      ctx.fillRect(legendX, ly, swatchSize, swatchSize);
+      ctx.fillStyle = '#303030';
+      ctx.font = '300 10.5px Public Sans, sans-serif';
+      // Wrap long labels
+      const label = cat.label;
+      const maxLabelW = 175;
+      const words = label.split(' ');
+      let line = '', lineY = ly + 10;
+      words.forEach(word => {
+        const test = line + (line ? ' ' : '') + word;
+        if (ctx.measureText(test).width > maxLabelW && line) {
+          ctx.fillText(line, legendX + swatchSize + 8, lineY);
+          line = word;
+          lineY += 13;
+        } else {
+          line = test;
+        }
+      });
+      ctx.fillText(line, legendX + swatchSize + 8, lineY);
+      lineY += 2;
+      ctx.fillStyle = '#002E6D';
+      ctx.font = 'bold 10px Public Sans, sans-serif';
+      ctx.fillText(cts[key] + ' state' + (cts[key] !== 1 ? 's' : ''), legendX + swatchSize + 8, lineY + 11);
+      ly = lineY + 22;
+    });
+
+    // Gradient arrow
+    const arrowX = legendX + 220, arrowTop = 120, arrowBot = ly - 10;
+    const arrowMid = arrowX;
+    // Arrow head top
+    ctx.fillStyle = cats[0][1].color;
+    ctx.beginPath();
+    ctx.moveTo(arrowMid, arrowTop);
+    ctx.lineTo(arrowMid + 6, arrowTop + 10);
+    ctx.lineTo(arrowMid - 6, arrowTop + 10);
+    ctx.closePath();
+    ctx.fill();
+    // Gradient line
+    const grad = ctx.createLinearGradient(0, arrowTop + 10, 0, arrowBot - 10);
+    cats.forEach(([, cat], i) => {
+      grad.addColorStop(i / (cats.length - 1), cat.color);
+    });
+    ctx.fillStyle = grad;
+    ctx.fillRect(arrowMid - 2, arrowTop + 10, 4, arrowBot - arrowTop - 20);
+    // Arrow head bottom
+    ctx.fillStyle = cats[cats.length - 1][1].color;
+    ctx.beginPath();
+    ctx.moveTo(arrowMid, arrowBot);
+    ctx.lineTo(arrowMid + 6, arrowBot - 10);
+    ctx.lineTo(arrowMid - 6, arrowBot - 10);
+    ctx.closePath();
+    ctx.fill();
+    // Labels
+    ctx.fillStyle = '#002E6D';
+    ctx.font = 'bold 8px Public Sans, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('MOST', arrowMid, arrowTop - 8);
+    ctx.fillText('STRICT', arrowMid, arrowTop - 0);
+    ctx.fillStyle = '#6B6B6B';
+    ctx.fillText('LEAST', arrowMid, arrowBot + 10);
+    ctx.fillText('STRICT', arrowMid, arrowBot + 18);
+    ctx.textAlign = 'left';
+
+    // Source line
+    ctx.fillStyle = '#949494';
+    ctx.font = '300 10px Public Sans, sans-serif';
+    ctx.fillText('Source: State legislation, executive orders, DOE guidance & board policies. Analysis as of March 2026.', pad, H - 20);
+
+    // Download
+    const a = document.createElement('a');
+    a.download = 'school_phone_ban_policies_map.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  };
+  img.src = url;
 }
 
 // ── EXPORT CSV ────────────────────────────────────────────────────────────────
