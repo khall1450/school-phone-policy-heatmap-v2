@@ -440,6 +440,7 @@
               <th>Legislation</th>
               <th>Implementation Timeline</th>
               <th>Notes</th>
+              <th>Sources</th>
             </tr>
           </thead>
           <tbody id="all-tbody"></tbody>
@@ -1235,6 +1236,141 @@ const BILL_URLS = {
   "56": "https://www.wyoleg.gov/Legislation/2026/SF0035"
 };
 
+// ── ADDITIONAL SOURCES (beyond bill text) ─────────────────────────────────────
+const SOURCES = {
+  "01": [
+    { label: "Walton Law: FOCUS Act guide", url: "https://www.waltonlaw.com/blog-alabama-focus-act-phone-ban/" }
+  ],
+  "02": [],
+  "04": [],
+  "05": [
+    { label: "AR Advocate: Act 122 signed", url: "https://arkansasadvocate.com/2025/02/21/free-school-breakfast-maternal-health-medicaid-school-cellphone-ban-all-become-arkansas-law/" }
+  ],
+  "06": [],
+  "08": [],
+  "09": [
+    { label: "CT News Junkie: HB 5035 hearing", url: "https://ctnewsjunkie.com/2026/03/09/lawmakers-consider-statewide-school-cellphone-ban-sparking-debate-among-students/" }
+  ],
+  "10": [
+    { label: "DE DOE: pouch pilot report", url: "https://education.delaware.gov/wp-content/uploads/2025/05/school-cellphone-pilot-report-.pdf" },
+    { label: "Spotlight DE: SB 106", url: "https://spotlightdelaware.org/2026/02/19/schools-tweak-phone-bans-as-bill-aims-to-set-statewide-guidelines/" }
+  ],
+  "11": [],
+  "12": [
+    { label: "WUSF: DeSantis signs HB 1105", url: "https://www.wusf.org/politics-issues/2025-06-01/desantis-signs-bill-restricting-cellphone-use-in-schools" }
+  ],
+  "13": [
+    { label: "Atlanta News First: HB 1009 in Senate", url: "https://www.atlantanewsfirst.com/2026/03/12/georgia-bill-would-ban-high-school-cellphone-use-sparking-debate-over-enforcement-safety/" }
+  ],
+  "15": [],
+  "16": [
+    { label: "Gov. Little: EO 2024-11 ($5K incentive)", url: "https://gov.idaho.gov/pressrelease/little-critchfield-unveil-new-steps-to-restrict-cell-phone-use-in-schools/" }
+  ],
+  "17": [
+    { label: "Capitol News IL: SB 2427", url: "https://capitolnewsillinois.com/news/cell-phone-ban-legislation-clears-senate-committee/" },
+    { label: "Gov. Pritzker renewed push", url: "https://education.illinois.edu/about/news-events/news/article/2026/02/24/gov.-pritzker-renews-push-to-ban-cell-phones-from-classrooms" }
+  ],
+  "18": [],
+  "19": [
+    { label: "HF 782 bill text (storage language)", url: "https://www.legis.iowa.gov/docs/publications/LGI/91/attachments/HF782.html" },
+    { label: "Gov. Reynolds signs HF 782", url: "https://governor.iowa.gov/press-release/2025-04-30/gov-reynolds-signs-hf-782-bill-limit-cell-phones-schools-law" }
+  ],
+  "20": [
+    { label: "KSDE: Blue Ribbon Task Force report", url: "https://www.ksde.gov/Portals/0/Commissioner/Blue-Ribbon-Task-Force-on-Student-Screen-Time-Report.pdf" },
+    { label: "KSNT: HB 2299 on Gov. desk", url: "https://www.ksnt.com/capitol-bureau/bell-to-bell-kansas-school-cell-phone-ban-passes-in-the-legislature-heads-to-governors-desk/" }
+  ],
+  "21": [
+    { label: "KY Lantern: HB 208 implementation", url: "https://kentuckylantern.com/2025/08/26/new-academic-year-brings-new-curbs-on-electronic-communications-in-kentucky-public-schools/" }
+  ],
+  "22": [],
+  "23": [],
+  "24": [
+    { label: "MD Task Force recommendations", url: "https://marylandpublicschools.org/Pages/taskforce/cell-phone-task-force.aspx" },
+    { label: "MD Matters: HB 525 / SB 928", url: "https://marylandmatters.org/2025/01/29/dialing-up-a-solution-bills-would-require-all-school-systems-in-state-to-cell-phone-policies/" }
+  ],
+  "25": [],
+  "26": [
+    { label: "MI Advance: Whitmer signs HB 4141", url: "https://michiganadvance.com/2026/02/10/whitmer-signs-off-on-school-cell-phone-ban-set-for-next-fall/" },
+    { label: "PA 2026-0002 (enacted text)", url: "https://legislature.mi.gov/documents/2025-2026/publicact/htm/2026-PA-0002.htm" }
+  ],
+  "27": [
+    { label: "KVRR: SF 508 omnibus consideration", url: "https://www.kvrr.com/2026/02/26/minnesota-considers-school-cell-phone-ban/" }
+  ],
+  "28": [],
+  "29": [
+    { label: "SLU/PRiME Center: SB 68 analysis", url: "https://www.primecenter.org/prime-blog/sb68" }
+  ],
+  "30": [
+    { label: "Gov. Gianforte: $1M incentive", url: "https://news.mt.gov/Governors-Office/Governor_Gianforte_Calls_for_Cell_Phone-Free_Schools" }
+  ],
+  "31": [
+    { label: "Unicameral Update: LB 140", url: "https://update.legislature.ne.gov/?p=38901" }
+  ],
+  "32": [
+    { label: "NV Independent: implementation", url: "https://thenevadaindependent.com/article/how-are-students-and-teachers-dealing-with-nevadas-new-restrictions-on-phones-in-classes" }
+  ],
+  "33": [
+    { label: "NH DOE: cell phone policy guidance", url: "https://www.education.nh.gov/who-we-are/deputy-commissioner/office-governance/legislation/cell-phone-policy" },
+    { label: "NH Bulletin: bell-to-bell confirmed", url: "https://newhampshirebulletin.com/2025/09/19/as-schools-implement-ban-on-cellphones-the-differences-are-in-the-details/" }
+  ],
+  "34": [
+    { label: "NJ Gov: Murphy signs S3695", url: "https://www.nj.gov/governor/news/news/562026/approved/20260108a.shtml" },
+    { label: "NJ DOE: $3M grant awards", url: "https://www.nj.gov/governor/news/news/562025/approved/20251218b.shtml" }
+  ],
+  "35": [],
+  "36": [
+    { label: "Gov. Hochul: phone-free schools law", url: "https://www.governor.ny.gov/eliminating-distractions-new-york-schools/new-york-state-phone-free-schools-law" },
+    { label: "Gov. Hochul: $13.5M storage funding", url: "https://www.governor.ny.gov/news/distraction-free-schools-governor-hochul-announces-new-york-become-largest-state-nation" }
+  ],
+  "37": [],
+  "38": [],
+  "39": [
+    { label: "Ohio DOE: 'instructional day' guidance", url: "https://education.ohio.gov/Media/Ed-Connection/Aug-20-2025/New-Ohio-law-prohibits-student-cell-phone-usage-re" },
+    { label: "OH Revised Code \u00A73313.753", url: "https://codes.ohio.gov/ohio-revised-code/section-3313.753" }
+  ],
+  "40": [
+    { label: "OK Voice: SB 139 signed (1-year)", url: "https://oklahomavoice.com/2025/05/06/oklahoma-governor-signs-mandatory-one-year-school-cellphone-ban-into-law/" }
+  ],
+  "41": [
+    { label: "OR DOE: EO 25-09 FAQ", url: "https://www.oregon.gov/ode/educator-resources/teachingcontent/Documents/Personal%20Electronic%20Device%20Policy%20Frequently%20Asked%20Questions.pdf" }
+  ],
+  "42": [
+    { label: "CBS Philly: SB 1014 passes Senate", url: "https://www.cbsnews.com/philadelphia/news/pennsylvania-senate-passes-bill-banning-cellphones-in-school/" }
+  ],
+  "44": [],
+  "45": [
+    { label: "SC DOE: cell phone policy memo", url: "https://ed.sc.gov/newsroom/school-district-memoranda-archive/cell-phone-policy/cell-phone-policy-memo/" }
+  ],
+  "46": [],
+  "47": [
+    { label: "WSMV: TN districts implement SB 897", url: "https://www.wsmv.com/2025/06/19/tn-school-districts-rules-cell-phones-new-law-set-take-effect/" }
+  ],
+  "48": [
+    { label: "TEA: HB 1481 guidance", url: "https://tea.texas.gov/about-tea/news-and-multimedia/correspondence/taa-letters/implementation-of-texas-house-bill-1481-student-use-of-personal-communication-devices-on-school-property" },
+    { label: "TEA: $20M grant program", url: "https://tea.texas.gov/finance-and-grants/grants/grants-administration/grants-awarded/2025-2026-phone-free-schools-grant-program" }
+  ],
+  "49": [
+    { label: "UT News Dispatch: SB 69 passes", url: "https://utahnewsdispatch.com/2026/02/27/utah-legislature-approves-bell-to-bell-school-cellphone-ban/" }
+  ],
+  "50": [
+    { label: "VT Biz: Gov. signs H.480", url: "https://vermontbiz.com/news/2025/june/27/governor-signs-h480-phone-free-school-bill" }
+  ],
+  "51": [
+    { label: "Gov. Youngkin: bell-to-bell signed", url: "https://www.governor.virginia.gov/newsroom/news-releases/2025/may/name-1046981-en.html" },
+    { label: "VA DOE: guidance & resources", url: "https://www.doe.virginia.gov/about-vdoe/cell-phone-free-education-in-virginia-k-12-public-schools/cell-phone-free-education-guidance-resources" }
+  ],
+  "53": [
+    { label: "WI Examiner: AB 948 pending", url: "https://wisconsinexaminer.com/2026/02/06/wisconsin-lawmakers-seek-bell-to-bell-cell-phone-ban-and-internet-regulations-for-children/" }
+  ],
+  "54": [
+    { label: "WV Watch: HB 2003 signed", url: "https://westvirginiawatch.com/2025/04/29/morrisey-signs-education-bills-banning-cellphone-mandating-in-god-we-trust-posters-in-wv-schools/" }
+  ],
+  "55": [
+    { label: "WI Examiner: AB 948 expansion", url: "https://wisconsinexaminer.com/2026/03/04/evers-says-he-has-to-think-about-the-bell-to-bell-cell-phone-ban-lawmakers-are-pushing/" }
+  ],
+  "56": []
+};
+
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 const stateByFips = {};
 STATE_DATA.forEach(s => { stateByFips[s.fips] = s; });
@@ -1771,6 +1907,15 @@ STATE_DATA.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(s => {
     <td>${s.legislation || '\u2014'}</td>
     <td>${s.timeline || '<em style="color:#bbb">N/A</em>'}</td>
     <td>${[s.notes, s.additionalNotes, s.pendingLegislation ? `\u23F3 Pending: ${s.pendingLegislation.bill} \u2014 ${s.pendingLegislation.status}` : ''].filter(Boolean).join(' | ') || '\u2014'}</td>
+    <td>${(() => {
+      const billUrl = BILL_URLS[s.fips];
+      const extra = SOURCES[s.fips] || [];
+      const links = [];
+      if (billUrl) links.push('<a href="' + billUrl + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">Bill text \u2197</a>');
+      if (s.guidanceLink) links.push('<a href="' + s.guidanceLink + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">Guidance \u2197</a>');
+      extra.forEach(src => links.push('<a href="' + src.url + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">' + src.label + ' \u2197</a>'));
+      return links.length ? links.join('<br>') : '<em style="color:#bbb">\u2014</em>';
+    })()}</td>
   `;
   allTbody.appendChild(tr);
 });
@@ -1789,13 +1934,14 @@ function switchTab(name) {
 function exportCSV() {
   const headers = [
     'State','Abbreviation','FIPS','Tier','Category Label','Current Policy',
-    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes'
+    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes','Sources'
   ];
   const rows = STATE_DATA.map(s => [
     s.name, s.abbr, s.fips, s.category, CATEGORIES[s.category].label,
     s.currentPolicy, s.storageReq, s.legislation,
     BILL_URLS[s.fips] || '',
-    s.timeline, s.notes, s.additionalNotes
+    s.timeline, s.notes, s.additionalNotes,
+    (SOURCES[s.fips] || []).map(src => src.url).join('; ')
   ].map(v => `"${(v||'').replace(/"/g,'""')}"`));
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
