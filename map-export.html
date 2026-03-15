@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Phone Ban Policies by State — Export</title>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background: white;
+      color: #303030;
+      padding: 40px 50px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #002E6D;
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 0.78rem;
+      color: #6B6B6B;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+    .layout {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    .map-wrap { flex: 1; min-width: 0; }
+    #map-svg { width: 100%; height: auto; display: block; aspect-ratio: 960 / 600; }
+    .legend-wrap {
+      width: 260px;
+      flex-shrink: 0;
+      display: flex;
+      gap: 10px;
+    }
+    .legend-items { flex: 1; }
+    .legend-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #002E6D;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #FF941A;
+      padding-bottom: 5px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .legend-label {
+      font-size: 0.66rem;
+      line-height: 1.35;
+      font-weight: 300;
+    }
+    .legend-count {
+      font-weight: 700;
+      color: #002E6D;
+    }
+    .arrow-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 24px;
+      padding: 2px 0;
+    }
+    .arrow-label {
+      font-size: 0.46rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      line-height: 1.1;
+      text-align: center;
+      color: #6B6B6B;
+    }
+    .source-line {
+      font-size: 0.6rem;
+      color: #949494;
+      margin-top: 18px;
+      font-weight: 300;
+    }
+    @media print {
+      body { padding: 20px 30px; }
+      @page { margin: 0.5in; size: landscape; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>School Phone Ban Policies by State</h1>
+<p class="subtitle">Updated March 15, 2026</p>
+
+<div class="layout">
+  <div class="map-wrap">
+    <svg id="map-svg" viewBox="0 0 960 600"></svg>
+  </div>
+  <div class="legend-wrap">
+    <div class="legend-items">
+      <div class="legend-title">Phone Ban Policy</div>
+      <div id="legend"></div>
+    </div>
+    <div class="arrow-col" id="arrow-col"></div>
+  </div>
+</div>
+
+<div class="source-line">Source: State legislation, executive orders, DOE guidance &amp; board policies. Analysis as of March 2026.</div>
+
+<script>
+const CATEGORIES = {
+  tier_6c: { label: 'Bell-to-Bell Ban, Inaccessible Storage Mandated', color: '#001A3F', order: 1 },
+  tier_6a: { label: 'Bell-to-Bell Ban, Inaccessible Storage Not Mandated', color: '#0D4A8A', order: 3 },
+  tier_6pi: { label: 'Bell-to-Bell K\u20138, Instructional-Time HS', color: '#1A5696', order: 4 },
+  tier_6p: { label: 'Bell-to-Bell Ban, K\u20138 Only (No HS Policy)', color: '#2668A8', order: 5 },
+  tier_5a: { label: 'Instructional-Time Ban', color: '#7BB3DC', order: 8 },
+  tier_4: { label: 'Must Limit Use (District Defines)', color: '#99C8E8', order: 9 },
+  tier_3: { label: 'Must Adopt a Policy (No Content Req.)', color: '#B8D8F0', order: 10 },
+  tier_2: { label: 'Guidance / Encouragement Only', color: '#D4E8F7', order: 11 },
+  tier_1: { label: 'No Statewide Policy', color: '#E8EAED', order: 12 }
+};
+
+const STATES = [
+  {f:"01",a:"AL",c:"tier_6a"},{f:"02",a:"AK",c:"tier_3"},{f:"04",a:"AZ",c:"tier_4"},
+  {f:"05",a:"AR",c:"tier_6a"},{f:"06",a:"CA",c:"tier_4"},{f:"08",a:"CO",c:"tier_3"},
+  {f:"09",a:"CT",c:"tier_2"},{f:"10",a:"DE",c:"tier_4"},{f:"11",a:"DC",c:"tier_6a"},
+  {f:"12",a:"FL",c:"tier_6pi"},{f:"13",a:"GA",c:"tier_6p"},{f:"15",a:"HI",c:"tier_6pi"},
+  {f:"16",a:"ID",c:"tier_4"},{f:"17",a:"IL",c:"tier_1"},{f:"18",a:"IN",c:"tier_6c"},
+  {f:"19",a:"IA",c:"tier_5a"},{f:"20",a:"KS",c:"tier_2"},{f:"21",a:"KY",c:"tier_5a"},
+  {f:"22",a:"LA",c:"tier_6a"},{f:"23",a:"ME",c:"tier_3"},{f:"24",a:"MD",c:"tier_2"},
+  {f:"25",a:"MA",c:"tier_1"},{f:"26",a:"MI",c:"tier_5a"},{f:"27",a:"MN",c:"tier_3"},
+  {f:"28",a:"MS",c:"tier_1"},{f:"29",a:"MO",c:"tier_6a"},{f:"30",a:"MT",c:"tier_2"},
+  {f:"31",a:"NE",c:"tier_6a"},{f:"32",a:"NV",c:"tier_4"},{f:"33",a:"NH",c:"tier_6a"},
+  {f:"34",a:"NJ",c:"tier_6a"},{f:"35",a:"NM",c:"tier_3"},{f:"36",a:"NY",c:"tier_6c"},
+  {f:"37",a:"NC",c:"tier_5a"},{f:"38",a:"ND",c:"tier_6c"},{f:"39",a:"OH",c:"tier_6a"},
+  {f:"40",a:"OK",c:"tier_6a"},{f:"41",a:"OR",c:"tier_6a"},{f:"42",a:"PA",c:"tier_1"},
+  {f:"44",a:"RI",c:"tier_6c"},{f:"45",a:"SC",c:"tier_6a"},{f:"46",a:"SD",c:"tier_2"},
+  {f:"47",a:"TN",c:"tier_5a"},{f:"48",a:"TX",c:"tier_6a"},{f:"49",a:"UT",c:"tier_5a"},
+  {f:"50",a:"VT",c:"tier_6a"},{f:"51",a:"VA",c:"tier_6a"},{f:"53",a:"WA",c:"tier_2"},
+  {f:"54",a:"WV",c:"tier_5a"},{f:"55",a:"WI",c:"tier_5a"},{f:"56",a:"WY",c:"tier_3"}
+];
+
+const stateByFips = {};
+STATES.forEach(s => { stateByFips[s.f] = s; });
+
+// Count states per category
+const counts = {};
+Object.keys(CATEGORIES).forEach(k => counts[k] = 0);
+STATES.forEach(s => counts[s.c]++);
+
+// Dark tiers get white text
+const darkTiers = ['tier_6c','tier_6a','tier_6pi','tier_6p','tier_5a'];
+
+// Label offsets
+const labelOffsets = {
+  '12': [14, 8], '22': [-4, 6], '26': [10, 12], '06': [-6, 0],
+  '21': [2, -2], '24': [8, 4], '09': [4, 2], '34': [4, 0],
+  '10': [4, 0], '33': [2, -2], '50': [0, -2], '36': [4, 0],
+};
+const calloutFips = ['11','25','44','15'];
+
+// Build legend
+const legendEl = document.getElementById('legend');
+const visibleCats = Object.entries(CATEGORIES).sort((a,b) => a[1].order - b[1].order);
+visibleCats.forEach(([key, cat]) => {
+  const div = document.createElement('div');
+  div.className = 'legend-item';
+  div.innerHTML = `
+    <div class="legend-swatch" style="background:${cat.color}"></div>
+    <div class="legend-label">${cat.label}<br><span class="legend-count">${counts[key]} state${counts[key]!==1?'s':''}</span></div>
+  `;
+  legendEl.appendChild(div);
+});
+
+// Build gradient arrow
+const arrowEl = document.getElementById('arrow-col');
+const colors = visibleCats.map(([,c]) => c.color);
+const stops = colors.map((c, i) =>
+  `<stop offset="${(i / (colors.length - 1) * 100).toFixed(1)}%" stop-color="${c}"/>`
+).join('');
+arrowEl.innerHTML = `
+  <div class="arrow-label" style="color:#002E6D;margin-bottom:3px;">Most<br>strict</div>
+  <svg width="10" height="10" viewBox="0 0 10 10" style="flex-shrink:0;">
+    <polygon points="5,0 10,10 0,10" fill="${colors[0]}"/>
+  </svg>
+  <svg width="6" style="flex:1;min-height:20px;" preserveAspectRatio="none" viewBox="0 0 6 100">
+    <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">${stops}</linearGradient></defs>
+    <rect x="1" y="0" width="4" height="100" fill="url(#lg)"/>
+  </svg>
+  <svg width="10" height="10" viewBox="0 0 10 10" style="flex-shrink:0;">
+    <polygon points="5,10 10,0 0,0" fill="${colors[colors.length-1]}"/>
+  </svg>
+  <div class="arrow-label" style="margin-top:3px;">Least<br>strict</div>
+`;
+
+// Render map
+const svg = d3.select('#map-svg');
+const path = d3.geoPath();
+
+d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
+  const states = topojson.feature(us, us.objects.states);
+
+  // State fills
+  svg.append('g').selectAll('path')
+    .data(states.features)
+    .join('path')
+    .attr('d', path)
+    .attr('fill', d => {
+      const fips = String(d.id).padStart(2,'0');
+      const s = stateByFips[fips];
+      return s ? CATEGORIES[s.c].color : '#f0f0f0';
+    })
+    .attr('stroke', 'white')
+    .attr('stroke-width', 0.5);
+
+  // State borders
+  svg.append('path')
+    .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+    .attr('fill', 'none')
+    .attr('stroke', 'rgba(255,255,255,0.7)')
+    .attr('stroke-width', 0.5)
+    .attr('d', path);
+
+  // State labels
+  svg.append('g').selectAll('text')
+    .data(states.features)
+    .join('text')
+    .attr('x', d => {
+      const c = path.centroid(d);
+      if (isNaN(c[0])) return -999;
+      const fips = String(d.id).padStart(2,'0');
+      const off = labelOffsets[fips];
+      return c[0] + (off ? off[0] : 0);
+    })
+    .attr('y', d => {
+      const c = path.centroid(d);
+      if (isNaN(c[1])) return -999;
+      const fips = String(d.id).padStart(2,'0');
+      const off = labelOffsets[fips];
+      return c[1] + (off ? off[1] : 0);
+    })
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'central')
+    .attr('font-size', '8px')
+    .attr('font-weight', '700')
+    .attr('font-family', 'Public Sans, sans-serif')
+    .attr('fill', d => {
+      const fips = String(d.id).padStart(2,'0');
+      const s = stateByFips[fips];
+      if (!s) return '#333';
+      return darkTiers.includes(s.c) ? 'white' : '#303030';
+    })
+    .attr('pointer-events', 'none')
+    .text(d => {
+      const fips = String(d.id).padStart(2,'0');
+      if (calloutFips.includes(fips)) return '';
+      const s = stateByFips[fips];
+      return s ? s.a : '';
+    });
+
+  // Small-state callouts (MA, RI, HI, DC)
+  const callouts = [
+    { fips: '25', abbr: 'MA', dx: 42, dy: -8, boxW: 26, boxH: 14 },
+    { fips: '44', abbr: 'RI', dx: 42, dy: 6, boxW: 22, boxH: 14 },
+    { fips: '15', abbr: 'HI', dx: 30, dy: -20, boxW: 22, boxH: 14 },
+    { fips: '11', abbr: 'DC', dx: 48, dy: -52, boxW: 28, boxH: 16 },
+  ];
+  callouts.forEach(({ fips, abbr, dx, dy, boxW, boxH }) => {
+    const feat = states.features.find(f => String(f.id).padStart(2,'0') === fips);
+    if (!feat) return;
+    const s = stateByFips[fips];
+    const [cx, cy] = path.centroid(feat);
+    const color = s ? CATEGORIES[s.c].color : '#ccc';
+    const bx = cx + dx, by = cy + dy;
+    const g = svg.append('g');
+    g.append('line').attr('x1', cx).attr('y1', cy).attr('x2', bx).attr('y2', by + boxH / 2)
+      .attr('stroke', '#002E6D').attr('stroke-width', 0.8).attr('stroke-dasharray', '3,2');
+    g.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 3)
+      .attr('fill', color).attr('stroke', 'white').attr('stroke-width', 1);
+    g.append('rect').attr('x', bx).attr('y', by).attr('width', boxW).attr('height', boxH)
+      .attr('rx', 2).attr('fill', color).attr('stroke', 'white').attr('stroke-width', 1.2);
+    g.append('text').attr('x', bx + boxW / 2).attr('y', by + boxH / 2)
+      .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
+      .attr('font-size', '7px').attr('font-weight', '700').attr('font-family', 'Public Sans, sans-serif')
+      .attr('fill', 'white').text(abbr);
+  });
+});
+</script>
+</body>
+</html>
