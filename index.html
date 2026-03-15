@@ -1297,13 +1297,13 @@ const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier
 const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
 const pendingStates = STATE_DATA.filter(s => s.pendingLegislation);
 const statsData = [
-  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'] },
-  { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'] },
-  { num: counts.tier_4, lbl: 'Must Limit Use', cats: ['tier_4'] },
-  { num: counts.tier_3, lbl: 'Must Adopt Policy', cats: ['tier_3'] },
-  { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'] },
-  { num: counts.tier_1, lbl: 'No Policy', cats: ['tier_1'] },
-  { num: pendingStates.length, lbl: 'Pending Legislation', cats: [], pending: true },
+  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'], borderColor: '#0D4A8A' },
+  { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'], borderColor: '#7BB3DC' },
+  { num: counts.tier_4, lbl: 'Must Limit Use', cats: ['tier_4'], borderColor: '#99C8E8' },
+  { num: counts.tier_3, lbl: 'Must Adopt Policy', cats: ['tier_3'], borderColor: '#B8D8F0' },
+  { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'], borderColor: '#D4E8F7' },
+  { num: counts.tier_1, lbl: 'No Policy', cats: ['tier_1'], borderColor: '#E8EAED' },
+  { num: pendingStates.length, lbl: 'Pending Legislation', cats: [], pending: true, borderColor: '#FF941A' },
 ];
 
 const statPopup = document.getElementById('stat-popup');
@@ -1320,6 +1320,7 @@ document.addEventListener('click', closeStatPopup);
 statsData.forEach(s => {
   const d = document.createElement('div');
   d.className = 'stat-box clickable';
+  d.style.borderBottomColor = s.borderColor;
   d.innerHTML = `<div class="num">${s.num}</div><div class="lbl">${s.lbl}</div>`;
   d.addEventListener('click', (e) => {
     e.stopPropagation();
