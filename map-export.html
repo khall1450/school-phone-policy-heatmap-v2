@@ -124,6 +124,9 @@
 <div class="source-line">Source: State legislation, executive orders, DOE guidance &amp; board policies. Analysis as of March 2026.</div>
 
 <script>
+window.onerror = function(msg, url, line, col, err) {
+  document.body.innerHTML += '<div style="color:red;padding:20px;font-size:14px;border:2px solid red;margin:20px;">JS Error: ' + msg + ' at line ' + line + ':' + col + '</div>';
+};
 const CATEGORIES = {
   tier_6c: { label: 'Bell-to-Bell Ban, Inaccessible Storage Mandated', color: '#001A3F', order: 1 },
   tier_6a: { label: 'Bell-to-Bell Ban, Inaccessible Storage Not Mandated', color: '#0D4A8A', order: 3 },
