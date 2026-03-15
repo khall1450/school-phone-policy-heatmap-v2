@@ -35,7 +35,7 @@
       align-items: flex-start;
     }
     .map-wrap { flex: 1; min-width: 0; }
-    #map-svg { width: 100%; height: auto; display: block; aspect-ratio: 960 / 600; }
+    #map-container svg { width: 100%; height: auto; display: block; }
     .legend-wrap {
       width: 260px;
       flex-shrink: 0;
@@ -110,7 +110,7 @@
 
 <div class="layout">
   <div class="map-wrap">
-    <svg id="map-svg" viewBox="0 0 960 600" width="960" height="600" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="map-container"></div>
   </div>
   <div class="legend-wrap">
     <div class="legend-items">
@@ -213,7 +213,11 @@ arrowEl.innerHTML = `
 `;
 
 // Render map
-const svg = d3.select('#map-svg');
+const svg = d3.select('#map-container')
+  .append('svg')
+  .attr('viewBox', '0 0 960 600')
+  .attr('width', 960)
+  .attr('height', 600);
 const path = d3.geoPath();
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
