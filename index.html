@@ -468,47 +468,52 @@ const CATEGORIES = {
     color: '#0D4A8A',
     order: 3
   },
-  tier_6p: {
-    label: 'Bell-to-Bell Ban, Partial (K\u20138 Only)',
-    color: '#2668A8',
+  tier_6pi: {
+    label: 'Bell-to-Bell K\u20138, Instructional-Time HS',
+    color: '#1A5696',
     order: 4
+  },
+  tier_6p: {
+    label: 'Bell-to-Bell Ban, K\u20138',
+    color: '#2668A8',
+    order: 5
   },
   tier_5c: {
     label: 'Instructional-Time Ban, Inaccessible Storage Mandated',
     color: '#3D8AC8',
-    order: 5,
+    order: 6,
     vacant: true
   },
   tier_5b: {
     label: 'Instructional-Time Ban, Accessible Storage Mandated',
     color: '#5AA0D8',
-    order: 6,
+    order: 7,
     vacant: true
   },
   tier_5a: {
     label: 'Instructional-Time Ban, Storage Unspecified',
     color: '#7BB3DC',
-    order: 7
+    order: 8
   },
   tier_4: {
     label: 'Must Limit Use (District Defines)',
     color: '#99C8E8',
-    order: 8
+    order: 9
   },
   tier_3: {
     label: 'Must Adopt a Policy (No Content Req.)',
     color: '#B8D8F0',
-    order: 9
+    order: 10
   },
   tier_2: {
     label: 'Guidance / Encouragement Only',
     color: '#D4E8F7',
-    order: 10
+    order: 11
   },
   tier_1: {
     label: 'No Statewide Policy',
     color: '#E8EAED',
-    order: 11
+    order: 12
   }
 };
 
@@ -624,8 +629,8 @@ const STATE_DATA = [
   },
   {
     fips:"12", name:"Florida", abbr:"FL",
-    category:"tier_6p",
-    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    category:"tier_6pi",
+    rawCategory:"Bell-to-Bell K\u20138, Instructional-Time HS",
     currentPolicy:"K\u20138: full bell-to-bell ban. Grades 9\u201312: instructional-time ban with teacher exceptions. 6-county HS pilot underway.",
     storageReq:"Storage unspecified",
     legislation:"HB 1105 (July 2025)",
@@ -636,7 +641,7 @@ const STATE_DATA = [
   {
     fips:"13", name:"Georgia", abbr:"GA",
     category:"tier_6p",
-    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    rawCategory:"Bell-to-Bell Ban, K\u20138",
     currentPolicy:"K\u20138: no personal devices during the school day. High school (9\u201312) has no statewide restriction.",
     storageReq:"Storage unspecified",
     legislation:"HB 340 (Apr 2025, eff. July 2026)",
@@ -653,8 +658,8 @@ const STATE_DATA = [
   },
   {
     fips:"15", name:"Hawaii", abbr:"HI",
-    category:"tier_6p",
-    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    category:"tier_6pi",
+    rawCategory:"Bell-to-Bell K\u20138, Instructional-Time HS",
     currentPolicy:"Elementary and middle schools: full-day ban. High schools: instructional-time ban only. Board policy, not a statute.",
     storageReq:"Storage unspecified",
     legislation:"BOE policy (Feb 2026)",
@@ -1259,11 +1264,11 @@ Object.entries(CATEGORIES).sort((a,b) => a[1].order - b[1].order).forEach(([key,
 
 // ── STATS ─────────────────────────────────────────────────────────────────────
 const statsGrid = document.getElementById('stats-grid');
-const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier_6p;
+const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier_6pi + counts.tier_6p;
 const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
 const policyTotal = counts.tier_4 + counts.tier_3;
 const statsData = [
-  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6p'] },
+  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'] },
   { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'] },
   { num: policyTotal, lbl: 'Must Adopt Policy / Limit Use', cats: ['tier_4','tier_3'] },
   { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'] },
@@ -1437,7 +1442,7 @@ svg.on('click', function(event) {
 });
 
 // Determine which categories should get white text labels on the map
-const darkTierCats = ['tier_6c','tier_6b','tier_6a','tier_6p','tier_5c','tier_5b','tier_5a'];
+const darkTierCats = ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p','tier_5c','tier_5b','tier_5a'];
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
   const states = topojson.feature(us, us.objects.states);
