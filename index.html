@@ -745,13 +745,12 @@ const STATE_DATA = [
   },
   {
     fips:"22", name:"Louisiana", abbr:"LA",
-    category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
-    currentPolicy:"Phones must be turned off and properly stowed away during the instructional day. Bill author stated intent is about instruction time, not full school day.",
-    storageReq:"Storage unspecified",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"No student may possess a phone on their person throughout the instructional day. Devices must be turned off and stowed away for the duration of the instructional day.",
+    storageReq:"Storage unspecified \u2014 must be 'properly stowed away'",
     legislation:"SB 207 (May 2024)",
-    reviewFlag:"Law requires phones to be off-person and stowed during the 'instructional day' \u2014 could be interpreted as closer to bell-to-bell (tier 6a) since students cannot carry phones at all. Classified as tier 5a based on bill author\u2019s stated intent.",
-    notes:"Uses 'instructional day' language (not 'school day' or 'bell-to-bell'). Many schools enforce through lunch in practice, but statutory scope is ambiguous.",
+    notes:"Enacted via statute. Uses 'instructional day' but the ban covers the full day \u2014 students cannot possess devices on their person at any point, and devices must remain stowed for the entire duration.",
     additionalNotes:"",
     timeline:""
   },
@@ -805,12 +804,12 @@ const STATE_DATA = [
   },
   {
     fips:"26", name:"Michigan", abbr:"MI",
-    category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
-    currentPolicy:"Smartphones banned during instructional time; students may carry basic/dumb phones; storage is district-defined",
+    category:"tier_6p",
+    rawCategory:"Bell-to-Bell Ban, Partial (K\u20138 Only)",
+    currentPolicy:"K\u20135: students may not possess devices on school grounds. Grades 6\u20138: banned during instructional time, breaks, lunch, and recess (bell-to-bell). Grades 9\u201312: banned during instructional time only.",
     storageReq:"Storage unspecified \u2014 district-defined",
     legislation:"HB 4141 (Feb 2026, eff. 2026\u201327)",
-    notes:"",
+    notes:"Enacted via statute. Tiered by grade level: K\u20135 is a full possession ban on school grounds; 6\u20138 explicitly includes lunch, recess, and breaks between classes; 9\u201312 is instructional-time only.",
     additionalNotes:"",
     timeline:"Districts required to implement policies by 2026\u20132027 school year"
   },
@@ -872,12 +871,12 @@ const STATE_DATA = [
   },
   {
     fips:"31", name:"Nebraska", abbr:"NE",
-    category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Storage Unspecified",
-    currentPolicy:"Prohibits use during instructional time/school instructional function. Districts have wide latitude on when and where to authorize use outside of instruction.",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Storage Unspecified",
+    currentPolicy:"Prohibits use of electronic communication devices while on school property or attending a school instructional function. Covers the entire school day, not just classroom instruction.",
     storageReq:"Storage unspecified",
     legislation:"LB 140 (May 2025)",
-    notes:"Legislators noted they did not intend to prevent districts from allowing phones at lunch or passing periods.",
+    notes:"Enacted via statute. Statutory text uses 'while on school property' \u2014 covers full school day including lunch and passing periods.",
     additionalNotes:"",
     timeline:""
   },
@@ -1048,7 +1047,7 @@ const STATE_DATA = [
     currentPolicy:"Legislature passed a resolution encouraging school boards to develop and implement cell phone policies during instructional time. 95% of districts already have policies in place.",
     storageReq:"N/A",
     legislation:"Legislative resolution (2025)",
-    guidanceLink:"https://southdakotasearchlight.com/2025/08/29/one-third-sd-school-districts-remove-or-lock-away-student-cell-phones-policy/",
+    guidanceLink:"https://sdlegislature.gov/Session/Bill/25980",
     notes:"",
     additionalNotes:"",
     timeline:"",
@@ -1187,22 +1186,22 @@ const BILL_URLS = {
   "05": "https://www.arkleg.state.ar.us/Bills/Detail?id=SB142&ddBienniumSession=2025%2F2025R",
   "06": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB3216",
   "08": "https://leg.colorado.gov/bills/hb25-1135",
-  "09": "https://www.cga.ct.gov/asp/CGABillStatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB5035",
+  // "09" — CT is guidance-only; pending HB 5035 shown via pendingLegislation; guidance link via guidanceLink
   "10": "https://legis.delaware.gov/BillDetail/142100",
   "11": "https://code.dccouncil.gov/us/dc/council/laws/26-39",
   "12": "https://www.flsenate.gov/Session/Bill/2025/1105",
   "13": "https://legiscan.com/GA/bill/HB340/2025",
   "15": "https://hawaiipublicschools.org/2026-hawaii-board-of-education-adopts-statewide-policy-on-student-cell-phone-use-in-public-schools/",
   "16": "https://legislature.idaho.gov/sessioninfo/2025/legislation/S1032/",
-  "17": "https://www.ilga.gov/Legislation/BillStatus?DocTypeID=SB&DocNum=2427&GAID=18&SessionID=114&LegID=162470",
+  // "17" — IL has no current law; pending SB 2427 shown via pendingLegislation
   "18": "https://iga.in.gov/legislative/2026/bills/senate/78",
   "19": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=HF782",
-  "20": "https://kslegislature.gov/li/b2025_26/measures/hb2299/",
+  // "20" — KS is guidance-only; pending HB 2299 shown via pendingLegislation; guidance link via guidanceLink
   "21": "https://apps.legislature.ky.gov/record/25RS/hb208.html",
   "22": "https://www.legis.la.gov/legis/ViewDocument.aspx?d=1380785",
   "23": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1234&snum=132",
-  "24": "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/hb0525?ys=2026RS",
-  "25": "https://malegislature.gov/Bills/194/S323",
+  // "24" — MD is guidance-only; pending HB 525 shown via pendingLegislation; guidance link via guidanceLink
+  // "25" — MA has no current law; pending S.323 shown via pendingLegislation
   "26": "https://www.legislature.mi.gov/Bills/Bill?ObjectName=2025-HB-4141",
   "27": "https://www.revisor.mn.gov/statutes/2024/cite/121A.73",
   // "28" removed — SB 2099 failed; link was to a dead bill
@@ -1218,7 +1217,7 @@ const BILL_URLS = {
   "39": "https://education.ohio.gov/Topics/Student-Supports/School-Wellness/Cell-Phones-in-Ohio-Schools",
   "40": "https://www.oklegislature.gov/BillInfo.aspx?Bill=SB139&Session=2500",
   "41": "https://www.oregon.gov/ode/educator-resources/teachingcontent/Documents/eo-25-09.pdf",
-  "42": "https://www.palegis.us/legislation/bills/2025/sb1014",
+  // "42" — PA has no current law; pending SB 1014 shown via pendingLegislation
   "44": "https://webserver.rilegislature.gov/BillText25/SenateText25/S0771.pdf",
   "45": "https://ed.sc.gov/newsroom/school-district-memoranda-archive/cell-phone-policy/cell-phone-policy-memo/",
   "47": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=SB0897&GA=114",
