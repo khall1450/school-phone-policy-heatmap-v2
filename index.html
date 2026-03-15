@@ -1363,7 +1363,7 @@ function buildTooltipHTML(s, fips, isPinned) {
             ? `<div class="t-leg">${s.legislation}</div>`
             : ''));
   const hint = isPinned
-    ? `<div style="opacity:.4;font-size:0.63rem;margin-top:7px;border-top:1px solid rgba(255,255,255,.15);padding-top:5px;">Pinned \u2014 click state to unpin</div>`
+    ? `<div style="opacity:.4;font-size:0.63rem;margin-top:7px;border-top:1px solid rgba(255,255,255,.15);padding-top:5px;">Pinned \u2014 click anywhere to dismiss</div>`
     : `<div style="opacity:.4;font-size:0.63rem;margin-top:6px;">Click to pin &amp; see full details</div>`;
   return `
     <div class="t-state">${s.name}</div>
@@ -1391,8 +1391,10 @@ function pinTooltip(event, s, fips) {
   tooltip.classList.remove('hidden');
   tooltip.classList.add('pinned');
   tooltip.style.opacity = '1';
-  tooltip.style.left = (event.clientX + 16) + 'px';
-  tooltip.style.top  = (event.clientY - 10) + 'px';
+  // Position absolute so tooltip scrolls with page instead of staying fixed on screen
+  tooltip.style.position = 'absolute';
+  tooltip.style.left = (event.clientX + window.scrollX + 16) + 'px';
+  tooltip.style.top  = (event.clientY + window.scrollY - 10) + 'px';
   tooltip.innerHTML = buildTooltipHTML(s, fips, true);
 }
 
@@ -1401,7 +1403,18 @@ function unpinTooltip() {
   tooltip.classList.remove('pinned');
   tooltip.style.opacity = '0';
   tooltip.classList.add('hidden');
+  // Restore fixed positioning for hover tooltips
+  tooltip.style.position = 'fixed';
 }
+
+// Click anywhere to dismiss pinned tooltip
+document.addEventListener('click', (event) => {
+  if (!pinned) return;
+  // Don't dismiss if clicking inside the tooltip itself (e.g. links)
+  if (tooltip.contains(event.target)) return;
+  unpinTooltip();
+  selectedFips = null;
+});
 
 function scheduleHideTooltip() {
   if (pinned) return;
@@ -1438,9 +1451,7 @@ function updateMapColors() {
   }
 }
 
-svg.on('click', function(event) {
-  if (event.target === this && pinned) unpinTooltip();
-});
+// Click-anywhere dismiss is handled by the global document click listener
 
 // Determine which categories should get white text labels on the map
 const darkTierCats = ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p','tier_5c','tier_5b','tier_5a'];
@@ -1473,6 +1484,7 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       }
     })
     .on('click', function(event, d) {
+      event.stopPropagation();
       const fips = String(d.id).padStart(2,'0');
       const s = stateByFips[fips];
       if (!s) return;
