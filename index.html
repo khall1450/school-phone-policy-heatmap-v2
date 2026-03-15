@@ -442,6 +442,7 @@
               <th>Legislation</th>
               <th>Implementation Timeline</th>
               <th>Notes</th>
+              <th>Review Flag</th>
               <th>Sources</th>
             </tr>
           </thead>
@@ -941,6 +942,7 @@ const STATE_DATA = [
     currentPolicy:"Bell-to-bell ban with inaccessible storage required. Backpacks and on-person storage explicitly prohibited. Storage must 'effectively prohibit unsanctioned use' all day. Districts choose method (locked pouches, bins, lockers with restricted access).",
     storageReq:"Inaccessible storage mandated (method is district-defined \u2014 locked pouches, bins, or lockers; backpacks explicitly prohibited; unsupervised locker access does not meet the standard)",
     legislation:"Budget agreement (May 2025)",
+    reviewFlag:"Interpreted as inaccessible storage \u2014 law does not explicitly use the word 'inaccessible,' but states that backpacks are not acceptable and storage must 'effectively prohibit unsanctioned use,' which implies inaccessibility. Classified as tier 6c based on this functional standard.",
     notes:"Enacted via state budget agreement, not standalone statute. Defines school day as including homeroom, lunch, recess, study halls, and passing time. $13.5M state funding for storage solutions.",
     additionalNotes:"",
     timeline:""
@@ -1150,6 +1152,7 @@ const STATE_DATA = [
     currentPolicy:"Instructional-time ban; county boards develop policy including storage procedure",
     storageReq:"Inaccessible storage not mandated \u2014 county boards define storage procedure (may require containers or pouches)",
     legislation:"HB 2003 (Apr 2025)",
+    reviewFlag:"Scope ambiguity \u2014 law uses 'instructional time' in its operative language, but 'instructional day' is defined elsewhere as bell-to-bell. Could be classified as tier 6a (bell-to-bell) if 'instructional day' definition applies. Classified as tier 5a based on the narrower 'instructional time' language used in the prohibition itself.",
     notes:"",
     additionalNotes:"",
     timeline:""
@@ -1894,6 +1897,12 @@ function showDetail(fips) {
         `).join('')}
       </div>
     ` : ''}
+    ${s.reviewFlag ? `
+      <div class="detail-review-flag">
+        <div class="review-flag-title">\u26A0\uFE0F Classification Note</div>
+        <div>${s.reviewFlag}</div>
+      </div>
+    ` : ''}
   `;
 }
 
@@ -1909,6 +1918,7 @@ STATE_DATA.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(s => {
     <td>${s.legislation || '\u2014'}</td>
     <td>${s.timeline || '<em style="color:#bbb">N/A</em>'}</td>
     <td>${[s.notes, s.additionalNotes, s.pendingLegislation ? `\u23F3 Pending: ${s.pendingLegislation.bill} \u2014 ${s.pendingLegislation.status}` : ''].filter(Boolean).join(' | ') || '\u2014'}</td>
+    <td>${s.reviewFlag ? `<span class="review-flag">\u26A0\uFE0F ${s.reviewFlag}</span>` : '<em style="color:#bbb">\u2014</em>'}</td>
     <td>${(() => {
       const billUrl = BILL_URLS[s.fips];
       const extra = SOURCES[s.fips] || [];
@@ -1936,13 +1946,13 @@ function switchTab(name) {
 function exportCSV() {
   const headers = [
     'State','Abbreviation','FIPS','Tier','Category Label','Current Policy',
-    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes','Sources'
+    'Storage Requirement','Legislation','Bill Link','Timeline','Notes','Additional Notes','Review Flag','Sources'
   ];
   const rows = STATE_DATA.map(s => [
     s.name, s.abbr, s.fips, s.category, CATEGORIES[s.category].label,
     s.currentPolicy, s.storageReq, s.legislation,
     BILL_URLS[s.fips] || '',
-    s.timeline, s.notes, s.additionalNotes,
+    s.timeline, s.notes, s.additionalNotes, s.reviewFlag || '',
     (SOURCES[s.fips] || []).map(src => src.url).join('; ')
   ].map(v => `"${(v||'').replace(/"/g,'""')}"`));
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
