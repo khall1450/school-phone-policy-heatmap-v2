@@ -12,6 +12,8 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     :root {
       --paragon-blue:   #002E6D;
@@ -386,6 +388,7 @@
       transition: background .15s, color .15s;
     }
     .map-export-btn:hover { background: #FFF5EB; }
+    .export-btn[style*="blaze-orange"]:hover { background: #E07800 !important; }
   </style>
 </head>
 <body>
@@ -450,6 +453,7 @@
     <!-- All States Tab -->
     <div class="tab-content active" id="tab-all">
       <button class="export-btn" onclick="exportCSV()">Export to CSV</button>
+      <button class="export-btn" onclick="exportPIC()" style="margin-left:8px;background:var(--blaze-orange);">Export PIC</button>
       <div class="state-table-wrap">
         <table class="state-table">
           <thead>
@@ -958,7 +962,7 @@ const STATE_DATA = [
     category:"tier_6c",
     rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Mandated",
     currentPolicy:"Bell-to-bell ban with inaccessible storage required. Backpacks and on-person storage explicitly prohibited. Storage must 'effectively prohibit unsanctioned use' all day. Districts choose method (locked pouches, bins, lockers with restricted access).",
-    storageReq:"Inaccessible storage mandated (method is district-defined \u2014 locked pouches, bins, or lockers; backpacks explicitly prohibited; unsupervised locker access does not meet the standard)",
+    storageReq:"Inaccessible storage mandated (method is district-defined \u2014 locked pouches, bins, or lockers; backpacks explicitly prohibited; unsupervised locker access does not meet the state standard)",
     legislation:"Budget agreement (May 2025)",
     reviewFlag:"Interpreted as inaccessible storage \u2014 law does not explicitly use the word 'inaccessible,' but states that backpacks are not acceptable and storage must 'effectively prohibit unsanctioned use,' which implies inaccessibility. Classified as tier 6c based on this functional standard.",
     notes:"Enacted via state budget agreement, not standalone statute. Defines school day as including homeroom, lunch, recess, study halls, and passing time. $13.5M state funding for storage solutions.",
@@ -2189,6 +2193,165 @@ function exportMapPDF() {
 }
 
 // ── EXPORT CSV ────────────────────────────────────────────────────────────────
+async function exportPIC() {
+  const btn = event.target;
+  btn.textContent = 'Generating…';
+  btn.disabled = true;
+
+  try {
+    const { jsPDF } = window.jspdf;
+
+    // Letter size landscape for map visibility
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+    const pw = pdf.internal.pageSize.getWidth();   // 612
+    const ph = pdf.internal.pageSize.getHeight();  // 792
+    const margin = 40;
+    const contentW = pw - margin * 2;
+
+    // ── Colors ──
+    const paragonBlue = [0, 46, 109];
+    const blazeOrange = [255, 148, 26];
+    const almostBlack = [48, 48, 48];
+    const grey = [107, 107, 107];
+
+    // ── Load Paragon logo ──
+    let logoImg = null;
+    try {
+      const resp = await fetch('https://paragoninstitute.org/wp-content/uploads/2023/11/paragon-health-institute-logo-1024x266.webp');
+      const blob = await resp.blob();
+      const bmp = await createImageBitmap(blob);
+      const canvas = document.createElement('canvas');
+      canvas.width = bmp.width;
+      canvas.height = bmp.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(bmp, 0, 0);
+      logoImg = canvas.toDataURL('image/png');
+    } catch (e) {
+      console.warn('Could not load logo:', e);
+    }
+
+    let y = margin;
+
+    // ── Header bar ──
+    pdf.setFillColor(...paragonBlue);
+    pdf.rect(0, 0, pw, 70, 'F');
+
+    // Orange accent line
+    pdf.setFillColor(...blazeOrange);
+    pdf.rect(0, 70, pw, 4, 'F');
+
+    // Logo
+    if (logoImg) {
+      const logoH = 30;
+      const logoW = logoH * (1024 / 266);
+      pdf.addImage(logoImg, 'PNG', margin, 20, logoW, logoH);
+    }
+
+    y = 74 + 24;
+
+    // ── "Paragon PIC" label ──
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(9);
+    pdf.setTextColor(...blazeOrange);
+    pdf.text('PARAGON PIC', margin, y);
+    y += 18;
+
+    // ── Title ──
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(22);
+    pdf.setTextColor(...paragonBlue);
+    pdf.text('State Cell Phone Policies in Schools', margin, y);
+    y += 18;
+
+    // ── Subtitle ──
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(10);
+    pdf.setTextColor(...grey);
+    pdf.text('Interactive Heatmap  |  All 50 States + D.C.  |  11-Tier Policy Classification', margin, y);
+    y += 12;
+    pdf.setFontSize(8);
+    pdf.text('Updated March 13, 2026  |  Source: State legislation, executive orders, board policies & DOE guidance', margin, y);
+    y += 24;
+
+    // ── Map snapshot ──
+    const mapContainer = document.querySelector('.map-container');
+    const mapCanvas = await html2canvas(mapContainer, {
+      backgroundColor: '#FFFFFF',
+      scale: 2,
+      useCORS: true,
+      logging: false
+    });
+    const mapDataUrl = mapCanvas.toDataURL('image/png');
+    const mapAspect = mapCanvas.height / mapCanvas.width;
+    const mapW = contentW;
+    const mapH = mapW * mapAspect;
+    pdf.addImage(mapDataUrl, 'PNG', margin, y, mapW, mapH);
+    y += mapH + 16;
+
+    // ── Legend (no gradient, just category swatches) ──
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(11);
+    pdf.setTextColor(...paragonBlue);
+    pdf.text('Legend', margin, y);
+    y += 14;
+
+    const catCnts = catCounts();
+    const sortedCats = Object.entries(CATEGORIES)
+      .sort((a, b) => a[1].order - b[1].order)
+      .filter(([key, cat]) => !(cat.vacant && catCnts[key] === 0));
+
+    // Two-column layout for legend
+    const colW = contentW / 2;
+    const itemH = 16;
+    const swatchSize = 9;
+    const startY = y;
+    const half = Math.ceil(sortedCats.length / 2);
+
+    sortedCats.forEach(([key, cat], i) => {
+      const col = i < half ? 0 : 1;
+      const row = i < half ? i : i - half;
+      const x = margin + col * colW;
+      const iy = startY + row * itemH;
+
+      // Color swatch
+      const hex = cat.color;
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      pdf.setFillColor(r, g, b);
+      pdf.roundedRect(x, iy - swatchSize + 2, swatchSize, swatchSize, 1.5, 1.5, 'F');
+
+      // Label
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(7.5);
+      pdf.setTextColor(...almostBlack);
+      pdf.text(`${cat.label}  (${catCnts[key]})`, x + swatchSize + 5, iy);
+    });
+
+    y = startY + half * itemH + 12;
+
+    // ── Footer ──
+    pdf.setDrawColor(...blazeOrange);
+    pdf.setLineWidth(1.5);
+    pdf.line(margin, ph - 36, pw - margin, ph - 36);
+
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(7);
+    pdf.setTextColor(...grey);
+    pdf.text('Paragon Health Institute  |  paragoninstitute.org', margin, ph - 22);
+    pdf.text('khall1450.github.io/school-phone-policy-heatmap-v2', pw - margin, ph - 22, { align: 'right' });
+
+    pdf.save('Paragon_PIC_Phone_Policy_Heatmap.pdf');
+
+  } catch (err) {
+    console.error('PIC export failed:', err);
+    alert('Export failed — see console for details.');
+  } finally {
+    btn.textContent = 'Export PIC';
+    btn.disabled = false;
+  }
+}
+
 function exportCSV() {
   const headers = [
     'State','Abbreviation','FIPS','Tier','Category Label','Current Policy',
