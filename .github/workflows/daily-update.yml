@@ -1,15 +1,16 @@
-name: Daily Policy Update
+name: Weekly Policy Update
 
 on:
   schedule:
-    # Run daily at 14:00 UTC (10:00 AM ET)
-    - cron: '0 14 * * *'
-  workflow_dispatch: # Allow manual trigger
+    # Run every Monday at 14:00 UTC (10:00 AM ET)
+    - cron: '0 14 * * 1'
+  workflow_dispatch:
+    description: 'Manual update trigger'
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: write
 
@@ -20,44 +21,139 @@ jobs:
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
 
-      - name: Run daily update
+      - name: Query LegiScan for bill updates
+        env:
+          LEGISCAN_API_KEY: ${{ secrets.LEGISCAN_API_KEY }}
+        run: |
+          # Bill watchlist: state|bill_number|description
+          BILLS=(
+            "CT|HB5035|CT bell-to-bell ban"
+            "CT|HB5149|CT companion bell-to-bell ban"
+            "GA|HB1009|GA extend ban to HS"
+            "IL|SB2427|IL instructional-time ban"
+            "MD|HB525|MD Phone-Free Schools Act"
+            "MD|SB928|MD Senate crossfile"
+            "MA|S2561|MA bell-to-bell ban"
+            "MN|SF508|MN K-8 bell-to-bell / HS instructional"
+            "MN|HF2516|MN companion"
+            "OK|SB1719|OK make ban permanent"
+            "OK|HB3715|OK companion permanent ban"
+            "PA|SB1014|PA bell-to-bell ban"
+            "WA|SB5346|WA study directive / 2030 goal"
+            "WI|AB948|WI bell-to-bell expansion"
+          )
+
+          REPORT=""
+
+          for entry in "${BILLS[@]}"; do
+            IFS='|' read -r STATE BILL DESC <<< "$entry"
+
+            # Search for the bill
+            SEARCH_URL="https://api.legiscan.com/?key=${LEGISCAN_API_KEY}&op=getSearch&state=${STATE}&query=${BILL}"
+            SEARCH_RESULT=$(curl -s --max-time 30 "$SEARCH_URL")
+
+            # Extract bill_id from search results
+            BILL_ID=$(echo "$SEARCH_RESULT" | jq -r --arg bn "$BILL" '
+              .searchresult | to_entries[]
+              | select(.key != "summary")
+              | select(.value.bill_number | gsub("\\s";"") == $bn)
+              | .value.bill_id' 2>/dev/null | head -1)
+
+            if [ -n "$BILL_ID" ] && [ "$BILL_ID" != "null" ]; then
+              # Get full bill details
+              BILL_URL="https://api.legiscan.com/?key=${LEGISCAN_API_KEY}&op=getBill&id=${BILL_ID}"
+              BILL_DATA=$(curl -s --max-time 30 "$BILL_URL")
+
+              STATUS=$(echo "$BILL_DATA" | jq -r '.bill.status')
+              STATUS_DATE=$(echo "$BILL_DATA" | jq -r '.bill.status_date')
+              TITLE=$(echo "$BILL_DATA" | jq -r '.bill.title')
+              STATE_LINK=$(echo "$BILL_DATA" | jq -r '.bill.state_link')
+              LEGISCAN_URL=$(echo "$BILL_DATA" | jq -r '.bill.url')
+
+              # Map status code to text
+              case "$STATUS" in
+                1) STATUS_TEXT="Introduced" ;;
+                2) STATUS_TEXT="Engrossed" ;;
+                3) STATUS_TEXT="Enrolled" ;;
+                4) STATUS_TEXT="Passed" ;;
+                5) STATUS_TEXT="Vetoed" ;;
+                6) STATUS_TEXT="Failed/Dead" ;;
+                *) STATUS_TEXT="Unknown ($STATUS)" ;;
+              esac
+
+              # Get last 3 history entries
+              HISTORY=$(echo "$BILL_DATA" | jq -r '[.bill.history[-3:][]] | map("    - \(.date): \(.action) [\(.chamber)]") | join("\n")' 2>/dev/null)
+
+              # Get vote info
+              VOTES=$(echo "$BILL_DATA" | jq -r '[.bill.votes[]?] | map("    - Vote: \(.desc) (Yea:\(.yea) Nay:\(.nay) Passed:\(if .passed == 1 then "Yes" else "No" end))") | join("\n")' 2>/dev/null)
+
+              REPORT+="
+          --- ${STATE} ${BILL} (${DESC}) ---
+            Status: ${STATUS_TEXT} (as of ${STATUS_DATE})
+            Title: ${TITLE}
+            Recent history:
+          ${HISTORY}
+          ${VOTES}
+            LegiScan URL: ${LEGISCAN_URL}
+            State URL: ${STATE_LINK}
+          "
+              echo "  ${STATE} ${BILL} - ${STATUS_TEXT} (${STATUS_DATE})"
+            else
+              REPORT+="
+          --- ${STATE} ${BILL} (${DESC}) ---
+            NOT FOUND in LegiScan search results
+          "
+              echo "  ${STATE} ${BILL} - NOT FOUND"
+            fi
+
+            sleep 0.5
+          done
+
+          # Save report for next step
+          echo "$REPORT" > /tmp/legiscan_report.txt
+
+      - name: Run Claude update
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          TODAY=$(date '+%B %d, %Y')
+          TODAY=$(date '+%B %-d, %Y')
+          LEGISCAN_REPORT=$(cat /tmp/legiscan_report.txt 2>/dev/null || echo "LegiScan data not available")
 
-          claude --print --dangerously-skip-permissions "$(cat <<'PROMPT'
-          You are updating a public state school phone policy heatmap dashboard (index.html) in the current directory.
+          claude --print --dangerously-skip-permissions "$(cat <<PROMPT
+          You are updating a public state school phone policy heatmap dashboard (index.html) in the current directory. Today is ${TODAY}.
 
-          Search the web for any state school cell phone/smartphone ban legislation news from the past 48 hours.
+          ## PART 1: LEGISCAN BILL STATUS DATA
 
-          Key states to monitor closely for imminent changes:
-          - Utah: SB 69 awaiting Gov. Cox signature (bell-to-bell ban)
-          - Delaware: SB 106 signed Mar 12, 2026 (instructional time) — DONE
-          - Kansas: HB 2299 awaiting Gov. Kelly signature (bell-to-bell)
-          - Connecticut: HB 5035 in Senate (bell-to-bell)
-          - Georgia: HB 1009 in Senate (9-12 extension)
-          - Wisconsin: AB 948 awaiting Senate floor vote (bell-to-bell expansion)
-          - Pennsylvania: SB 1014 in House Education Committee
-          - Maryland: HB 525 heading to Senate
-          - Massachusetts: S.2561 stalled in House
-          - Illinois: SB 2427 in House committee
-          - Minnesota: SF 508 in committee for omnibus bill
-          - Maine: LD 1234 monitor final passage
+          The following is current bill status data from the LegiScan API for all pending legislation tracked on the heatmap. Compare each bill's status below against what is currently in the pendingLegislation entries in STATE_DATA. Update any entries where the status has changed.
 
-          Also search broadly for any NEW state phone legislation or policy changes.
+          ${LEGISCAN_REPORT}
 
-          If you find updates:
+          For any bill whose status has changed significantly:
           1. Read index.html and find the relevant state entry in STATE_DATA
-          2. Update the affected fields: notes, additionalNotes, timeline, currentPolicy, legislation, toReview
-          3. If a bill was SIGNED INTO LAW, update the category field to the appropriate enacted category
+          2. Update the pendingLegislation status field to reflect the new status
+          3. If a bill was SIGNED INTO LAW: move it from pendingLegislation to the main fields — update category, rawCategory, currentPolicy, storageReq, legislation, and notes. Remove the pendingLegislation object. Fetch the enrolled bill text from the state legislature URL to verify details.
+          4. If a bill FAILED/DIED: move it to priorFailedBills with accurate details
+          5. Update the header subtitle date to today's date
+
+          ## PART 2: NEWS SEARCH FOR NEW DEVELOPMENTS
+
+          Search the web for any state school cell phone/smartphone ban legislation or policy news from the past 7 days. Focus on:
+          1. NEW bills filed in any state that the heatmap doesn't currently track
+          2. Executive orders, Board of Education policies, or DOE guidance (not on LegiScan)
+          3. Governor signing/veto announcements
+          4. Implementation updates for enacted laws
+
+          If you find new developments:
+          1. Read index.html and find or create the relevant state entry
+          2. Update the affected fields with verified information
+          3. For brand new bills, add them as pendingLegislation entries
           4. Update the header subtitle date to today's date
-          5. If a flag/accuracyNote is now resolved by the update, remove the flag (set highlighted:false, remove accuracyNote/accuracyVerdict)
-          6. Do NOT commit or push — the workflow handles that.
 
-          If no meaningful updates are found, do NOT edit any files.
-
-          IMPORTANT: Only make changes backed by verified sources. Do not speculate or assume bills were signed without confirmation.
+          ## RULES
+          - Only make changes backed by verified sources. Do not speculate.
+          - When verifying a signing or major status change, fetch the enrolled bill text from the state legislature website.
+          - If no meaningful updates are found, do NOT edit any files.
+          - Do NOT commit or push — the workflow handles that.
           PROMPT
           )"
 
@@ -68,5 +164,5 @@ jobs:
           git diff --quiet && echo "No changes to commit" && exit 0
           TODAY=$(date '+%B %-d, %Y')
           git add index.html
-          git commit -m "Daily policy update - $TODAY"
+          git commit -m "Policy update - $TODAY"
           git push
