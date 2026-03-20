@@ -395,7 +395,7 @@
     <div class="brand-logo"></div>
     <div>
       <h1>State Cell Phone Policies in Schools</h1>
-      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 18, 2026</p>
+      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 20, 2026</p>
     </div>
   </div>
   <div class="source">
@@ -744,22 +744,15 @@ const STATE_DATA = [
   },
   {
     fips:"20", name:"Kansas", abbr:"KS",
-    category:"tier_2",
-    rawCategory:"Guidance / Encouragement Only",
-    currentPolicy:"Kansas DOE encourages districts to limit phone use \u2014 not a law. Blue Ribbon Task Force recommended bell-to-bell bans with secure storage for all K-12.",
-    storageReq:"N/A",
-    legislation:"KSDE policy (Dec 2024)",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
+    currentPolicy:"Bell-to-bell ban from first bell to dismissal. Students must turn off devices and store them in a location away from their person. Covers phones, smartwatches, earbuds, and all personal communication devices. Also prohibits school staff from communicating with students on social media.",
+    storageReq:"Inaccessible storage not mandated \u2014 devices must be stored away from person, method district-defined",
+    legislation:"Sub. HB 2299 (signed Mar 19, 2026)",
     guidanceLink:"https://www.ksde.gov/Portals/0/Commissioner/Blue-Ribbon-Task-Force-on-Student-Screen-Time-Report.pdf",
-    notes:"",
-    additionalNotes:"",
-    timeline:"",
-    pendingLegislation: {
-      bill: "Sub. HB 2299 ('Bell to Bell, No Cell')",
-      summary: "Requires districts to adopt policies restricting student cell phone use throughout the entire school day. Covers phones, smartwatches, earbuds, and all personal communication devices.",
-      status: "Passed Senate 32-4 on Mar 5; House concurred 84-39 on Mar 10. On Gov. Kelly's desk \u2014 she has indicated she will sign.",
-      wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
-    }
+    notes:"Signed by Gov. Kelly on Mar 19, 2026. Takes effect for the 2026-27 school year. Passed House 84-39, Senate 32-4.",
+    additionalNotes:"Also includes a provision prohibiting school employees from communicating with students on social media platforms.",
+    timeline:"Signed into law March 2026"
   },
   {
     fips:"21", name:"Kentucky", abbr:"KY",
@@ -1106,21 +1099,14 @@ const STATE_DATA = [
   },
   {
     fips:"49", name:"Utah", abbr:"UT",
-    category:"tier_5a",
-    rawCategory:"Instructional-Time Ban, Inaccessible Storage Not Mandated",
-    currentPolicy:"Instructional-time ban during classroom hours; law explicitly excludes lunch periods, recess, transit time between classes, and study halls.",
+    category:"tier_6a",
+    rawCategory:"Bell-to-Bell Ban, Inaccessible Storage Not Mandated",
+    currentPolicy:"Bell-to-bell ban covering the entire school day including lunch, recess, and transition time between classes. Covers cell phones, smartwatches, and emerging technologies.",
     storageReq:"Inaccessible storage not mandated \u2014 district-defined",
-    legislation:"SB 178 (2025)",
-    notes:"",
+    legislation:"SB 69 (signed Mar 18, 2026); supersedes SB 178 (2025)",
+    notes:"Signed by Gov. Cox on Mar 18, 2026. Upgrades Utah's 2025 instructional-time-only ban (SB 178) to a full bell-to-bell ban.",
     additionalNotes:"",
-    timeline:"",
-    pendingLegislation: {
-      bill: "SB 69 (2026)",
-      summary: "Upgrades to bell-to-bell ban covering the entire school day including lunch, recess, and transition time. Also covers smartwatches and emerging technologies.",
-      status: "Passed legislature Feb 27, 2026. Sent to Gov. Cox Mar 11, 2026 — awaiting signature. Signing widely expected.",
-      wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
-    }
+    timeline:"Signed into law March 2026"
   },
   {
     fips:"50", name:"Vermont", abbr:"VT",
@@ -1978,7 +1964,7 @@ function exportMapPNG() {
   ctx.fillText('School Phone Ban Policies by State', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 18, 2026', pad, 68);
+  ctx.fillText('Updated March 20, 2026', pad, 68);
 
   // Render SVG map to canvas
   const svgEl = document.getElementById('map-svg');
@@ -2102,7 +2088,7 @@ function exportMapPDF() {
   ctx.fillText('School Phone Ban Policies by State', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 18, 2026', pad, 68);
+  ctx.fillText('Updated March 20, 2026', pad, 68);
 
   const svgEl = document.getElementById('map-svg');
   const svgData = new XMLSerializer().serializeToString(svgEl);
