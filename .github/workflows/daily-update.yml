@@ -1,0 +1,72 @@
+name: Daily Policy Update
+
+on:
+  schedule:
+    # Run daily at 14:00 UTC (10:00 AM ET)
+    - cron: '0 14 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run daily update
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          TODAY=$(date '+%B %d, %Y')
+
+          claude --print --dangerously-skip-permissions "$(cat <<'PROMPT'
+          You are updating a public state school phone policy heatmap dashboard (index.html) in the current directory.
+
+          Search the web for any state school cell phone/smartphone ban legislation news from the past 48 hours.
+
+          Key states to monitor closely for imminent changes:
+          - Utah: SB 69 awaiting Gov. Cox signature (bell-to-bell ban)
+          - Delaware: SB 106 signed Mar 12, 2026 (instructional time) — DONE
+          - Kansas: HB 2299 awaiting Gov. Kelly signature (bell-to-bell)
+          - Connecticut: HB 5035 in Senate (bell-to-bell)
+          - Georgia: HB 1009 in Senate (9-12 extension)
+          - Wisconsin: AB 948 awaiting Senate floor vote (bell-to-bell expansion)
+          - Pennsylvania: SB 1014 in House Education Committee
+          - Maryland: HB 525 heading to Senate
+          - Massachusetts: S.2561 stalled in House
+          - Illinois: SB 2427 in House committee
+          - Minnesota: SF 508 in committee for omnibus bill
+          - Maine: LD 1234 monitor final passage
+
+          Also search broadly for any NEW state phone legislation or policy changes.
+
+          If you find updates:
+          1. Read index.html and find the relevant state entry in STATE_DATA
+          2. Update the affected fields: notes, additionalNotes, timeline, currentPolicy, legislation, toReview
+          3. If a bill was SIGNED INTO LAW, update the category field to the appropriate enacted category
+          4. Update the header subtitle date to today's date
+          5. If a flag/accuracyNote is now resolved by the update, remove the flag (set highlighted:false, remove accuracyNote/accuracyVerdict)
+          6. Do NOT commit or push — the workflow handles that.
+
+          If no meaningful updates are found, do NOT edit any files.
+
+          IMPORTANT: Only make changes backed by verified sources. Do not speculate or assume bills were signed without confirmation.
+          PROMPT
+          )"
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "khall1450"
+          git config user.email "katherinehall1450@gmail.com"
+          git diff --quiet && echo "No changes to commit" && exit 0
+          TODAY=$(date '+%B %-d, %Y')
+          git add index.html
+          git commit -m "Daily policy update - $TODAY"
+          git push

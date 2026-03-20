@@ -2,7 +2,7 @@
 ## Runs Claude Code to check for legislative updates and push changes
 ## Schedule via Windows Task Scheduler
 
-$repo = "C:\Users\khall\school-phone-policy-heatmap"
+$repo = "C:\Users\khall\school-phone-policy-heatmap-v2"
 Set-Location $repo
 
 $prompt = @'
@@ -12,7 +12,7 @@ Search the web for any state school cell phone/smartphone ban legislation news f
 
 Key states to monitor closely for imminent changes:
 - Utah: SB 69 awaiting Gov. Cox signature (bell-to-bell ban)
-- Delaware: SB 106 awaiting Gov. Meyer signature (instructional time)
+- Delaware: SB 106 signed Mar 12, 2026 (instructional time) — DONE
 - Kansas: HB 2299 awaiting Gov. Kelly signature (bell-to-bell)
 - Connecticut: HB 5035 in Senate (bell-to-bell)
 - Georgia: HB 1009 in Senate (9-12 extension)
