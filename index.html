@@ -517,7 +517,7 @@ const CATEGORIES = {
   },
   tier_5a: {
     label: 'Instructional-Time Ban, Inaccessible Storage Not Mandated',
-    color: '#7BB3DC',
+    color: '#5EA3D0',
     order: 8
   },
   tier_4: {
@@ -1630,6 +1630,16 @@ function updateMapColors() {
     svg.select('.dc-callout circle').attr('fill', dcColor);
     svg.select('.dc-callout rect').attr('fill', dcColor);
   }
+  // Update small-state callouts (MA, RI, HI)
+  svg.selectAll('.state-callout').each(function() {
+    const g = d3.select(this);
+    const abbr = g.select('text').text();
+    const s = STATE_DATA.find(st => st.abbr === abbr);
+    if (!s) return;
+    const color = (activeFilter && s.category !== activeFilter) ? '#E8EAED' : CATEGORIES[s.category].color;
+    g.select('circle').attr('fill', color);
+    g.select('rect').attr('fill', color);
+  });
 }
 
 // Click-anywhere dismiss is handled by the global document click listener
