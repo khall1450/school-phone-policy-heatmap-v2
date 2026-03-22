@@ -395,11 +395,11 @@
     <div class="brand-logo"></div>
     <div>
       <h1>State Cell Phone Policies in Schools</h1>
-      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 20, 2026</p>
+      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 22, 2026</p>
     </div>
   </div>
   <div class="source">
-    Source: State legislation, executive orders, board policies &amp; DOE guidance
+    Source: State legislation, executive orders, board policies &amp; DOE guidance &nbsp;|&nbsp; Legislative data via <a href="https://legiscan.com" target="_blank" style="color:inherit;">LegiScan</a>
   </div>
 </header>
 
@@ -715,7 +715,7 @@ const STATE_DATA = [
     pendingLegislation: {
       bill: "SB 2427",
       summary: "Requires every school board to adopt a policy prohibiting wireless devices during instructional time by 2026-27. Includes guidance for secure storage. Exceptions for medical, IEP, and ELL needs.",
-      status: "Passed Senate 55-0. Cleared House Education Policy Committee in 2025 but was not called to floor vote. Referred to House Education Policy Committee for 2026 spring session with hearing scheduled. Gov. Pritzker renewed push in Feb 2026. Needs House floor vote.",
+      status: "Passed Senate 55-0. Cleared House Education Policy Committee in 2025 but was not called to floor vote. House Education Policy Committee hearing held Mar 19, 2026. Gov. Pritzker renewed push in Feb 2026. Needs House floor vote.",
       wouldBeTier: "tier_5a",
       wouldBeLabel: "Instructional-Time Ban, Inaccessible Storage Not Mandated"
     }
@@ -749,7 +749,7 @@ const STATE_DATA = [
     currentPolicy:"Bell-to-bell ban from first bell to dismissal. Students must turn off devices and store them in a location away from their person. Covers phones, smartwatches, earbuds, and all personal communication devices. Also prohibits school staff from communicating with students on social media.",
     storageReq:"Inaccessible storage not mandated \u2014 devices must be stored away from person, method district-defined",
     legislation:"Sub. HB 2299 (signed Mar 19, 2026)",
-    guidanceLink:"https://www.ksde.gov/Portals/0/Commissioner/Blue-Ribbon-Task-Force-on-Student-Screen-Time-Report.pdf",
+    guidanceLink:"https://www.kslegislature.gov/li/b2025_26/measures/hb2299/",
     notes:"Signed by Gov. Kelly on Mar 19, 2026. Takes effect for the 2026-27 school year. Passed House 84-39, Senate 32-4.",
     additionalNotes:"Also includes a provision prohibiting school employees from communicating with students on social media platforms.",
     timeline:"Signed into law March 2026"
@@ -801,7 +801,7 @@ const STATE_DATA = [
     pendingLegislation: {
       bill: "HB 525 (Phone-Free Schools Act)",
       summary: "Bell-to-bell ban making phones inaccessible during school day. Requires districts to implement policies by 2027-28. Cross-filed as SB 928 in Senate.",
-      status: "HB 525 faced headwinds in House Ways and Means Committee. Cross-filed SB 928 (sponsor Sen. Kevin Harris) passed second reading with amendments on Mar 19, 2026. Senate path advancing; 12 Dem and 5 GOP cosponsors.",
+      status: "HB 525 faced headwinds in House Ways and Means Committee. Cross-filed SB 928 passed full Senate on Mar 20, 2026. Now heads to House. 12 Dem and 5 GOP cosponsors.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
@@ -1962,7 +1962,7 @@ function exportMapPNG() {
   ctx.fillText('School Phone Ban Policies by State', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 20, 2026', pad, 68);
+  ctx.fillText('Updated March 22, 2026', pad, 68);
 
   // Render SVG map to canvas
   const svgEl = document.getElementById('map-svg');
@@ -2086,7 +2086,7 @@ function exportMapPDF() {
   ctx.fillText('School Phone Ban Policies by State', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 20, 2026', pad, 68);
+  ctx.fillText('Updated March 22, 2026', pad, 68);
 
   const svgEl = document.getElementById('map-svg');
   const svgData = new XMLSerializer().serializeToString(svgEl);
