@@ -749,7 +749,7 @@ const STATE_DATA = [
     currentPolicy:"Bell-to-bell ban from first bell to dismissal. Students must turn off devices and store them in a location away from their person. Covers phones, smartwatches, earbuds, and all personal communication devices. Also prohibits school staff from communicating with students on social media.",
     storageReq:"Inaccessible storage not mandated \u2014 devices must be stored away from person, method district-defined",
     legislation:"Sub. HB 2299 (signed Mar 19, 2026)",
-    guidanceLink:"https://www.kslegislature.gov/li/b2025_26/measures/hb2299/",
+    guidanceLink:"",
     notes:"Signed by Gov. Kelly on Mar 19, 2026. Takes effect for the 2026-27 school year. Passed House 84-39, Senate 32-4.",
     additionalNotes:"Also includes a provision prohibiting school employees from communicating with students on social media platforms.",
     timeline:"Signed into law March 2026"
@@ -1208,7 +1208,7 @@ const BILL_URLS = {
   // "17" — IL has no current law; pending SB 2427 shown via pendingLegislation
   "18": "https://iga.in.gov/legislative/2026/bills/senate/78",
   "19": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=HF782",
-  // "20" — KS is guidance-only; pending HB 2299 shown via pendingLegislation; guidance link via guidanceLink
+  "20": "https://www.kslegislature.gov/li/b2025_26/measures/hb2299/",
   "21": "https://apps.legislature.ky.gov/record/25RS/hb208.html",
   "22": "https://www.legis.la.gov/legis/ViewDocument.aspx?d=1380785",
   "23": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1234&snum=132",
@@ -1533,8 +1533,9 @@ function buildTooltipHTML(s, fips, isPinned) {
   const linkLabel = url
     ? (url.includes('legiscan.com') ? `View ${s.legislation} on LegiScan \u2197` : `View ${s.legislation} \u2197`)
     : null;
+  const guidanceLinkIsLeg = s.guidanceLink && /legislat|leg\./i.test(s.guidanceLink);
   const guidanceHtml = s.guidanceLink
-    ? `<div class="t-link"><a href="${s.guidanceLink}" target="_blank" rel="noopener">View state guidance \u2197</a></div>`
+    ? `<div class="t-link"><a href="${s.guidanceLink}" target="_blank" rel="noopener">${guidanceLinkIsLeg ? 'View legislation' : 'View state guidance'} \u2197</a></div>`
     : '';
   const linkHtml = url
     ? `<div class="t-link"><a href="${url}" target="_blank" rel="noopener">${linkLabel}</a></div>`
@@ -1852,8 +1853,9 @@ function showDetail(fips) {
   const linkHtml = url
     ? `<div class="detail-row"><strong>Bill Link:</strong> <a href="${url}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">View legislation \u2197</a></div>`
     : '';
+  const detailGuidanceIsLeg = s.guidanceLink && /legislat|leg\./i.test(s.guidanceLink);
   const guidanceLinkHtml = s.guidanceLink
-    ? `<div class="detail-row"><strong>State Guidance:</strong> <a href="${s.guidanceLink}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">View guidance document \u2197</a></div>`
+    ? `<div class="detail-row"><strong>${detailGuidanceIsLeg ? 'Legislation:' : 'State Guidance:'}</strong> <a href="${s.guidanceLink}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.74rem;">${detailGuidanceIsLeg ? 'View legislation' : 'View guidance document'} \u2197</a></div>`
     : '';
 
   let pendingHtml = '';
@@ -1926,7 +1928,7 @@ STATE_DATA.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(s => {
       const extra = SOURCES[s.fips] || [];
       const links = [];
       if (billUrl) links.push('<a href="' + billUrl + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">Bill text \u2197</a>');
-      if (s.guidanceLink) links.push('<a href="' + s.guidanceLink + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">Guidance \u2197</a>');
+      if (s.guidanceLink) links.push('<a href="' + s.guidanceLink + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">' + (/legislat|leg\./i.test(s.guidanceLink) ? 'Legislation' : 'Guidance') + ' \u2197</a>');
       extra.forEach(src => links.push('<a href="' + src.url + '" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.68rem;">' + src.label + ' \u2197</a>'));
       return links.length ? links.join('<br>') : '<em style="color:#bbb">\u2014</em>';
     })()}</td>
