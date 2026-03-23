@@ -395,7 +395,7 @@
     <div class="brand-logo"></div>
     <div>
       <h1>State Cell Phone Policies in Schools</h1>
-      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 22, 2026</p>
+      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 23, 2026</p>
     </div>
   </div>
   <div class="source">
@@ -479,7 +479,7 @@
 const CATEGORIES = {
   tier_6c: {
     label: 'Bell-to-Bell Ban, Inaccessible Storage Mandated',
-    color: '#001A3F',
+    color: '#001030',
     order: 1
   },
   tier_6b: {
@@ -490,49 +490,49 @@ const CATEGORIES = {
   },
   tier_6a: {
     label: 'Bell-to-Bell Ban, Inaccessible Storage Not Mandated',
-    color: '#0D4A8A',
+    color: '#1E60A0',
     order: 3
   },
   tier_6pi: {
     label: 'Bell-to-Bell K\u20138, Instructional-Time HS',
-    color: '#1A5696',
+    color: '#4A90CC',
     order: 4
   },
   tier_6p: {
     label: 'Bell-to-Bell Ban, K\u20138 Only (No HS Policy)',
-    color: '#2668A8',
+    color: '#7AB8E8',
     order: 5
   },
   tier_5c: {
     label: 'Instructional-Time Ban, Inaccessible Storage Mandated',
-    color: '#3D8AC8',
+    color: '#B86800',
     order: 6,
     vacant: true
   },
   tier_5b: {
     label: 'Instructional-Time Ban, Accessible Storage Mandated',
-    color: '#5AA0D8',
+    color: '#D48010',
     order: 7,
     vacant: true
   },
   tier_5a: {
     label: 'Instructional-Time Ban, Inaccessible Storage Not Mandated',
-    color: '#5EA3D0',
+    color: '#FF941A',
     order: 8
   },
   tier_4: {
     label: 'Must Limit Use (District Defines)',
-    color: '#99C8E8',
+    color: '#FFB866',
     order: 9
   },
   tier_3: {
     label: 'Must Adopt a Policy (No Content Req.)',
-    color: '#B8D8F0',
+    color: '#FFD9A0',
     order: 10
   },
   tier_2: {
     label: 'Guidance / Encouragement Only',
-    color: '#D4E8F7',
+    color: '#FFF3E0',
     order: 11
   },
   tier_1: {
@@ -623,8 +623,9 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "HB 5035 / HB 5149",
+      url: "https://www.cga.ct.gov/asp/CGABillStatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB5035",
       summary: "Would require districts to implement bell-to-bell cellphone bans. Students would store phones in lockers or secure pouches. Accommodations for IEPs and medical needs.",
-      status: "HB 5035 in Joint Education Committee as of March 2026. Public hearing held Feb 20 with strong support from CT Education Association. Gov. Lamont supports. Covers phones, tablets, gaming devices, smartwatches; excludes school-provided tech. Accommodations for IEPs and medical needs. Session ends May 6, 2026.",
+      status: "HB 5035 passed House, now awaiting Senate vote. Gov. Lamont urges Senate passage so he can sign into law. If passed by June 4, districts must adopt policies for 2026-27 school year. Covers phones, tablets, gaming devices, smartwatches; excludes school-provided tech. Accommodations for IEPs and medical needs. Session ends June 4, 2026.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
@@ -674,6 +675,7 @@ const STATE_DATA = [
     timeline:"Schools adopt policies by Jan 1 2026; restrictions in place by July 2026",
     pendingLegislation: {
       bill: "HB 1009",
+      url: "https://www.legis.ga.gov/legislation/72304",
       summary: "Would extend bell-to-bell ban to grades 9\u201312 (all grades K\u201312)",
       status: "Passed House 145-20 on Feb 24, 2026. In Senate as of Mar 12, 2026 with active debate.",
       wouldBeTier: "tier_6a",
@@ -714,6 +716,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "SB 2427",
+      url: "https://www.ilga.gov/legislation/billstatus.asp?DocNum=2427&DocTypeID=SB&GA=104&GAID=18&LegID=162470&SessionID=114",
       summary: "Requires every school board to adopt a policy prohibiting wireless devices during instructional time by 2026-27. Includes guidance for secure storage. Exceptions for medical, IEP, and ELL needs.",
       status: "Passed Senate 55-0. Cleared House Education Policy Committee in 2025 but was not called to floor vote. House Education Policy Committee hearing held Mar 19, 2026. Gov. Pritzker renewed push in Feb 2026. Needs House floor vote.",
       wouldBeTier: "tier_5a",
@@ -800,6 +803,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "HB 525 (Phone-Free Schools Act)",
+      url: "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/hb0525?ys=2026RS",
       summary: "Bell-to-bell ban making phones inaccessible during school day. Requires districts to implement policies by 2027-28. Cross-filed as SB 928 in Senate.",
       status: "HB 525 faced headwinds in House Ways and Means Committee. Cross-filed SB 928 passed full Senate on Mar 20, 2026. Now heads to House. 12 Dem and 5 GOP cosponsors.",
       wouldBeTier: "tier_6a",
@@ -818,6 +822,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "S.2561 (194th session)",
+      url: "https://malegislature.gov/Bills/194/S2561",
       summary: "Bell-to-bell ban on phones, tablets, smartwatches, and Bluetooth devices at all K-12 public schools. Exceptions for medical, IEP, disability, and off-campus travel.",
       status: "Passed Senate 38-2 in July 2025 but stalled in the House. Gov. Healey pushing for passage. House has not yet acted. S.323 is a separate, narrower bill by Sen. Crighton/Montigny addressing DESE guidelines.",
       wouldBeTier: "tier_6a",
@@ -847,6 +852,7 @@ const STATE_DATA = [
     timeline:"Districts required to adopt policies by March 2025",
     pendingLegislation: {
       bill: "SF 508 / HF 2516",
+      url: "https://www.revisor.mn.gov/bills/bill.php?b=Senate&f=SF0508&ssn=0&y=2025",
       summary: "K-8: full bell-to-bell ban (no phones on school grounds). Grades 9-12: banned during classroom time but allowed at other times. Implementation for 2026-27.",
       status: "Senate Education Policy Committee held hearing but no vote taken. Being held for possible inclusion in larger omnibus education bill.",
       wouldBeTier: "tier_6pi",
@@ -1002,6 +1008,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "SB 1719",
+      url: "https://www.oklegislature.gov/BillInfo.aspx?Bill=SB1719&Session=2600",
       summary: "Makes the current one-year mandatory bell-to-bell ban permanent for all future school years. Without this, the ban becomes optional for districts starting 2026-27.",
       status: "In Senate Education Committee. Committee of Origin deadline was Mar 5 \u2014 may be effectively dead for this session if deadline was missed. Companion House bill HB 3715 may serve as alternative vehicle.",
       wouldBeTier: "tier_6a",
@@ -1031,6 +1038,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "SB 1014",
+      url: "https://www.palegis.us/legislation/bills/2025/sb1014",
       summary: "Bell-to-bell ban on personal electronic devices during the school day. Exceptions for medical, IEP, ELL, and teacher-approved instructional use. Districts define storage and enforcement. Would take effect 2027-28.",
       status: "Passed Senate 46-1 on Feb 3, 2026. Referred to House Education Committee Feb 4. Gov. Shapiro supports. Pending committee action as of mid-March.",
       wouldBeTier: "tier_6a",
@@ -1142,6 +1150,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "SB 5346",
+      url: "https://app.leg.wa.gov/BillSummary/?BillNumber=5346&Year=2025&Initiative=false",
       summary: "Directs OSPI to create a best-practices resource, submit initial report by Dec 2026 and final report by Dec 2028, with a goal that every district implements a bell-to-bell policy by 2030.",
       status: "Passed both chambers. Delivered to Gov. Ferguson \u2014 awaiting signature.",
       wouldBeTier: "tier_2",
@@ -1171,6 +1180,7 @@ const STATE_DATA = [
     timeline:"",
     pendingLegislation: {
       bill: "AB 948",
+      url: "https://docs.legis.wisconsin.gov/2025/proposals/ab948",
       summary: "Expands existing instructional-time ban to cover the entire school day including recess, passing periods, and lunch. Implementation by July 1, 2027.",
       status: "Passed Assembly on voice vote. Passed Senate Education Committee 4-1 (~Mar 7). Awaiting full Senate vote. Gov. Evers undecided.",
       wouldBeTier: "tier_6a",
@@ -1440,13 +1450,13 @@ const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier
 const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
 const pendingStates = STATE_DATA.filter(s => s.pendingLegislation);
 const statsData = [
-  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'], borderColor: '#0D4A8A' },
-  { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'], borderColor: '#7BB3DC' },
-  { num: counts.tier_4, lbl: 'Must Limit Use', cats: ['tier_4'], borderColor: '#99C8E8' },
-  { num: counts.tier_3, lbl: 'Must Adopt Policy', cats: ['tier_3'], borderColor: '#B8D8F0' },
-  { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'], borderColor: '#D4E8F7' },
+  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'], borderColor: '#1E60A0' },
+  { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'], borderColor: '#FF941A' },
+  { num: counts.tier_4, lbl: 'Must Limit Use', cats: ['tier_4'], borderColor: '#FFB866' },
+  { num: counts.tier_3, lbl: 'Must Adopt Policy', cats: ['tier_3'], borderColor: '#FFD9A0' },
+  { num: counts.tier_2, lbl: 'Guidance Only', cats: ['tier_2'], borderColor: '#FFF3E0' },
   { num: counts.tier_1, lbl: 'No Policy', cats: ['tier_1'], borderColor: '#E8EAED' },
-  { num: pendingStates.length, lbl: 'Pending Legislation', cats: [], pending: true, borderColor: '#FF941A' },
+  { num: pendingStates.length, lbl: 'Pending Legislation', cats: [], pending: true, borderColor: '#00A6CF' },
 ];
 
 const statPopup = document.getElementById('stat-popup');
@@ -1548,7 +1558,7 @@ function buildTooltipHTML(s, fips, isPinned) {
     : `<div style="opacity:.4;font-size:0.63rem;margin-top:6px;">Click to pin &amp; see full details</div>`;
   return `
     <div class="t-state">${s.name}</div>
-    <div class="t-cat" style="color:${cat.order <= 4 ? '#FFB866' : '#99C8E8'}">${cat.label}</div>
+    <div class="t-cat" style="color:${cat.order <= 5 ? '#FFB866' : '#ACC3D9'}">${cat.label}</div>
     <div style="font-size:0.7rem;opacity:0.8;margin-bottom:3px;">${s.storageReq}</div>
     ${linkHtml}
     ${s.pendingLegislation ? `<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.15);font-size:0.67rem;opacity:0.85;">\u23F3 <strong>${s.pendingLegislation.bill}</strong> pending \u2014 click for details</div>` : ''}
@@ -1645,7 +1655,7 @@ function updateMapColors() {
 // Click-anywhere dismiss is handled by the global document click listener
 
 // Determine which categories should get white text labels on the map
-const darkTierCats = ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p','tier_5c','tier_5b','tier_5a'];
+const darkTierCats = ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'];
 
 d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
   const states = topojson.feature(us, us.objects.states);
@@ -1876,7 +1886,7 @@ function showDetail(fips) {
     pendingHtml = `
       <div class="detail-pending">
         <div class="pending-title">\u23F3 Legislation in Progress</div>
-        <div><span class="pending-bill">${p.bill}</span></div>
+        <div><span class="pending-bill">${p.bill}</span>${p.url ? ` <a href="${p.url}" target="_blank" rel="noopener" style="color:var(--paragon-blue);font-size:0.7rem;">View bill \u2197</a>` : ''}</div>
         <div style="margin-top:4px;">${p.summary}</div>
         <div class="pending-status"><strong>Status:</strong> ${p.status}</div>
         <div class="pending-would-be">
@@ -1974,7 +1984,7 @@ function exportMapPNG() {
   ctx.fillText('School Phone Ban Policies by State', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 22, 2026', pad, 68);
+  ctx.fillText('Updated March 23, 2026', pad, 68);
 
   // Render SVG map to canvas
   const svgEl = document.getElementById('map-svg');
@@ -2098,7 +2108,7 @@ function exportMapPDF() {
   ctx.fillText('School Phone Ban Policies by State', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 22, 2026', pad, 68);
+  ctx.fillText('Updated March 23, 2026', pad, 68);
 
   const svgEl = document.getElementById('map-svg');
   const svgData = new XMLSerializer().serializeToString(svgEl);
