@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://cdn.jsdelivr.net; base-uri 'none'; form-action 'none';" />
   <meta name="referrer" content="no-referrer" />
-  <title>State Cell Phone Policies in Schools — Heatmap Dashboard</title>
+  <title>State Policies Restricting Student Cell Phone Access During School</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -394,7 +394,7 @@
   <div class="brand">
     <div class="brand-logo"></div>
     <div>
-      <h1>State Cell Phone Policies in Schools</h1>
+      <h1>State Policies Restricting Student Cell Phone Access During School</h1>
       <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 23, 2026</p>
     </div>
   </div>
@@ -677,7 +677,7 @@ const STATE_DATA = [
       bill: "HB 1009",
       url: "https://www.legis.ga.gov/legislation/72304",
       summary: "Would extend bell-to-bell ban to grades 9\u201312 (all grades K\u201312)",
-      status: "Passed House 145-20 on Feb 24, 2026. In Senate as of Mar 12, 2026 with active debate.",
+      status: "Passed House 145-20 on Feb 24, 2026. Senate Children and Families Committee advanced to full Senate on Mar 17, 2026.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated (all grades)"
     }
@@ -1981,7 +1981,7 @@ function exportMapPNG() {
   // Title
   ctx.fillStyle = '#002E6D';
   ctx.font = 'bold 28px Public Sans, sans-serif';
-  ctx.fillText('School Phone Ban Policies by State', pad, 45);
+  ctx.fillText('State Policies Restricting Student Cell Phone Access During School', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
   ctx.fillText('Updated March 23, 2026', pad, 68);
@@ -2105,7 +2105,7 @@ function exportMapPDF() {
   ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = '#002E6D';
   ctx.font = 'bold 28px Public Sans, sans-serif';
-  ctx.fillText('School Phone Ban Policies by State', pad, 45);
+  ctx.fillText('State Policies Restricting Student Cell Phone Access During School', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
   ctx.fillText('Updated March 23, 2026', pad, 68);
@@ -2233,7 +2233,7 @@ function exportPIC() {
     ctx.font = `bold ${Math.round(SIZE * 0.028)}px Public Sans, sans-serif`;
 
     // Word-wrap title to fit
-    const titleText = 'State Cell Phone Policies in Schools';
+    const titleText = 'State Policies Restricting Student Cell Phone Access During School';
     const maxTitleW = SIZE - pad * 4;
     const titleWords = titleText.split(' ');
     let titleLines = [];
@@ -2252,13 +2252,8 @@ function exportPIC() {
       y += titleLineH;
     });
 
-    // ── Subtitle ──
-    y += Math.round(SIZE * 0.005);
-    ctx.fillStyle = '#6B6B6B';
-    ctx.font = `300 ${Math.round(SIZE * 0.016)}px Public Sans, sans-serif`;
-    ctx.fillText('All 50 States + D.C.  |  Updated March 2026', titleX, y);
     ctx.textAlign = 'left';
-    y += Math.round(SIZE * 0.025);
+    y += Math.round(SIZE * 0.01);
 
     // ── Map ──
     const svgEl = document.getElementById('map-svg');
@@ -2285,10 +2280,22 @@ function exportPIC() {
       const half = Math.ceil(cats.length / 2);
       const legendStartY = y;
 
+      // Measure legend width to center it
+      ctx.font = `300 ${fontSize}px Public Sans, sans-serif`;
+      let maxCol0W = 0, maxCol1W = 0;
+      cats.forEach(([key, cat], i) => {
+        const w = ctx.measureText(`${cat.label} (${cts[key]})`).width + swatchSize + 4;
+        if (i < half) maxCol0W = Math.max(maxCol0W, w);
+        else maxCol1W = Math.max(maxCol1W, w);
+      });
+      const legendGap = Math.round(SIZE * 0.03);
+      const totalLegendW = maxCol0W + legendGap + maxCol1W;
+      const legendOffsetX = (SIZE - totalLegendW) / 2;
+
       cats.forEach(([key, cat], i) => {
         const col = i < half ? 0 : 1;
         const row = i < half ? i : i - half;
-        const lx = pad + col * colW;
+        const lx = legendOffsetX + (col === 0 ? 0 : maxCol0W + legendGap);
         const ly = legendStartY + row * itemH;
 
         ctx.fillStyle = cat.color;
@@ -2307,8 +2314,8 @@ function exportPIC() {
       ctx.font = `300 ${srcFontSize}px Public Sans, sans-serif`;
       ctx.textAlign = 'left';
       const srcLines = [
-        'Source: State legislation, executive orders, board policies & DOE guidance. Analysis as of March 2026.',
-        'Paragon Health Institute  |  paragoninstitute.org'
+        'Source: State legislation, executive orders, board policies & DOE guidance. Legislative data via LegiScan.',
+        'Updated March 23, 2026  |  Paragon Health Institute  |  paragoninstitute.org'
       ];
       srcLines.forEach((line, i) => {
         ctx.fillText(line, pad, sourceY - (srcLines.length - 1 - i) * (srcFontSize + 3));
