@@ -494,7 +494,7 @@ const CATEGORIES = {
     order: 3
   },
   tier_6pi: {
-    label: 'Bell-to-Bell K\u20138, Instructional-Time HS',
+    label: 'Bell-to-Bell Ban K\u20138, Instructional-Time Ban HS',
     color: '#4A90CC',
     order: 4
   },
@@ -526,12 +526,12 @@ const CATEGORIES = {
     order: 9
   },
   tier_3: {
-    label: 'Must Adopt a Policy (No Content Req.)',
+    label: 'Must Adopt a Policy (No Content Requirement)',
     color: '#FFD9A0',
     order: 10
   },
   tier_2: {
-    label: 'Guidance / Encouragement Only',
+    label: 'Guidance or Encouragement Only',
     color: '#FFF3E0',
     order: 11
   },
@@ -2222,18 +2222,18 @@ function exportPIC() {
     // ── Circle logo top-left ──
     const logoSize = Math.round(SIZE * 0.05); // ~48px
     if (logoLoaded) {
-      ctx.drawImage(logoImg, pad, y, logoSize, logoSize);
+      ctx.drawImage(logoImg, Math.round(pad * 0.5), Math.round(pad * 0.5), logoSize, logoSize);
     }
 
-    // ── Title (bold, Paragon Blue, centered) ──
+    // ── Title (Public Sans Semibold, Size 14, Paragon Blue) ──
     const titleX = SIZE / 2;
-    y += Math.round(logoSize * 0.3);
+    y += Math.round(logoSize * 0.8);
     ctx.fillStyle = '#002E6D';
     ctx.textAlign = 'center';
-    ctx.font = `bold ${Math.round(SIZE * 0.028)}px Public Sans, sans-serif`;
+    ctx.font = `600 ${Math.round(SIZE * 0.028)}px Public Sans, sans-serif`;
 
     // Word-wrap title to fit
-    const titleText = 'State Policies Restricting Student Cell Phone Access During School';
+    const titleText = 'State Policies Restricting Student Cell Phone Access During School as of March 2026';
     const maxTitleW = SIZE - pad * 4;
     const titleWords = titleText.split(' ');
     let titleLines = [];
@@ -2266,7 +2266,7 @@ function exportPIC() {
       const mapH = mapW * (600 / 960);
       ctx.drawImage(mapImg, pad, y, mapW, mapH);
       URL.revokeObjectURL(url);
-      y += mapH + Math.round(SIZE * 0.015);
+      y += mapH + Math.round(SIZE * 0.035);
 
       // ── Legend (compact, no gradient) ──
       const cats = Object.entries(CATEGORIES)
@@ -2280,8 +2280,8 @@ function exportPIC() {
       const half = Math.ceil(cats.length / 2);
       const legendStartY = y;
 
-      // Measure legend width to center it
-      ctx.font = `300 ${fontSize}px Public Sans, sans-serif`;
+      // Measure legend width to center it (Public Sans Extra Light, Almost Black)
+      ctx.font = `200 ${fontSize}px Public Sans, sans-serif`;
       let maxCol0W = 0, maxCol1W = 0;
       cats.forEach(([key, cat], i) => {
         const w = ctx.measureText(`${cat.label} (${cts[key]})`).width + swatchSize + 4;
@@ -2301,21 +2301,20 @@ function exportPIC() {
         ctx.fillStyle = cat.color;
         ctx.fillRect(lx, ly, swatchSize, swatchSize);
         ctx.fillStyle = '#303030';
-        ctx.font = `300 ${fontSize}px Public Sans, sans-serif`;
+        ctx.font = `200 ${fontSize}px Public Sans, sans-serif`;
         ctx.fillText(`${cat.label} (${cts[key]})`, lx + swatchSize + 4, ly + swatchSize - 1);
       });
 
       y = legendStartY + half * itemH + Math.round(SIZE * 0.015);
 
-      // ── Source (small, grey, at bottom) ──
+      // ── Source (Public Sans Extra Light, Size 6, Concrete Grey) ──
       const sourceY = SIZE - pad;
-      ctx.fillStyle = '#949494';
-      const srcFontSize = Math.round(SIZE * 0.01);
-      ctx.font = `300 ${srcFontSize}px Public Sans, sans-serif`;
+      ctx.fillStyle = '#6B6B6B';
+      const srcFontSize = Math.round(SIZE * 0.009);
+      ctx.font = `200 ${srcFontSize}px Public Sans, sans-serif`;
       ctx.textAlign = 'left';
       const srcLines = [
-        'Source: State legislation, executive orders, board policies & DOE guidance. Legislative data via LegiScan.',
-        'Updated March 23, 2026  |  Paragon Health Institute  |  paragoninstitute.org'
+        'SOURCE: State legislation, executive orders, board policies, DOE guidance, LegiScan. Data as of March 23, 2026.'
       ];
       srcLines.forEach((line, i) => {
         ctx.fillText(line, pad, sourceY - (srcLines.length - 1 - i) * (srcFontSize + 3));
