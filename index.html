@@ -395,7 +395,7 @@
     <div class="brand-logo"></div>
     <div>
       <h1>State Policies Restricting Student Cell Phone Access During School</h1>
-      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 23, 2026</p>
+      <p class="subtitle">Interactive Heatmap &nbsp;|&nbsp; All 50 States + D.C. &nbsp;|&nbsp; Updated March 24, 2026</p>
     </div>
   </div>
   <div class="source">
@@ -677,7 +677,7 @@ const STATE_DATA = [
       bill: "HB 1009",
       url: "https://www.legis.ga.gov/legislation/72304",
       summary: "Would extend bell-to-bell ban to grades 9\u201312 (all grades K\u201312)",
-      status: "Passed House 145-20 on Feb 24, 2026. Senate Children and Families Committee advanced to full Senate on Mar 17, 2026.",
+      status: "Passed House 145-20 on Feb 24, 2026. Passed Senate 52-0 on Mar 23, 2026. Now heads to Gov. Kemp's desk for signature.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated (all grades)"
     }
@@ -805,7 +805,7 @@ const STATE_DATA = [
       bill: "HB 525 (Phone-Free Schools Act)",
       url: "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/hb0525?ys=2026RS",
       summary: "Bell-to-bell ban making phones inaccessible during school day. Requires districts to implement policies by 2027-28. Cross-filed as SB 928 in Senate.",
-      status: "HB 525 faced headwinds in House Ways and Means Committee. Cross-filed SB 928 passed full Senate on Mar 20, 2026. Now heads to House. 12 Dem and 5 GOP cosponsors.",
+      status: "SB 928 passed full Senate on Mar 20, 2026. HB 525 passed House on Mar 23, 2026. Both chambers have passed their versions; reconciliation and Gov. Moore signature expected. 12 Dem and 5 GOP cosponsors.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
@@ -1984,7 +1984,7 @@ function exportMapPNG() {
   ctx.fillText('State Policies Restricting Student Cell Phone Access During School', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 23, 2026', pad, 68);
+  ctx.fillText('Updated March 24, 2026', pad, 68);
 
   // Render SVG map to canvas
   const svgEl = document.getElementById('map-svg');
@@ -2108,7 +2108,7 @@ function exportMapPDF() {
   ctx.fillText('State Policies Restricting Student Cell Phone Access During School', pad, 45);
   ctx.fillStyle = '#6B6B6B';
   ctx.font = '300 14px Public Sans, sans-serif';
-  ctx.fillText('Updated March 23, 2026', pad, 68);
+  ctx.fillText('Updated March 24, 2026', pad, 68);
 
   const svgEl = document.getElementById('map-svg');
   const svgData = new XMLSerializer().serializeToString(svgEl);
@@ -2314,7 +2314,8 @@ function exportPIC() {
       ctx.font = `200 ${srcFontSize}px Public Sans, sans-serif`;
       ctx.textAlign = 'left';
       const srcLines = [
-        'SOURCE: State legislation, executive orders, board policies, DOE guidance, LegiScan. Data as of March 24, 2026.'
+        'NOTE: Data as of March 24, 2026.',
+        'SOURCES: State legislation, executive orders, board policies, DOE guidance, LegiScan.'
       ];
       srcLines.forEach((line, i) => {
         ctx.fillText(line, pad, sourceY - (srcLines.length - 1 - i) * (srcFontSize + 3));
