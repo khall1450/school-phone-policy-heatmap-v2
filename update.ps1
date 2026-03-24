@@ -166,6 +166,7 @@ For any bill whose status has changed significantly:
 3. If a bill was SIGNED INTO LAW: move it from pendingLegislation to the main fields — update category, rawCategory, currentPolicy, storageReq, legislation, and notes. Remove the pendingLegislation object. To verify details, fetch the enrolled bill text from the state legislature URL provided above.
 4. If a bill FAILED/DIED: move it to priorFailedBills with accurate details
 5. Update the header subtitle date to today's date
+6. Update the PIC export 'NOTE: Data as of ...' date to today's date
 
 "@
 }
@@ -188,6 +189,7 @@ If you find new developments:
 2. Update the affected fields with verified information
 3. For brand new bills not on the heatmap, add them as pendingLegislation entries
 4. Update the header subtitle date to today's date
+5. Update the PIC export 'NOTE: Data as of ...' date to today's date
 
 "@
 }
