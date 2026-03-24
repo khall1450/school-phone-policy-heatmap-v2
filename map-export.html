@@ -266,7 +266,7 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'central')
     .attr('font-size', '8px')
-    .attr('font-weight', '500')
+    .attr('font-weight', '700')
     .attr('font-family', 'Public Sans, sans-serif')
     .attr('fill', d => {
       const fips = String(d.id).padStart(2,'0');
@@ -305,7 +305,7 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(us => {
       .attr('rx', 2).attr('fill', color).attr('stroke', 'white').attr('stroke-width', 1.2);
     g.append('text').attr('x', bx + boxW / 2).attr('y', by + boxH / 2)
       .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-      .attr('font-size', '7px').attr('font-weight', '500').attr('font-family', 'Public Sans, sans-serif')
+      .attr('font-size', '7px').attr('font-weight', '700').attr('font-family', 'Public Sans, sans-serif')
       .attr('fill', 'white').text(abbr);
   });
 }).catch(err => {
