@@ -2233,9 +2233,9 @@ function exportPIC() {
     ctx.font = `600 ${Math.round(SIZE * 0.028)}px Public Sans, sans-serif`;
 
     // Word-wrap title to fit
-    const titleText = 'State Policies Restricting Student Cell Phone Access During School (as of March 2026)';
+    const titleText = 'State Policies Restricting Student Cell Phone Access During School';
     const maxTitleW = SIZE - pad * 4;
-    const titleWords = titleText.split(' ');
+    const titleWords = titleText.replace('During School', 'During\u00a0School').split(' ');
     let titleLines = [];
     let currentLine = '';
     titleWords.forEach(word => {
