@@ -415,6 +415,7 @@
     <div style="display:flex;justify-content:space-between;align-items:center;">
       <h2 style="margin-bottom:0;">Policy Heatmap — United States</h2>
       <button class="map-export-btn" onclick="exportPIC()">Export PIC</button>
+      <button class="map-export-btn" onclick="exportPICWebP()">Export WebP</button>
     </div>
     <svg id="map-svg" viewBox="0 0 960 600"></svg>
   </div>
@@ -2194,8 +2195,14 @@ function exportMapPDF() {
   img.src = url;
 }
 
-// ── EXPORT PIC (Paragon-styled 5×5 figure PDF) ──────────────────────────────
-function exportPIC() {
+// ── EXPORT PIC WebP ─────────────────────────────────────────────────────────
+function exportPICWebP() {
+  exportPIC('webp');
+}
+
+// ── EXPORT PIC (Paragon-styled 5×5 figure) ──────────────────────────────────
+function exportPIC(format) {
+  if (!format) format = 'pdf';
   const btn = event.target;
   btn.textContent = 'Generating…';
   btn.disabled = true;
@@ -2321,14 +2328,24 @@ function exportPIC() {
         ctx.fillText(line, pad, sourceY - (srcLines.length - 1 - i) * (srcFontSize + 3));
       });
 
-      // ── Generate PDF (5" × 5") ──
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: [5, 5] });
-      const imgData = canvas.toDataURL('image/png');
-      pdf.addImage(imgData, 'PNG', 0, 0, 5, 5);
-      pdf.save('Paragon_PIC_Phone_Policy_Heatmap.pdf');
+      // ── Generate output ──
+      if (format === 'webp') {
+        canvas.toBlob(function(blob) {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'Paragon_PIC_Phone_Policy_Heatmap.webp';
+          a.click();
+          URL.revokeObjectURL(a.href);
+        }, 'image/webp', 0.95);
+      } else {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: [5, 5] });
+        const imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'PNG', 0, 0, 5, 5);
+        pdf.save('Paragon_PIC_Phone_Policy_Heatmap.pdf');
+      }
 
-      btn.textContent = 'Export PIC';
+      btn.textContent = format === 'webp' ? 'Export WebP' : 'Export PIC';
       btn.disabled = false;
     };
     mapImg.src = url;
