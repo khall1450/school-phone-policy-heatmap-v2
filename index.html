@@ -2233,7 +2233,7 @@ function exportPIC() {
     ctx.font = `600 ${Math.round(SIZE * 0.028)}px Public Sans, sans-serif`;
 
     // Word-wrap title to fit
-    const titleText = 'State Policies Restricting Student Cell Phone Access During School as of March 2026';
+    const titleText = 'State Policies Restricting Student Cell Phone Access During School (as of March 2026)';
     const maxTitleW = SIZE - pad * 4;
     const titleWords = titleText.split(' ');
     let titleLines = [];
@@ -2314,7 +2314,7 @@ function exportPIC() {
       ctx.font = `200 ${srcFontSize}px Public Sans, sans-serif`;
       ctx.textAlign = 'left';
       const srcLines = [
-        'SOURCE: State legislation, executive orders, board policies, DOE guidance, LegiScan. Data as of March 23, 2026.'
+        'SOURCE: State legislation, executive orders, board policies, DOE guidance, LegiScan. Data as of March 24, 2026.'
       ];
       srcLines.forEach((line, i) => {
         ctx.fillText(line, pad, sourceY - (srcLines.length - 1 - i) * (srcFontSize + 3));
