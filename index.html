@@ -479,28 +479,28 @@
 const CATEGORIES = {
   tier_6c: {
     label: 'Bell-to-Bell Ban, Inaccessible Storage Mandated',
-    color: '#001030',
+    color: '#002E6D',
     order: 1
   },
   tier_6b: {
     label: '(Vacant)',
-    color: '#002E6D',
+    color: '#00547E',
     order: 2,
     vacant: true
   },
   tier_6a: {
     label: 'Bell-to-Bell Ban, Inaccessible Storage Not Mandated',
-    color: '#1E60A0',
+    color: '#006A9E',
     order: 3
   },
   tier_6pi: {
     label: 'Bell-to-Bell Ban K\u20138, Instructional-Time Ban HS',
-    color: '#4A90CC',
+    color: '#00A6CF',
     order: 4
   },
   tier_6p: {
     label: 'Bell-to-Bell Ban, K\u20138 Only (No HS Policy)',
-    color: '#7AB8E8',
+    color: '#ACC3D9',
     order: 5
   },
   tier_5c: {
@@ -1450,7 +1450,7 @@ const bellTotal = counts.tier_6c + counts.tier_6b + counts.tier_6a + counts.tier
 const instrTotal = counts.tier_5c + counts.tier_5b + counts.tier_5a;
 const pendingStates = STATE_DATA.filter(s => s.pendingLegislation);
 const statsData = [
-  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'], borderColor: '#1E60A0' },
+  { num: bellTotal, lbl: 'Bell-to-Bell Ban', cats: ['tier_6c','tier_6b','tier_6a','tier_6pi','tier_6p'], borderColor: '#002E6D' },
   { num: instrTotal, lbl: 'Instructional-Time Ban', cats: ['tier_5c','tier_5b','tier_5a'], borderColor: '#FF941A' },
   { num: counts.tier_4, lbl: 'Must Limit Use', cats: ['tier_4'], borderColor: '#FFB866' },
   { num: counts.tier_3, lbl: 'Must Adopt Policy', cats: ['tier_3'], borderColor: '#FFD9A0' },
