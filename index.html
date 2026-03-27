@@ -578,7 +578,15 @@ const STATE_DATA = [
     legislation:"HB 2484 (Apr 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 1811",
+      url: "https://www.azleg.gov/legtext/57leg/2R/bills/SB1811P.htm",
+      summary: "Requires districts and charter schools to establish policies limiting wireless device use during the school day (including meals, passing periods, and recess). Adds internet access and social media policy requirements.",
+      status: "Passed House Education Committee 6-2 on Mar 24, 2026. Awaiting House floor vote.",
+      wouldBeTier: "tier_4",
+      wouldBeLabel: "Must Limit Use (District Defines) \u2014 broadened scope"
+    }
   },
   {
     fips:"05", name:"Arkansas", abbr:"AR",
@@ -628,7 +636,7 @@ const STATE_DATA = [
       bill: "HB 5035 / HB 5149",
       url: "https://www.cga.ct.gov/asp/CGABillStatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB5035",
       summary: "Would require districts to implement bell-to-bell cellphone bans. Students would store phones in lockers or secure pouches. Accommodations for IEPs and medical needs.",
-      status: "HB 5035 passed House, now awaiting Senate vote. Gov. Lamont urges Senate passage so he can sign into law. If passed by June 4, districts must adopt policies for 2026-27 school year. Covers phones, tablets, gaming devices, smartwatches; excludes school-provided tech. Accommodations for IEPs and medical needs. Session ends June 4, 2026.",
+      status: "Both bills received Joint Favorable committee votes (HB 5035: 29-16; HB 5149: 30-16 as substitute). Filed with Legislative Commissioners' Office on Mar 19. Awaiting House floor vote, then Senate action. Gov. Lamont supports. Session ends June 4, 2026.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
@@ -819,7 +827,7 @@ const STATE_DATA = [
       bill: "HB 525 (Phone-Free Schools Act)",
       url: "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/hb0525?ys=2026RS",
       summary: "Bell-to-bell ban making phones inaccessible during school day. Requires districts to implement policies by 2027-28. Cross-filed as SB 928 in Senate.",
-      status: "SB 928 passed full Senate unanimously on Mar 20, 2026. HB 525 passed House 135-1 on Mar 23, 2026. Bills are identical — no reconciliation needed; heads to Gov. Moore for signature. 12 Dem and 5 GOP cosponsors.",
+      status: "HB 525 passed House 135-1 on Mar 23, referred to Senate Education, Energy, and the Environment Committee. SB 928 passed Senate 40-0 on Mar 20, referred to House Ways and Means Committee with hearing scheduled Apr 1. Each bill still needs to pass the other chamber before heading to Gov. Moore.",
       wouldBeTier: "tier_6a",
       wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
     }
@@ -889,7 +897,8 @@ const STATE_DATA = [
       { bill: "HB 317", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
       { bill: "HB 570", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
       { bill: "HB 46", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
-      { bill: "SB 2151", session: "2025", outcome: "Died in House committee", detail: "Passed Senate on Feb 6, 2025. Died in House Education Committee on Mar 4, 2025.", wouldHaveBeen: "Bell-to-Bell Ban" }
+      { bill: "SB 2151", session: "2025", outcome: "Died in House committee", detail: "Passed Senate on Feb 6, 2025. Died in House Education Committee on Mar 4, 2025.", wouldHaveBeen: "Bell-to-Bell Ban" },
+      { bill: "HB 702", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" }
     ]
   },
   {
@@ -968,7 +977,10 @@ const STATE_DATA = [
     legislation:"SB 11 (Apr 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    priorFailedBills: [
+      { bill: "SB 23", session: "2026", outcome: "Postponed indefinitely", detail: "Proposed exceptions to student use of phones. Action postponed indefinitely on Feb 16, 2026.", wouldHaveBeen: "Policy modification" }
+    ]
   },
   {
     fips:"36", name:"New York", abbr:"NY",
@@ -1109,7 +1121,15 @@ const STATE_DATA = [
     legislation:"SB 0897 / HB 0932 (signed Mar 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 10",
+      url: "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=SB0010&GA=114",
+      summary: "Would amend existing law regarding communication devices at schools. Details pending \u2014 assigned to General Subcommittee of Senate Education Committee.",
+      status: "Assigned to General Subcommittee of Senate Education Committee on Feb 18, 2026. Early stage.",
+      wouldBeTier: "tier_5a",
+      wouldBeLabel: "Instructional-Time Ban (potential strengthening)"
+    }
   },
   {
     fips:"48", name:"Texas", abbr:"TX",
@@ -1153,7 +1173,15 @@ const STATE_DATA = [
     legislation:"EO 33 (July 2024) + HB 1961 / SB 738 (signed May 2025)",
     notes:"",
     additionalNotes:"",
-    timeline:""
+    timeline:"",
+    pendingLegislation: {
+      bill: "SB 108",
+      url: "https://lis.virginia.gov/bill-details/20261/SB108",
+      summary: "Strengthens existing law by changing 'restrict' to 'prohibit' \u2014 school boards must prohibit student cell phone and smart device possession and use on school property from bell to bell.",
+      status: "Passed Senate 40-0. House substitute agreed to by Senate 40-0 on Mar 11, 2026. Awaiting Gov. Youngkin's signature.",
+      wouldBeTier: "tier_6a",
+      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated (strengthened language)"
+    }
   },
   {
     fips:"53", name:"Washington", abbr:"WA",
@@ -1196,14 +1224,9 @@ const STATE_DATA = [
     notes:"",
     additionalNotes:"",
     timeline:"",
-    pendingLegislation: {
-      bill: "AB 948",
-      url: "https://docs.legis.wisconsin.gov/2025/proposals/ab948",
-      summary: "Expands existing instructional-time ban to cover the entire school day including recess, passing periods, and lunch. Implementation by July 1, 2027.",
-      status: "Passed Assembly on voice vote. Passed Senate Education Committee 4-1 (~Mar 7). Awaiting full Senate vote. Gov. Evers undecided.",
-      wouldBeTier: "tier_6a",
-      wouldBeLabel: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated"
-    }
+    priorFailedBills: [
+      { bill: "AB 948", session: "2025", outcome: "Failed to concur in Senate", detail: "Would have expanded instructional-time ban to full school day including recess, passing periods, and lunch. Passed Assembly on voice vote. Senate Education Committee recommended concurrence 4-1. Failed to concur pursuant to Senate Joint Resolution 1 on Mar 23, 2026.", wouldHaveBeen: "Bell-to-Bell Ban, Inaccessible Storage Not Mandated" }
+    ]
   },
   {
     fips:"56", name:"Wyoming", abbr:"WY",
