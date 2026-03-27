@@ -694,7 +694,18 @@ const STATE_DATA = [
     legislation:"BOE policy (Feb 2026)",
     notes:"Based on Board of Education policy, not statute — can be changed by board vote without legislative action.",
     additionalNotes:"",
-    timeline:"Effective 2026\u20132027 school year"
+    timeline:"Effective 2026\u20132027 school year",
+    pendingLegislation: {
+      bill: "HB 2466",
+      url: "https://www.capitol.hawaii.gov/session/measure_indiv.aspx?billtype=HB&billnumber=2466&year=2026",
+      summary: "Would codify an instructional-time device ban into statute (2026-27) and require DOE to develop K-12 digital/AI literacy curriculum. Exemptions for accommodations, emergencies, and teacher-authorized use.",
+      status: "Referred to EDN, JHA, and FIN committees on Feb 2, 2026. No further action.",
+      wouldBeTier: "tier_6pi",
+      wouldBeLabel: "Bell-to-Bell K\u20138, Instructional-Time HS (statutory)"
+    },
+    priorFailedBills: [
+      { bill: "HB 2563", session: "2026", outcome: "Deferred by committee", detail: "Would have required BOE to adopt phone ban policy for 2027-28 school year. Deferred by House Education Committee on Feb 12, 2026 — same day BOE adopted its own policy, rendering the bill moot.", wouldHaveBeen: "Bell-to-Bell Ban (statutory)" }
+    ]
   },
   {
     fips:"16", name:"Idaho", abbr:"ID",
@@ -721,7 +732,7 @@ const STATE_DATA = [
       bill: "SB 2427",
       url: "https://www.ilga.gov/legislation/billstatus.asp?DocNum=2427&DocTypeID=SB&GA=104&GAID=18&LegID=162470&SessionID=114",
       summary: "Requires every school board to adopt a policy prohibiting wireless devices during instructional time by 2026-27. Includes guidance for secure storage. Exceptions for medical, IEP, and ELL needs.",
-      status: "Passed Senate 55-0. House Floor Amendment No. 4 recommended for adoption by Education Policy Committee 12-0 on Mar 25, 2026. Awaiting House floor vote.",
+      status: "Passed Senate 55-0. House Floor Amendment No. 4 adopted by Education Policy Committee 12-0 on Mar 25, 2026. Gaining co-sponsors; awaiting House floor vote.",
       wouldBeTier: "tier_5a",
       wouldBeLabel: "Instructional-Time Ban, Inaccessible Storage Not Mandated"
     }
@@ -874,6 +885,10 @@ const STATE_DATA = [
     timeline:"",
     priorFailedBills: [
       { bill: "SB 2099", session: "2026", outcome: "Died in House committee", detail: "Passed full Senate on Feb 4, 2026 and transmitted to House. House Education Committee did not take up the bill; died without a House vote.", wouldHaveBeen: "Bell-to-Bell Ban" },
+      { bill: "SB 2069", session: "2026", outcome: "Died in committee", detail: "Required public schools to adopt policies prohibiting or restricting cell phone possession or use. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
+      { bill: "HB 317", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
+      { bill: "HB 570", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
+      { bill: "HB 46", session: "2026", outcome: "Died in committee", detail: "Required school boards to adopt bell-to-bell cell phone prohibition policy. Died in committee on Feb 3, 2026.", wouldHaveBeen: "Bell-to-Bell Ban" },
       { bill: "SB 2151", session: "2025", outcome: "Died in House committee", detail: "Passed Senate on Feb 6, 2025. Died in House Education Committee on Mar 4, 2025.", wouldHaveBeen: "Bell-to-Bell Ban" }
     ]
   },
